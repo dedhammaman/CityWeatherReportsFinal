@@ -1,0 +1,229 @@
+﻿/*#CarouselHeader1 {
+        background-color: lavender;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: Arial;
+        color: black;
+        margin-left:1em;
+}*/
+
+#Intro {
+    height:100%;
+}
+#ExtremeReport2Text
+{
+    font-size:10px;
+    font-weight:bolder;
+    font-family:Arial;
+    margin-left:4em;
+}
+
+.mobile-table
+{
+    border:none;
+}
+
+#datepicker,#datepicker2{
+    float:left;
+    border-radius:5px;
+    width:80%;
+}
+
+#CityPicker
+{
+    font-size:10px;
+}
+
+.cityList {
+    background: lightblue;
+    color: black !important;
+    font-weight: bold !important;
+    font-size:14px;
+}
+
+ExtremeReport1DisplayPanel {
+    background-color: lavender;
+    display:none;
+    border-radius:20px;
+    border-color:deepskyblue;
+    margin-left:25px;
+}
+
+#WelcomeTo {
+    font-size: 10px;
+    color: white;
+    font-family: Broadway;
+}
+
+#Container{
+    background-color:lavender;
+}
+
+img {
+    border-radius: 5px;
+    /*margin-left: 2px;*/
+    width: 60px;
+    height: 60px;
+
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10px;
+    font-family: fantasy;
+    font-weight: bolder;
+}
+
+.centered-fall {
+    color: orange;
+    
+}
+
+.centered-summer {
+    color: gold;
+}
+
+.centered-winter {
+    color: whitesmoke;
+}
+
+.centered-spring {
+    color: #db5079;
+}
+
+/*table{
+    border:none;
+    margin-left:2px;
+}*/
+
+
+#CarouselHeader2,#CarouselHeader3 {
+    font-size: 14px;
+    font-family: Arial;
+    font-weight: bold;
+}
+
+header {
+    /*float: none;*/
+    margin: 0 auto;
+    margin-top: 1em;
+    height: 30%;
+    width: 100%;
+    background-color: #006699;
+    border-radius: .5em;
+    font-size: 14px;
+    font-family: fantasy;
+    color: deepskyblue;
+}
+
+/* Container that holds all buttons "Learn More" and "Search Now"*/
+#Intro {
+    float: none;
+    margin: 0 auto;
+    margin-top: 1em;
+    height: 30%;
+    width: 100%;
+    background-color: #006699;
+    border-radius: .5em;
+    font-size: 14px;
+    font-family: fantasy;
+    color: deepskyblue;
+}
+
+.navbar-brand {
+    /*padding: 0 15px;*/
+    margin-left:2px;
+    height: 50px;
+    line-height: 20px;
+}
+
+.navbar-brand > img {
+    /*padding: 0 15px;*/
+    margin-left: 0px;
+    
+}
+
+
+.HistoricalSearch {
+    color: lavender;
+}
+
+.ExtremeSearch {
+    color: silver;
+}
+
+.Climatologysearch {
+    color: #db5079;
+}
+
+.HistoricalSearch, .ExtremeSearch, .Climatologysearch {
+    font-size: 22px;
+    font-family: Broadway;
+}
+
+.HistoricalSearch + ul li, .ExtremeSearch + ul li, .Climatologysearch + ul li {
+        margin: 0;
+        margin-bottom: 5px;
+}
+
+.HistoricalSearch + ul li a, .ExtremeSearch + ul li a, .Climatologysearch + ul li a {
+    background-color: white;
+    color: #006699;
+    font-size: 14px;
+    font-family: arial;
+    font-weight: bolder;
+}
+
+.input-group-addon
+{
+    float:left;
+    width:15%;
+    /*display:inline;*/
+}
+
+h3 {
+    font-family: Arial;
+    color: black;
+    margin-left: 25px;
+    text-shadow: 2px 2px;
+    font-weight:bold;
+}
+
+#filterStuff {
+    background-color:red;
+    width:100%;
+
+}
+
+
+#filterLabel{
+    display:initial;
+    /*float:left;*/
+    font-size:14px;
+}
+
+.firstFilterColumn
+{width: 75px;}
+
+#MetricValue1, #MetricValue2, #MetricValue3 {
+    color: silver;
+    display: inline;
+    width: 75px;
+}
+
+.bootstrap-select.btn-group .dropdown-toggle .filter-option {
+    color: silver;
+    background-color:white;
+}
+
+
+.bootstrap-select .dropdown-menu {
+    margin-left: 10px;
+}
+
+.bootstrap-select .btn {
+    color: black;
+}

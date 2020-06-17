@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "About City Weather Reports";
+}
+<h2 style="color:deepskyblue">@ViewData["Title"]</h2>
+<h3>@ViewData["Message"]</h3>
+
+<p> Hello, and welcome to cityweatherreports.com! This site was partly developed for fun as I love weather statistics/data, cities, and weather in general. 
+    This site was also developed to practice and learn web development skills in Bootstrap, ASP.NET Core, C#, LINQ, WEB API consumption, Web API development (REST), SQL, ADO.NET, HTML, and CSS.'
+</p> 
+
+<p>
+    Currently, there are two reports that can generated on this site:
+    <ol>
+        <li><i>The historical weather data report</i></li>
+        <li><i>The extreme weather data report.</i></li>
+    </ol>
+
+    The data source of the weather data behind the <i>The historical weather data report</i> is <a href="https://www.ncdc.noaa.gov/cdo-web/webservices/v2"> the National Weather Service's (NOAA) Web Services API </a>. The ASP.NET business logic consumes
+    this service by making REST API calls and eventually displaying the data to the end-user.
+
+    The data source of the weather data behind the <i>The extreme weather report</i> is a backend database residing in the cloud that already has preloaded weather data. 
+    This data is regularly updated by a seperate program that pulls data from <a href="https://www.ncdc.noaa.gov/cdo-web/webservices/v2"> the National Weather Service's (NOAA) Web Services API </a>
+    The extreme weather report calculations are made when the user submits the parameters of the report. The results are then returned from the database back to the end-user and displayed in a Bootstrap table.
+</p>    

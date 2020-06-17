@@ -1,0 +1,89 @@
+﻿@{
+    ViewData["Title"] = "Monthly Averages Report";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<i style="margin-left:25px" class="fas fa-divide fa-2x"></i>
+<h2>Monthly Averages Report</h2>
+<h5 style="margin-left:25px">Show average monthly high temperatures for a city throughout a certain time period</h5>
+<br />
+<br />
+<i style="margin-left:25px" class="fas fa-directions fa-2x"></i>
+<span class="ExtremeInstructions">Complete parameters below then click 'Generate Report'</span>
+<div id="ExtremeInstructionsPanel">
+
+    <div>
+        <ul style="list-style:none;padding-left:0">
+            <li>
+                @*<i class="fas fa-list-ol fa-2x"></i>*@
+                <span class="fa-stack fa-2x">
+                    <i class="fas fa-square fa-stack-2x fa-inverse"></i>
+                    <i class="fas fa-temperature-high fa-stack-1x"></i>
+                </span>
+
+                <span class="ExtremeReport2Text">Find the average monthly high temperature</span>
+            </li>
+            <li>
+                <span class="fa-stack fa-2x">
+                    <i class="fas fa-square fa-stack-2x fa-inverse"></i>
+                    <i class="fas fa-city fa-stack-1x"></i>
+                </span>
+                <span class="ExtremeReport2Text">for the city of </span>
+                <select style="display:inline" id="CityPicker2" class="selectpicker" data-live-search="true" data-width="fit" name="CityId" title="Select a City..." required></select>
+            </li>
+            <li>
+                <span class="ExtremeReport2Text">from </span>
+                <input id="fromYearReport1" type="text" placeholder="Enter year only (yyyy)" />
+                <span class="ExtremeReport2Text">to </span>
+                <input id="toYearReport1" type="text" placeholder="Enter Year only (yyyy)" />
+            </li>
+            
+        </ul>
+
+    </div>
+    <br />
+    <button type="button" id="btnYearToYearAvgSubmit">
+        Generate Report >>
+        <i class="fas fa-arrow-circle-down"></i>
+    </button>
+    <br />
+    <br />
+    @*<a href="@Url.Action("CheckoutDetails","Home")" class="btn btn-success">Checkout >></a>*@
+    <span class="Error" id="ExtremeError1"></span>
+    @*<i class="fas fa-exclamation-circle fa-2x"></i>*@
+    <span class="Error" id="ExtremeError2"></span>
+    <span class="Error" id="ExtremeError3"></span>
+    <span class="Error" id="ExtremeError4"></span>
+    <span class="Error" id="ExtremeError5"></span>
+
+</div>
+
+<div id="ProgressBar" class="col-sm-10 panel panel-default" style="margin-left:25px;border:none;display:none;">
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+        </div>
+        <div class='col-sm-4'>
+            <div id="THELOADER" class="loader"></div>
+        </div>
+
+    </div>
+</div>
+
+<br /><br />
+
+
+<div id="ExtremeReport1DisplayPanel" class="col-sm-12 panel panel-default">
+    <div class="row">
+        <div id="Summary2"></div>
+        <p id="Summary2-Line2"></p>
+    </div>
+
+    <div class="row">
+        <div id="Container"></div>
+    </div>
+</div>
+

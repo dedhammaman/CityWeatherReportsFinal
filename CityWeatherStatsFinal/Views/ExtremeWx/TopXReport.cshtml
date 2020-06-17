@@ -1,0 +1,136 @@
+﻿@{
+    ViewData["Title"] = "TopXReport";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<i style="margin-left:25px" class="fas fa-list-ol fa-2x"></i>
+<h2>Top X Days of Extreme Weather For a City</h2>
+<h5 style="margin-left:25px">What were the top (number) of coldest/snowiest/warmest/etc. days for a particular city?</h5>
+<br />
+<br />
+<i style="margin-left:25px" class="fas fa-directions fa-2x"></i>
+<span class="ExtremeInstructions">Complete parameters below then click 'Generate Report'</span>
+<div id="ExtremeInstructionsPanel">
+
+    <div>
+        <ul style="list-style:none;padding-left:0">
+            <li>
+                @*<i class="fas fa-list-ol fa-2x"></i>*@
+                <span class="fa-stack fa-2x">
+                    <i class="fas fa-square fa-stack-2x fa-inverse"></i>
+                    <i class="fas fa-list-ol fa-stack-1x"></i>
+                </span>
+
+                <span class="ExtremeReport2Text">Find the top</span>
+                <input id="TopnReport2" type="text" class="change" placeholder="Enter a number">
+                <span class="ExtremeReport2Text">days</span>
+            </li>
+            <li>
+                <span class="fa-stack fa-2x">
+                    <i class="fas fa-square fa-stack-2x fa-inverse"></i>
+                    <i class="fas fa-cloud-sun-rain fa-stack-1x"></i>
+                </span>
+
+                <span class="ExtremeReport2Text">with the</span>
+                <select id="xtremeWx2" class="selectpicker" data-live-search="true" data-width="fit" title="Select an extreme weather parameter...">
+                    <option class="cityList" value="Snowiest">Snowiest days</option>
+                    <option class="cityList" value="Wettest">Wettest days</option>
+                    <option class="cityList" value="Warmest Highs">Days with warmest highs</option>
+                    <option class="cityList" value="Warmest Lows">Days with warmest lows</option>
+                    <option class="cityList" value="Coldest Highs">Days with coldest highs</option>
+                    <option class="cityList" value="Coldest Lows">Days with coldest lows</option>
+                </select>
+            </li>
+            <li>
+                <span class="fa-stack fa-2x">
+                    <i class="fas fa-square fa-stack-2x fa-inverse"></i>
+                    <i class="fas fa-city fa-stack-1x"></i>
+                </span>
+                <span class="ExtremeReport2Text">in the city of </span>
+                <select style="display:inline" id="CityPicker2" class="selectpicker text-nowrap" data-live-search="true" data-width="fit" name="CityId" title="Select a City..." required></select>
+            </li>
+            <li>
+                <span class="fa-stack fa-2x">
+                    <i class="fas fa-square fa-stack-2x  fa-inverse"></i>
+                    <i class="fas fa-clock fa-stack-1x"></i>
+                </span>
+                <span class="ExtremeReport2Text">Generate report for specific time frame?</span>
+                @*<div style="display:inline" class="radio">*@
+                <label class="ExtremeReport2Text"><input type="radio" name="optyesno" value="yes" checked />Yes</label>
+                @*</div>*@
+                @*<div style="display:inline" class="radio">*@
+                <label class="ExtremeReport2Text"><input type="radio" name="optyesno" value="no" />No</label>
+                @*</div>*@
+
+
+            </li>
+            <li>
+                <span class="fa-stack fa-2x">
+                    <i class="fas fa-square fa-stack-2x fa-inverse"></i>
+                    <i class="fas fa-business-time fa-stack-1x"></i>
+                </span>
+                <span class="ExtremeReport2Text">during the time period of</span>
+                <div id="Report2FromDate" class="input-group date" data-provide="datepicker" title="mm/dd/yyyy">
+                    <input type="text" class="change2" id="datepicker" name="datepicker" placeholder="mm/dd/yyyy" required>
+                    <div class="input-group-addon" style="display:inline-block;width:50px">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+                </div>
+
+                <span class="ExtremeReport2Text">To</span>
+
+                <div id="Report2ToDate" class="input-group date" data-provide="datepicker" data-width="200px">
+                    <input type="text" class="change2" id="datepicker2" name="datepicker2" placeholder="mm/dd/yyyy" required>
+                    <div class="input-group-addon" style="display:inline-block;width:50px">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+
+                </div>
+            </li>
+        </ul>
+
+    </div>
+    <button type="button" id="btnSubmit2">
+        Generate Report >>
+        <i class="fas fa-arrow-circle-down"></i>
+    </button>
+    <br />
+    <br />
+    @*<a href="@Url.Action("CheckoutDetails","Home")" class="btn btn-success">Checkout >></a>*@
+    <span class="Error" id="ExtremeError1"></span>
+    @*<i class="fas fa-exclamation-circle fa-2x"></i>*@
+    <span class="Error" id="ExtremeError2"></span>
+    <span class="Error" id="ExtremeError3"></span>
+    <span class="Error" id="ExtremeError4"></span>
+    <span class="Error" id="ExtremeError5"></span>
+
+</div>
+
+<div id="ProgressBar" class="col-sm-10 panel panel-default" style="margin-left:25px;border:none;display:none;">
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+        </div>
+        <div class='col-sm-4'>
+            <div id="THELOADER" class="loader"></div>
+        </div>
+
+    </div>
+</div>
+
+<br /><br />
+
+
+<div id="ExtremeReport2DisplayPanel" class="col-sm-12 panel panel-default" style="display:none;border-radius:20px;border-color:deepskyblue;margin-left:25px;">
+    <div class="row">
+        <div id="Summary"></div>
+    </div>
+
+    <div class="row">
+        <div id="Container"></div>
+    </div>
+</div>
+

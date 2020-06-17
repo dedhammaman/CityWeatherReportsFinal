@@ -1,0 +1,252 @@
+﻿
+@{
+    ViewData["Title"] = "Weather History Search";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<i style="margin-left:25px" class="fas fa-history fa-2x"></i>
+<h2>Historical Weather Search</h2>
+<br />
+<br />
+<table class="mobile-table">
+    <tr>
+        <td>
+            <i style="margin:0px 3px 0px 25px" class="fas fa-directions fa-2x"></i>
+        </td>
+        <td>
+            <span class="ExtremeInstructions">Enter search parameters then click 'Submit'. After clicking </span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <i style="margin-left:25px;display:none" class="fas fa-directions fa-2x"></i>
+        </td>
+        <td>
+            <span class="ExtremeInstructions">'Submit', a summary along with the data will appear below.</span>
+        </td>
+
+    </tr>
+</table>
+
+@*<div style="margin-left:25px;">
+<i style="margin-left:25px" class="fas fa-directions fa-2x"></i>
+<span class="ExtremeInstructions">Instructions: Enter search parameters below then click 'Submit'. After clicking 'Submit', a summary along with the data will appear below. The additional filters are optional and can help to narrow the search results.</span>
+</div>*@
+<div id="HistorySearchPanel">
+    <div>
+        <ul style="list-style:none;padding-left:0">
+            <li>
+                <br />
+            </li>
+            <li>
+                <span class="fa-stack fa-2x">
+                    <i class="fas fa-square fa-stack-2x fa-inverse"></i>
+                    <i class="fas fa-ruler fa-stack-1x"></i>
+                </span>
+                <span class="ExtremeReport2Text">City size to select from?</span>
+                <select style="display:inline" id="CityScope" class="selectpicker" data-width="fit">
+                    <option value="MidSize">List midsized/major U.S. cities only</option>
+                    <option value="Major">List major U.S. cities only</option>
+                    <option value="SmallSized">List all U.S. cities (data may be limited)</option>
+                </select>
+            </li>
+            <li>
+                @*<span class="fa-stack fa-2x">
+                        <i class="fas fa-square fa-stack-2x fa-inverse"></i>
+                        <i class="fas fa-city fa-stack-1x"></i>
+                    </span>
+                    <label class="formlabel">Select a City:</label><br />
+                    <select class="selectpicker" data-live-search="true" data-width="fit" name="CityId" title="Select a City..." required></select>*@
+                <span class="fa-stack fa-2x">
+                    <i class="fas fa-square fa-stack-2x fa-inverse"></i>
+                    <i class="fas fa-city fa-stack-1x"></i>
+                </span>
+                <select style="display:inline" id="CityPicker" class="selectpicker" data-live-search="true" 
+                        data-width="fit" name="CityId"  data- title="Select a City..." required></select>
+                <p class="Error" id="HisErr1"></p>
+            </li>
+            <li>
+                <span class="fa-stack fa-2x">
+                    <i class="fas fa-square fa-stack-2x fa-inverse"></i>
+                    <i class="fas fa-calendar-times fa-stack-1x"></i>
+                </span>
+                <span class="ExtremeReport2Text">From:</span>
+
+                
+                <div id="Report2FromDate" class="input-group date" data-provide="datepicker" title="mm/dd/yyyy">
+        <input type="text" id="datepicker" name="datepicker" placeholder="mm/dd/yyyy" required>
+        <div class="input-group-addon" style="display:inline-block;width:50px">
+        <span class="glyphicon glyphicon-th"></span>
+        </div>
+        </div>
+
+                @*<div class="input-group date">
+                    <input type="text" class="form-control" id="datepicker" placeholder="MM/DD/YYYY">
+                </div>*@
+
+
+                <span class="ExtremeReport2Text">To:</span>
+
+                <div id="Report2ToDate" class="input-group date" data-provide="datepicker" data-width="200px">
+                    <input type="text" id="datepicker2" name="datepicker2" placeholder="mm/dd/yyyy" required>
+                    <div class="input-group-addon" style="display:inline-block;width:50px">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
+
+                </div>
+                <p class="Error" id="HisErr2"></p>
+                <p class="Error" id="HisErr3"></p>
+            </li>
+            <li>
+                <span class="fa-stack fa-2x">
+                    <i class="fas fa-square fa-stack-2x fa-inverse"></i>
+                    <i class="fas fa-filter fa-stack-1x"></i>
+                </span>
+
+                <span>
+                    <button id="FilterButton" type="button" class="btn btn-default btn-sm" onclick="FilterOnOff();" data-toggle="collapse">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                </span>
+                <span id="filterLabel2">
+                    Add additional filters (optional)
+                </span>
+
+                <div id="filterStuff">
+                    <label id="filterLabel">Select additional filters (example: Where high temp is greater than 80 degrees)</label>
+                    <table id="filterTable" style="display:none">
+                        <tr>
+                            <td>
+                                <button type="button" class="ClearButton" id="ClearBtn1">Clear</button>
+                            </td>
+                            <td>
+                                <select style="display:inline" id="Metric1" class="selectpicker"
+                                        data-width="130px" name="Metric1" data- title="Select metric" required>
+                                    <option value="Snowfall">Snowfall</option>
+                                    <option value="Precipitation">Precipitation</option>
+                                    <option value="HighTemp">High Temp</option>
+                                    <option value="LowTemp">Low Temp</option>
+                                    <option value="None"></option>
+                                </select>
+
+                            </td>
+                            <td>
+                                <select style="display:inline" id="Operator1" class="selectpicker"
+                                        data-width="140px" name="Operator1" data- title="Select operator" required>
+
+                                    @*<select id="Operator1" class="selectpicker" data-style="btn-primary" title="Select Operator" data-width="140px">*@
+                                        <option value="GreaterThan">GreaterThan( > )</option>
+                                        <option value="LessThan">LessThan( < )</option>
+                                        <option value="LessThanOrEqualTo">Less Than or equal to ( <= )</option>
+                                        <option value="GreaterThanOrEqualTo">Greater than or equal to ( >= )</option>
+                                        <option value="Equals">Equals ( = )</option>
+                                        <option value="None"></option>
+                                    </select>
+                            </td>
+                            <td>
+                                <input id="MetricValue1" type="text" class="form-control" placeholder="Enter number">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="button" class="ClearButton" id="ClearBtn2">Clear</button>
+                            </td>
+                            <td>
+                                <select style="display:inline" id="Metric2" class="selectpicker"
+                                        data-width="130px" name="Metric2" data- title="Select metric" required>
+                                    <option value="None"></option>
+                                    <option value="Snowfall">Snowfall</option>
+                                    <option value="Precipitation">Precipitation</option>
+                                    <option value="HighTemp">High Temp</option>
+                                    <option value="LowTemp">Low Temp</option>
+                                    <option value="None"></option>
+                                </select>
+                            </td>
+                            <td>
+                                <select style="display:inline" id="Operator2" class="selectpicker"
+                                        data-width="140px" name="Operator2" data- title="Select operator" required>
+
+                                    <option value="GreaterThan">GreaterThan( > )</option>
+                                    <option value="LessThan">LessThan( < )</option>
+                                    <option value="LessThanOrEqualTo">Less Than or equal to ( <= )</option>
+                                    <option value="GreaterThanOrEqualTo">Greater than or equal to ( >= )</option>
+                                    <option value="Equals">Equals ( = )</option>
+                                    <option value="None"></option>
+                                </select>
+                            </td>
+                            <td>
+                                <input id="MetricValue2" type="text" class="form-control" placeholder="Enter number">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button class="ClearButton" type="button" id="ClearBtn3">Clear</button>
+                            </td>
+                            <td>
+                                <select style="display:inline" id="Metric3" class="selectpicker"
+                                        data-width="130px" name="Metric3" data- title="Select metric" required>
+                                    <option value="Snowfall">Snowfall</option>
+                                    <option value="Precipitation">Precipitation</option>
+                                    <option value="HighTemp">High Temp</option>
+                                    <option value="LowTemp">Low Temp</option>
+                                    <option value="None"></option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="Operator3" class="selectpicker" data-style="btn-primary" data-width="140px" title="Select Operator">
+                                    <option value="GreaterThan">GreaterThan( > )</option>
+                                    <option value="LessThan">LessThan( < )</option>
+                                    <option value="LessThanOrEqualTo">Less Than or equal to ( <= )</option>
+                                    <option value="GreaterThanOrEqualTo">Greater than or equal to ( >= )</option>
+                                    <option value="Equals">Equals ( = )</option>
+                                    <option value="None"></option>
+                                </select>
+                            </td>
+                            <td>
+                                <input id="MetricValue3" type="text" class="form-control" placeholder="Enter number">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+
+
+    <button type="button" id="btnSubmit">Generate Report >>
+    <i class="fas fa-arrow-circle-down"></i>
+    </button>
+    <br />
+</div>
+<br /><br />
+      <div id="ProgressBar" class="col-sm-10 panel panel-default" style="margin-left:25px;border:none;display:none;">
+          <div class="row">
+              <div class='col-sm-6'>
+                  <div class="progress">
+                      <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                  </div>
+              </div>
+              <div class='col-sm-4'>
+                  <div id="THELOADER" class="loader"></div>
+              </div>
+
+          </div>
+      </div>
+          <br /><br />
+
+                <div id="Summary" class="col-sm-12 panel panel-default">
+
+                    
+                </div>
+
+                    <div id="Details" class="col-sm-12 panel panel-default" style="border-radius:20px;margin-left:25px;">
+                        <div class="row">
+                            <div id="Container"></div>
+                        </div>
+                    </div>
+
+                    <script>
+                        src = "~/lib/bootstrap / dist / js / bootstrap.js"
+                    </script>

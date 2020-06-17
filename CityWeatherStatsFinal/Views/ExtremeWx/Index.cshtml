@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "XTreme Weather Search";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 id="extremeHeader"><span>X-</span>Treme Weather Reports</h2>
+
+@using (Html.BeginForm("Report", "ExtremeWx"))
+{
+<div id="RadioPanelDivEx" class="col-sm-12 panel panel-default">
+    <i class="fas fa-directions fa-2x"></i>
+    <span style="color:silver" class="ExtremeInstructions">Choose a report</span>
+    @*<div id="extremeOptions" class='col-sm-12'>
+            <div class="radio">
+                <label><input type="radio" id="radoptex1" name="optradio" checked>List top x (some number) days of extreme weather in a city (Example: show top 10 snowiest days in Seattle and New York City) </label>
+            </div>
+            <div class="radio">
+                <label><input type="radio" id="radoptex2" name="optradio" />Number of days, months, or years that extreme events occurred (in cities/states) over a chosen time period</label>
+            </div>
+            <div class="radio disabled">
+                <label><input type="radio" id="radoptex3" name="optradio">Number of U.S. cities where an event occurred over a chosen time period</label>
+            </div>
+        </div>*@
+    <br />
+    <br />
+    @Html.RadioButton("WhichReport", "TopXReport", true) <span>List top x (some number) days of extreme weather in a city (Example: show top 10 snowiest days in Seattle and New York City)</span>
+    <br />
+    @Html.RadioButton("WhichReport", "MonthlyAveragesReport") <span>Average temperatures for the same month over a period of years for selected cities</span>
+    <br />
+    @Html.RadioButton("WhichReport", "NumExtremeEvents") <span>Number of U.S. cities where an event occurred over a chosen time period</span>
+    <br />
+    <br />
+    <button type="submit" class="btn btn-default">Next</button>
+    <br />
+    <br />
+
+
+</div>
+}
+
+    
+    
+

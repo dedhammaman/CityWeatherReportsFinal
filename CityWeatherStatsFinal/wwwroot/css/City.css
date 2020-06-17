@@ -1,0 +1,130 @@
+﻿/*p {
+    padding: 10px;
+}*/
+
+#content {
+    float: left;
+    width: 100%;
+}
+
+header {
+    float: left;
+    /*margin-left:auto;*/
+    margin-top:1px;
+    /*margin-right:auto;*/
+    height: 300px;
+    width: 100%;
+    background-color: whitesmoke;
+    border-radius: 10px;
+    font-size:14px;
+    font-family: fantasy;
+}
+
+article {
+    background-color: navajowhite;
+    margin-left: 155px;
+    border-radius: 10px;
+}
+
+nav {
+    float: left;
+    background-color: navajowhite;
+    width: 150px;
+    margin-left: -100%;
+    border-radius: 10px;
+}
+
+footer {
+    border-radius: 10px;
+    text-align: center;
+    height: 30px;
+    width: 100%;
+    background: #4cff00;
+    background-color: lightgreen;
+    clear: both;
+}
+
+ul {
+    margin: 4px;
+    padding-left: 10px;
+    list-style-type: none;
+}
+
+/*h2 {
+    background-color: red;
+}*/
+
+table {
+    width: 80%;
+    margin: 20px;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #cdcdcd;
+    background-color: orange;
+}
+
+    table th, table td {
+        padding: 5px;
+        text-align: center;
+}
+.jumbotron {
+    background-size: 50% 50%;
+}
+
+img {
+    border-radius: 8px;
+    margin: 10px; 
+    width:300px;
+    height:195px;
+}
+
+.centered
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size:30px;
+    
+}
+
+.centered-fall{
+    color:orange;
+}
+
+.centered-summer {
+    color: gold;
+}
+
+.centered-winter {
+    color: whitesmoke;
+}
+
+.centered-spring {
+    color: springgreen;
+}
+
+.header-text {
+    font-size:20px;
+    font-family: 'Arial Rounded MT';
+    color:forestgreen;
+}
+
+#Home
+{
+    background-color:whitesmoke
+}
+
+#Caption {
+    font-size:20px;
+    font-family: 'Arial Rounded MT'; 
+    color:forestgreen;
+    /*background-color:whitesmoke;*/
+}
+
+.navbar-text {
+    padding:1px 1px 1px 1px;
+    float:left;
+}

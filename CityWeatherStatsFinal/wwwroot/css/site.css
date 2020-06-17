@@ -1,0 +1,807 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    /*padding-top: 50px;*/
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.container {
+    padding-left: 1px;
+    padding-right: 1px; 
+}
+
+
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+img {
+    border-radius: 8px;
+    margin: 10px;
+    width: 250px;
+    height: 175px;
+}
+
+/* Container that holds the carousel*/
+header {
+    float: none;
+    margin-left: 10px;
+    margin-top: 1em;
+    margin-right:auto;
+    height: 30%;
+    width: 100%;
+    background-color: lavender;
+    border-radius: .5em;
+    font-size: 14px;
+    font-family: fantasy;
+}
+
+/* Container that holds all buttons "Learn More" and "Search Now"*/
+#Intro {
+    float: none;
+    margin-left: 10px;
+    margin-top: 1em;
+    margin-right: auto;
+    height: 30%;
+    width: 100%;
+    background-color: #006699;
+    border-radius: .5em;
+    font-size: 14px;
+    font-family: fantasy;
+    color:deepskyblue;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-family:fantasy;
+    font-weight:bolder;
+}
+
+.centered-fall {
+    color: orange;
+}
+
+.centered-summer {
+    color: gold;
+}
+
+.centered-winter {
+    color: whitesmoke;
+}
+
+.centered-spring {
+    color: #db5079;
+}
+
+.navbar {
+    min-height: 80px;
+}
+
+.navbar-brand {
+    padding: 0 15px;
+    height: 90px;
+    line-height: 80px;
+}
+
+.navbar-toggle {
+    /* (80px - button height 34px) / 2 = 23px */
+    margin-top: 23px;
+    padding: 9px 10px !important;
+}
+
+@media (min-width: 768px) {
+    .navbar-nav > li > a {
+        /* (80px - line-height of 27px) / 2 = 26.5px */
+        padding-top: 26.5px;
+        padding-bottom: 26.5px;
+        line-height: 27px;
+    }
+}
+
+/*.navbar{
+    margin:0px;
+    padding:0xp;*/
+
+/* Customer Searches of us cities caption*/
+#Caption {
+    font-size: 20px;
+    font-family: 'Arial Rounded MT';
+    color: #db5079;
+    margin-left:1em;
+}
+
+.container {
+    padding-right: 1px;
+    padding-left: 1px;
+    margin-right: 1px;
+    margin-left: 1px;
+}
+
+h2 {
+    font-family: Broadway;
+    color: black;
+    display:inline;
+    padding-left:10px;
+    text-shadow: 1px 1px;
+}
+
+ul {
+    padding-left: 0;
+}
+
+ul li {
+    list-style-type: none;
+    margin-top: 10px;
+    padding-left: 0;
+    margin-left: 25px;
+}
+
+button {
+    border-radius: 6px;
+    border:solid;
+}
+
+table {
+    border:10px;
+    color:black;
+}
+
+#Container{
+    margin-top: 30px;
+    height: 300px !important;
+    
+}
+
+#Summary {
+    margin-top: 30px;
+    background-color: peachpuff;
+    border-radius:20px;
+    /*border-color:deepskyblue;*/
+    margin-left:25px;
+    /*border-width:3px;*/
+    
+}
+
+#Summary2 {
+    border-radius: 20px;
+    font-size:20px;
+    font-family:Broadway;
+    text-align:center;
+}
+
+#Summary p{
+    font-family:Arial;
+    font-weight:bold;
+    font-size:16px;
+    color:black;
+}
+
+#Container p {
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+    margin-left:10px;
+}
+
+.col-md-3
+{
+    margin-left:25px;
+       
+}
+
+/*.col-sm-3 {
+    margin-left: 25px;
+}*/
+/*.col-sm-4 {
+    margin-left: 25px;
+}*/
+
+.col-md-6 {
+    margin-left: 25px;
+}
+
+#btnSubmit, #btnSubmit2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: silver;
+    background-color:white;
+    margin-left:30px;
+}
+
+/*Results of picked city, dates*/
+#datepicker2, #datepicker{
+    color: black;
+    font-weight:bold;
+    font-size:16px;
+    border-radius:3em;
+}
+
+#CityPicker {
+    color: black;
+    font-weight: bold;
+    font-size: 12px;
+    border-radius: 2em;
+    margin-left:100px;
+}
+.input-group date .btn-default {
+    background-color: lightblue;
+    color: black;
+}
+
+/*Cities in city list*/
+.cityList {
+    background: lightblue;
+    color: black !important;
+    font-weight: bold !important;
+}
+
+/*.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: white !important;
+    color:pink !important;
+}*/
+
+.bootstrap-select .btn {
+    color:black;
+}
+
+/* 06/08 pull city list to the right. */
+.bootstrap-select .dropdown-menu
+{
+    margin-left:100px;
+}
+
+.formlabel
+{
+    color:black;
+    font-size:20px;
+}
+
+#ProgressBar{
+    display:none;
+}
+
+#loader {
+    display: none;
+}
+
+#Example
+{
+    width:300px;
+    height:300px;
+    border-radius:10px;
+}
+
+.form-control::-moz-placeholder {
+    color: white;
+    opacity: 1;
+}
+
+.form-control:-ms-input-placeholder {
+    color: white;
+}
+
+/* Enter a number in filters button placeholder*/
+.form-control::-webkit-input-placeholder {
+    color: black;
+}
+
+/* Animated "Searching" circle thingy*/
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid blue;
+    border-right: 16px solid green;
+    border-bottom: 16px solid red;
+    width: 100px;
+    height: 100px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.bgimg {
+    background-image: url('/images/Under Construction 2.jpg');
+    height: 800px;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    color: white;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 25px;
+}
+
+/*.topleft {
+    position: absolute;
+    top: 0;
+    left: 16px;
+}
+
+.bottomleft {
+    position: absolute;
+    bottom: 0;
+    left: 16px;
+}
+
+.middle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+hr {
+    margin: auto;
+    width: 40%;*/
+
+.HistoricalSearch {
+    color: lavender;
+}
+
+.ExtremeSearch {
+    color: silver;
+}
+
+.Climatologysearch {
+    color: #db5079;
+}
+
+.HistoricalSearch, .ExtremeSearch, .Climatologysearch {
+    font-size: 22px;
+    font-family: Broadway;
+}
+
+.HistoricalSearch + ul li, .ExtremeSearch + ul li, .Climatologysearch + ul li {
+    margin: 0;
+    margin-bottom:5px;
+}
+
+.HistoricalSearch + ul li a, .ExtremeSearch + ul li a, .Climatologysearch + ul li a {
+    background-color: white;
+    color: #006699;
+    font-size: 14px;
+    font-family: arial;
+    font-weight: bolder;
+}
+
+.Error
+{
+    color:red;
+    font-size:16px;
+}
+
+/* Each label for the city-size choices*/
+
+#HistRadioDiv {
+    border: solid 2px;
+    border-color: black;
+    border-radius: 10px;
+    border-width: 1px;
+}
+
+#HistRadioDiv > .radio label {
+        color: black;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+#AdvancedOptions p{
+    color: blue;
+}
+
+
+#filterLabel
+{
+   display:none;
+   color:black;
+   font-size:16px;
+}
+
+#filterLabel2{
+    color:black;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.datepicker .form-control .input-group-addon{
+    background-color: red;
+    color: red;
+    
+}
+
+.ClearButton
+{
+    border-width:1px;
+
+}
+
+#summarybanner
+{
+    color:lightblue;
+    font-size:20px;
+    background-color:orange;
+}
+
+/* Form control that holds all user entered parameters for history search.*/
+#HistoryForm{
+    background-color:lightblue;
+    color:black;
+}
+
+/* Entire Details Panel that displays the tabled results*/
+#Details
+{
+    background-color:peachpuff;
+}
+
+/* Panel that holds the Form for History seaerch*/
+#HistorySearchPanel {
+    border-radius:20px;
+    /*margin-top:25px;*/
+    margin-left:25px;
+    background-color:lightblue;
+}
+
+#WelcomeTo {
+    font-size: 16px;
+    color: white;
+    font-family: Broadway;
+}
+
+/* Header at the top for each city in the carosel*/
+#CarouselHeader1, #CarouselHeader2, #CarouselHeader3 {
+    background-color:lavender;
+    font-size:30px; 
+    font-family:Broadway;
+    color:black;
+
+}
+
+/*Advertising the extreme Search on the home page.*/
+#HistoricalInstructions 
+{
+    color: silver;
+    font-size: 12px;
+    font-family: Arial;
+    margin-left: 25px;
+}
+
+#MetricValue1, #MetricValue2, #MetricValue3 {
+    color: Silver;
+    /*display: inline;*/
+    width:140px;
+}
+
+#RadioPanelDivEx {
+    border-radius: 20px;
+    border-color: deepskyblue;
+    margin-left: 25px;
+    background-color: lavender;
+}
+
+#RadioPanelDivEx > .radio label {
+   color: black;
+   font-weight: bold;
+   font-size: 11px;
+}
+
+#extremeHeader {
+    font-family: Broadway;
+    margin-left: 25px;
+    color: black;
+}
+
+#extremeHeader > span {
+        font-size: 30px;
+        color: #db5079;
+}
+
+.ExtremeInstructions
+{
+    color: silver;
+    font-size: 20px;
+    font-family: Arial;
+    font-weight: bolder;
+
+}
+
+#Report2FromDate,#Report2ToDate
+{
+    width:200px;
+    display:inline;
+    border-radius:3px;
+}
+
+    #Report2FromDate input[type='text'], #Report2ToDate input[type='text'] {
+        width: 200px;
+        border-radius: 5px;
+    }
+
+    #Report2ToDateLbl, #Report2FromDateLbl {
+        font-size: 12px;
+    }
+
+#xtremeWx {
+    
+    background-color:silver;
+    width:300px;
+}
+
+
+
+/*select#xtremeWx > .bootstrap-select.btn-group .dropdown-toggle .filter-option {
+        color: red;
+}*/
+
+#Report2InstructionsRow1 > p
+{
+    color:black;
+}
+
+#Report2InstructionsRow1 > p > input {
+     background-color: lightblue;
+     color: #db5079;
+     display: inline;
+     /*width: 150px;*/
+}
+
+/* select picker with extreme weather types for extreme report2*/
+
+.change::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: silver;
+    font-size:24px;
+}
+
+.change::-moz-placeholder { /* Firefox 19+ */
+    color: silver;
+}
+
+.change:-ms-input-placeholder { /* IE 10+ */
+    color: silver;
+}
+
+.change:-moz-placeholder { /* Firefox 18- */
+    color: pink;
+}
+
+/* Date picker styles for extreme report2*/
+
+.change2::-webkit-input-placeholder {
+    color: silver;
+    background-color: white;
+}
+
+/* WebKit, Blink, Edge */
+.change2:-moz-placeholder {
+    color: silver;
+    background-color: white;
+}
+
+/* Mozilla Firefox 4 to 18 */
+.change2::-moz-placeholder {
+    color: silver;
+    background-color: white;
+}
+
+/* Mozilla Firefox 19+ */
+.change2:-ms-input-placeholder {
+    color: silver;
+    background-color: white;
+}
+
+#TopnReport2 {
+    background-color: white;
+    color:silver;
+    height: 30px;
+    width: 220px;
+    font-size: 24px;
+}
+
+#ExtremeInstructionsPanel {
+    background-color: lightblue;
+    margin-left: 25px;
+    border-radius: 20px;
+    border:solid lightblue;
+}
+
+.ExtremeReport2Text{
+   font-family: Arial;
+   font-size:24px;
+   color:black;
+   font-weight:bolder;
+}
+
+#Report2InstructionsRow1 ol li {
+    font-family: Arial;
+    font-size: 30px;
+    font-weight: bolder;
+    color: black;
+}
+
+input[type='radio']::after
+{
+    border-color:black;
+    background-color:black;
+    color:black;
+}
+
+#xtremeWx2
+{
+    color:silver;
+    background-color:white;
+}
+
+.copyright {
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+}
+
+.copyright .copyright-left {
+    text-align: left;
+}
+
+.copyright .copyright-right {
+    text-align: right;
+}
+
+.copyright .list-social {
+    float: right;
+    margin-top: -10px;
+}
+
+.copyright .list-social > li {
+    /*display: inline;*/
+    float: left;
+    margin: 2px 5px;
+}
+
+.copyright .list-social > li > a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    
+    font-size: 20px;
+    color: #333333;
+}
+
+.copyright .list-social > li > a:hover {
+    background: #333333;
+    border: 1px solid #333333;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.copyright .list-social > li > a .fa {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -8px;
+    margin-top: -9px;
+}
+
+#filterStuff
+{
+    margin-left:50px;
+}
+
+#fromYearReport1, #toYearReport1 {
+    border-radius: 5px;
+}
+
+/*#CarouselHeader1
+{
+    margin-left:2px;
+}*/
+
+#ExtremeReport1DisplayPanel 
+{
+    background-color:lavender;
+    margin-left:25px;
+    display:none;
+}
+
+#Summary2-Line2{
+    font-size:16px;
+    font-family:Broadway;
+    text-align:center;
+}
+
+#btnYearToYearAvgSubmit
+{
+   margin-left:25px; 
+}
+
+/*#CityPicker2.selectpicker .dropdown-menu .open {
+    width: 425px !important;
+    font-size: 12px;
+    font-weight: bolder;
+    background-color: white;
+}*/
+
+.dropdown-menu > a {
+  color: black;
+  /*height:100px;*/
+  font-family:'Arial Rounded MT';
+  font-size:12px;
+  
+}
+
+#ExtremeNavDropdown.dropdown-menu {
+    max-width: 425px !important;
+    font-size: 16px;
+    font-weight: bolder;
+    background-color: lightblue;
+}
+
+
+.bootstrap-select > .dropdown-toggle[title='Select'],
+.bootstrap-select > .dropdown-toggle[title='Select']:hover,
+.bootstrap-select > .dropdown-toggle[title='Select']:focus,
+.bootstrap-select > .dropdown-toggle[title='Select']:active {
+    color: grey;
+    background-color:white;
+}
+
+/*.datepicker,
+.table-condensed {
+    width: 100px;
+    height: 50px;
+}*/
