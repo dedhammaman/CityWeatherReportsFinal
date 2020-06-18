@@ -264,14 +264,25 @@ function loadCarouselImages() {
 
             var filters = new Array();
             
-            
+
             $("#filterTable tr").each(function () {
-                var row = $(this);
-                var filter = {};
-                filter.Metric = row.find("td").eq(1).find('select option:selected').val();
-                filter.Operator = row.find("td").eq(2).find('select option:selected').val();
-                filter.MetricValue = row.find("td").eq(3).find('input').val();
-                filters.push(filter);
+
+                if (isMobile) {
+                    var row = $(this);
+                    var filter = {};
+                    filter.Metric = row.find("td").eq(2).find('select option:selected').val();
+                    filter.Operator = row.find("td").eq(3).find('select option:selected').val();
+                    filter.MetricValue = row.find("td").eq(4).find('input').val();
+                    filters.push(filter);
+                }
+                else {
+                    var row = $(this);
+                    var filter = {};
+                    filter.Metric = row.find("td").eq(1).find('select option:selected').val();
+                    filter.Operator = row.find("td").eq(2).find('select option:selected').val();
+                    filter.MetricValue = row.find("td").eq(3).find('input').val();
+                    filters.push(filter);
+                }
             });
 
             var cityIdLabel = $("#CityPicker option:selected").text();
@@ -1000,7 +1011,7 @@ function isValidDate(dateString) {
 function FilterOnOff() {
     var filterbutton = $("#FilterButton");
     var filtertable = $("#filterTable");
-    var filterlabel = $("#filterLabel");
+    var filterlabel = $(".filterLabel");
     if (filtertable.css('display') == 'none') {
         filterbutton.find('span').removeClass("glyphicon glyphicon-plus").addClass("glyphicon glyphicon-minus");
         filtertable.css('display', 'block');

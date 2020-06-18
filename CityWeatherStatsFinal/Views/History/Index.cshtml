@@ -108,12 +108,12 @@
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </span>
-                <span id="filterLabel2">
+                <span class="ExtremeReport2Text">
                     Add additional filters (optional)
                 </span>
 
                 <div id="filterStuff">
-                    <label id="filterLabel">Select additional filters (example: Where high temp is greater than 80 degrees)</label>
+                    <label class="filterLabel">Select additional filters (example: Where high temp is greater than 80 degrees)</label>
                     <table id="filterTable" style="display:none">
                         <tr>
                             <td>
@@ -164,7 +164,7 @@
                             </td>
                             <td>
                                 <select style="display:inline" id="Operator2" class="selectpicker"
-                                        data-width="140px" name="Operator2" data- title="Select operator" required>
+                                        data-width="140px" name="Operator2" title="Select operator" required>
 
                                     <option value="GreaterThan">GreaterThan( > )</option>
                                     <option value="LessThan">LessThan( < )</option>
@@ -193,7 +193,7 @@
                                 </select>
                             </td>
                             <td>
-                                <select id="Operator3" class="selectpicker" data-style="btn-primary" data-width="140px" title="Select Operator">
+                                <select id="Operator3" class="selectpicker" data-width="140px" title="Select Operator">
                                     <option value="GreaterThan">GreaterThan( > )</option>
                                     <option value="LessThan">LessThan( < )</option>
                                     <option value="LessThanOrEqualTo">Less Than or equal to ( <= )</option>
@@ -234,9 +234,7 @@
 
           </div>
       </div>
-          <br /><br />
-
-                <div id="Summary" class="col-sm-12 panel panel-default">
+          <div id="Summary" class="col-sm-12 panel panel-default">
 
                     
                 </div>

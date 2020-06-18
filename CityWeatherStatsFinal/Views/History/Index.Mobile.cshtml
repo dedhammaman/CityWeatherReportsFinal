@@ -68,7 +68,7 @@
                 </span>
             </td>
             <td>
-                <select   style="display:inline" id="CityPicker" class="selectpicker" data-live-search="true" data-width="50%" name="CityId" title="Select a City..." required></select>
+                <select style="display:inline" id="CityPicker" class="selectpicker" data-live-search="true" data-width="50%" name="CityId" title="Select a City..." required></select>
             </td>
         </tr>
         <tr>
@@ -124,7 +124,7 @@
                     <i class="fas fa-calendar-times fa-stack-1x"></i>
                 </span>
             </td>
-            
+
             <td>
                 <div class="input-group date" data-provide="datepicker">
                     <input style="border-radius:5px" type="text" id="datepicker2" name="datepicker2" placeholder="mm/dd/yyyy" required>
@@ -151,26 +151,35 @@
                 </span>
             </td>
             <td>
-
-                <span id="filterLabel2">
-                    Add additional filters (optional)
+                <span class="ExtremeReport2Text">
+                    Add additional filters
                 </span>
+            </td>
+        </tr>
+        <tr>
+            <td class="firstFilterColumn"></td>
+            <td class="ExtremeReport2Text">
+                (optional)
                 <span>
                     <button id="FilterButton" type="button" class="btn btn-default btn-sm" onclick="FilterOnOff();" data-toggle="collapse">
                         <span class="glyphicon glyphicon-plus"></span>
                     </button>
                 </span>
             </td>
-            </tr>
-            <tr>
-            <td></td>
+        </tr>
+        <tr>
+            <td class="firstFilterColumn"></td>
             <td>
-                
-                    <label id="filterLabel" style="display:none">Select additional filters (example: Where high temp is greater than 80 degrees)</label>
-                    @*<table id="filterTable"> @*style="display:none">*@
+                <label class="filterLabel" style="display:none">(example: Where high temp is greater</label>
             </td>
-            </tr>
-            </table>
+        </tr>
+        <tr>
+            <td class="firstFilterColumn"></td>
+            <td>
+                <label class="filterLabel" style="display:none">than 80 degrees)</label>
+            </td>
+        </tr>
+    </table>
             
    
             <table id="filterTable" style="display:none;margin-right:5px">
@@ -293,7 +302,6 @@
 
     </div>
 </div>
-<br /><br />
 
 <div id="Summary" class="col-sm-12 panel panel-default">
 
