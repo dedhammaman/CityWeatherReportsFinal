@@ -808,10 +808,9 @@ input[type='radio']::after
     height: 50px;
 }*/
 
-#CityMetaDataAlert
-{
-    font-size:14px;
-    font-family:Arial;
-    font-weight: bolder;
+#CityMetaDataAlert {
+    font-size: 14px;
+    font-family: Arial;
+    font-weight: bold;
 }
 

@@ -1,7 +1,8 @@
 ﻿var CityMetaData = new Array();
+var isMobile;
 
 $(document).ready(function () {
-
+    isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
     if (window.location.href == "https://" + window.location.host + "/History") {
         $("#Summary").hide();
@@ -76,7 +77,7 @@ $(document).ready(function () {
     }
     else if (window.location.href == "https://" + window.location.host + "/")
     {
-        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         //if (!isMobile) {
             loadCarouselImages();
         //}
@@ -104,7 +105,7 @@ function loadCarouselImages() {
         ,'Dallas', 'Kansas city', 'St. Louis', 'Minneapolis', 'Chicago', 'Denver', 'Seattle', 'Phoenix','Portland'
         , 'San Francisco', 'Los Angeles', 'San Diego', 'Honolulu'];
 
-    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    //var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         
 
     let colors = ['AliceBlue', 'Azure', 'BlanchedAlmond','Orchid', 'DarkOrange', 'LightYellow', 'Cyan', 'WhiteSmoke', 'SkyBlue',
@@ -251,7 +252,7 @@ function loadCarouselImages() {
             var FromDate = $("#datepicker").val();
             var ToDate = $("#datepicker2").val();
 
-            var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            //var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
             clearErrors();
             if (validate('Historical') != true)
@@ -1104,8 +1105,17 @@ function getCityDataRec(cityid) {
 }
 
 function displayDataAvailability(cityMDRec) {
-    $("#CityMetaDataAlert").text('Data Available from ' + cityMDRec.mindateShort + ' to ' + cityMDRec.maxdateShort);
-    $("#cityDataAvailableInfoIcon").show();   
+
+    if (isMobile) {
+        $("#CityMetaDataAlert").text('Data available from ' + cityMDRec.mindateShort);
+        $("#CityMetaDataAlert2").text(' to ' + cityMDRec.maxdateShort);
+    }
+    else {
+
+        $("#CityMetaDataAlert").text('Data Available from ' + cityMDRec.mindateShort + ' to ' + cityMDRec.maxdateShort);
+    }
+    $("#cityDataAvailableInfoIcon").show();
+    
 }
 
 function loadCityMDCache(data) {

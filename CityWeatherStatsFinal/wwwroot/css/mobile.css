@@ -227,3 +227,10 @@ h3 {
 .bootstrap-select .btn {
     color: black;
 }
+
+#CityMetaDataAlert2 {
+    
+    font-size: 14px;
+    font-family: Arial;
+    font-weight: bolder;
+}
