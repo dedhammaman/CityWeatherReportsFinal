@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="wwwroot\images\ExtremeWxController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="2.2.0" />

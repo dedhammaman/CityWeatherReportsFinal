@@ -9,42 +9,21 @@ namespace CityWeatherStatsFinal.Models
 {
     public class City
     {
+        private DateTime minDateLocal;
+        private string maxDateLocal;
 
-        //public City(string cityId,DateTime MinDate,DateTime MaxDate)
-        //{
-        //    cityid = cityId;
-        //    mindate = MinDate;
-        //    maxdate = MaxDate;
-        //}
-
-        //public City(string Name,
-        //            string CityId,
-        //            string State,
-        //            DateTime Mindate,
-        //            DateTime Maxdate,
-        //            double Latitude,
-        //            double Longitude,
-        //            double Elevation,
-        //            string Country)
-        //{
-        //    name = Name;
-        //    cityid = CityId;
-        //    state = State;
-        //    mindate = Mindate;
-        //    maxdate = Maxdate;
-        //    latitude = Latitude;
-        //    longitude = Longitude;
-        //    country = Country;
-        //}
 
         public Nullable<double> elevation { get; set; }
         public DateTime mindate { get; set; }
+         
+        
         public DateTime maxdate { get; set; }
         public Nullable<double> latitude { get; set; }
         public string name { get; set; }
         public string ShortName { get; set; }
         public Nullable<double> datacoverage { get; set; }
         public Nullable<bool> HasData { get; set; }
+        
 
         [Key]
         public string cityid { get; set; }
@@ -54,6 +33,16 @@ namespace CityWeatherStatsFinal.Models
 
         public string state { get; set; }
         public int citysize { get; set; }
+
+        public string mindateShort
+        {
+            get => mindate.ToString("MM-dd-yyyy");
+        }
+
+        public string maxdateShort
+        {
+            get => maxdate.ToString("MM-dd-yyyy");
+        }
 
 
     }

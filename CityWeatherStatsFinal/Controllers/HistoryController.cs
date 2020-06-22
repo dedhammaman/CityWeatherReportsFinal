@@ -109,7 +109,9 @@ namespace CityWeatherStatsFinal.Controllers
                         x.country,
                         x.HasData,
                         x.ShortName,
-                        x.citysize
+                        x.citysize,
+                        x.mindateShort,
+                        x.maxdateShort
                     }).Where(x => (citySize == 1 && x.citysize == 1) 
                        ||
                        (

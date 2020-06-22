@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿var CityMetaData = new Array();
+
+$(document).ready(function () {
 
 
     if (window.location.href == "https://" + window.location.host + "/History") {
@@ -12,6 +14,7 @@
                 citysize: 2
             },
             success: function (data) {
+                loadCityMDCache(data);
                 for (var i = 0; i < data.length; i++) {
                     $('#CityPicker').append('<option value="' + data[i].cityid + '" class="cityList">' + data[i].shortName.toUpperCase() + ", " + data[i].state.toUpperCase() + " (" + data[i].name + ")" + '</option>');
 
@@ -939,8 +942,9 @@ $('#CityScope').on('change', function (e) {
                 citysize: 1
             },
             success: function (data) {
+                
                 for (var i = 0; i < data.length; i++) {
-                    $('#CityPicker').append('<option value="' + data[i].cityid + '" class="cityList">' + data[i].shortName.toUpperCase() + ", " + data[i].state.toUpperCase() + " (" + data[i].name + ")" + '</option>');
+                    $('#CityPicker').append('<option value="' + data[i].cityid + '" class="cityList">' + data[i].shortName.toUpperCase() + ", " + data[i].state.toUpperCase() + " (" + data[i].name + ")" + '</option>');                  
                 }
                 var counter = 0;
                 $('#CityPicker').selectpicker('refresh');
@@ -958,6 +962,7 @@ $('#CityScope').on('change', function (e) {
                 citysize: 2
             },
             success: function (data) {
+                loadCityMDCache(data);
                 for (var i = 0; i < data.length; i++) {
                     $('#CityPicker').append('<option value="' + data[i].cityid + '" class="cityList">' + data[i].shortName.toUpperCase() + ", " + data[i].state.toUpperCase() + " (" + data[i].name + ")" + '</option>');
                 }
@@ -977,6 +982,7 @@ $('#CityScope').on('change', function (e) {
                 citysize: 3
             },
             success: function (data) {
+                
                 for (var i = 0; i < data.length; i++) {
                     //if ((data[i].citysize == 1) || (data[i].citysize == 2))
                     $('#CityPicker').append('<option value="' + data[i].cityid + '" class="cityList">' + data[i].shortName.toUpperCase() + ", " + data[i].state.toUpperCase() + " (" + data[i].name + ")" + '</option>');
@@ -1075,5 +1081,45 @@ $('input:radio[name="optyesno"]').change(
     }
 );
 
+// Display city start end dates to user.
+$("#CityPicker").on('changed.bs.select',function () {
+
+    // Get selected city first.
+    var cityid = $(this).val();
+    var cityRec = getCityDataRec(cityid);
+
+    // Display city data availability
+    displayDataAvailability(cityRec);
+
+});
+
+function getCityDataRec(cityid) {
+    for (var i = 0; i < CityMetaData.length - 1; i++)
+    {
+        if (CityMetaData[i].cityid == cityid) {
+            return CityMetaData[i];
+        }
+
+    }
+}
+
+function displayDataAvailability(cityMDRec) {
+    $("#CityMetaDataAlert").text('Data Available from ' + cityMDRec.mindateShort + ' to ' + cityMDRec.maxdateShort);
+    $("#cityDataAvailableInfoIcon").show();   
+}
+
+function loadCityMDCache(data) {
+
+    for (var i = 0; i < data.length - 1; i++) {
+        // Rec for one city.
+        var cityRec = data[i];
+        CityMetaData.push(cityRec);
+    }
+}
+    
+      
+        
+
+   
 
 

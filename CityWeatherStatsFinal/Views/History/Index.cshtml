@@ -4,7 +4,7 @@
     //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<i style="margin-left:25px" class="fas fa-history fa-2x"></i>
+f<i style="margin-left:25px" class="fas fa-history fa-2x"></i>
 <h2>Historical Weather Search</h2>
 <br />
 <br />
@@ -52,17 +52,23 @@
             </li>
             <li>
                 @*<span class="fa-stack fa-2x">
-                        <i class="fas fa-square fa-stack-2x fa-inverse"></i>
-                        <i class="fas fa-city fa-stack-1x"></i>
-                    </span>
-                    <label class="formlabel">Select a City:</label><br />
-                    <select class="selectpicker" data-live-search="true" data-width="fit" name="CityId" title="Select a City..." required></select>*@
+            <i class="fas fa-square fa-stack-2x fa-inverse"></i>
+            <i class="fas fa-city fa-stack-1x"></i>
+        </span>
+        <label class="formlabel">Select a City:</label><br />
+        <select class="selectpicker" data-live-search="true" data-width="fit" name="CityId" title="Select a City..." required></select>*@
                 <span class="fa-stack fa-2x">
                     <i class="fas fa-square fa-stack-2x fa-inverse"></i>
                     <i class="fas fa-city fa-stack-1x"></i>
                 </span>
-                <select style="display:inline" id="CityPicker" class="selectpicker" data-live-search="true" 
-                        data-width="fit" name="CityId"  data- title="Select a City..." required></select>
+                <select style="display:inline" id="CityPicker" class="selectpicker" data-live-search="true"
+                        data-width="fit" name="CityId" data- title="Select a City..." required></select>
+
+                <span id="cityDataAvailableInfoIcon" class="fa-stack" style="display:none;">
+                    <i class="fas fa-circle fa-stack-2x fa-inverse"></i>
+                    <i class="fas fa-info fa-stack-1x"></i>
+                </span>
+                <span id="CityMetaDataAlert" class="text-info"></span>
                 <p class="Error" id="HisErr1"></p>
             </li>
             <li>
