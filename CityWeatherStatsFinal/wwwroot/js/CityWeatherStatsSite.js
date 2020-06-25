@@ -1059,6 +1059,17 @@ $(".ClearButton").click(function (e) {
 });
 
 
+
+$('input:radio[name="optyesnoTopXMobile"]').change(
+    function () {
+        if (this.checked && this.value == 'yes') {
+            $("#TopXReportMobileTimeInputs").show();
+        }
+        else {
+            $("#TopXReportMobileTimeInputs").hide();
+        }
+    });
+
 //$(function () {
 $('input:radio[name="optyesno"]').change(
     function () {
@@ -1068,6 +1079,7 @@ $('input:radio[name="optyesno"]').change(
             $("#Report2FromDate").prev().show();
             $("#Report2FromDate").next().show();
             $("#Report2FromDate").parent().show();
+            $("#CalendarIcon").show();
         }
         else
         {
@@ -1076,6 +1088,7 @@ $('input:radio[name="optyesno"]').change(
             $("#Report2FromDate").prev().hide();
             $("#Report2FromDate").next().hide();
             $("#Report2FromDate").parent().hide();
+            $("#CalendarIcon").hide();
         }
 
 

@@ -56,30 +56,30 @@
                 </span>
                 <span class="ExtremeReport2Text">Generate report for specific time frame?</span>
                 @*<div style="display:inline" class="radio">*@
-                <label class="ExtremeReport2Text"><input type="radio" name="optyesno" value="yes" checked />Yes</label>
+                <label class="ExtremeReport2Text"><input type="radio" name="optyesno" value="yes" />Yes</label>
                 @*</div>*@
                 @*<div style="display:inline" class="radio">*@
-                <label class="ExtremeReport2Text"><input type="radio" name="optyesno" value="no" />No</label>
+                <label class="ExtremeReport2Text"><input type="radio" name="optyesno" value="no" checked />No</label>
                 @*</div>*@
 
 
             </li>
             <li>
-                <span class="fa-stack fa-2x">
+                <span class="fa-stack fa-2x" id="CalendarIcon" style="display:none;">
                     <i class="fas fa-square fa-stack-2x fa-inverse"></i>
                     <i class="fas fa-business-time fa-stack-1x"></i>
                 </span>
-                <span class="ExtremeReport2Text">during the time period of</span>
-                <div id="Report2FromDate" class="input-group date" data-provide="datepicker" title="mm/dd/yyyy">
+                <span class="ExtremeReport2Text" style="display:none;">during the time period of</span>
+                <div id="Report2FromDate" style="display:none;" class="input-group date" data-provide="datepicker" title="mm/dd/yyyy">
                     <input type="text" class="change2" id="datepicker" name="datepicker" placeholder="mm/dd/yyyy" required>
                     <div class="input-group-addon" style="display:inline-block;width:50px">
                         <span class="glyphicon glyphicon-th"></span>
                     </div>
                 </div>
 
-                <span class="ExtremeReport2Text">To</span>
+                <span class="ExtremeReport2Text" style="display:none;">To</span>
 
-                <div id="Report2ToDate" class="input-group date" data-provide="datepicker" data-width="200px">
+                <div style="display:none;" id="Report2ToDate" class="input-group date" data-provide="datepicker" data-width="200px">
                     <input type="text" class="change2" id="datepicker2" name="datepicker2" placeholder="mm/dd/yyyy" required>
                     <div class="input-group-addon" style="display:inline-block;width:50px">
                         <span class="glyphicon glyphicon-th"></span>

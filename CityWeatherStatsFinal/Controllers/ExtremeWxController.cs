@@ -124,8 +124,10 @@ namespace CityWeatherStatsFinal.Controllers
 
         public IActionResult TopXReport()
         {
-            return View();
-            
+            if (RequestExtensions.IsMobileBrowser(Request))
+                return View("~/Views/ExtremeWx/TopXReport.Mobile.cshtml");
+            else
+                return View();
         }
 
         public IActionResult Report(string WhichReport)

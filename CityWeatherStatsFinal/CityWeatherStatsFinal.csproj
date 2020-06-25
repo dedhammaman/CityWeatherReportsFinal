@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="wwwroot\images\ExtremeWxController.cs" />
+    <Content Include="Controllers\ExtremeWxController.cs" />
   </ItemGroup>
 
   <ItemGroup>

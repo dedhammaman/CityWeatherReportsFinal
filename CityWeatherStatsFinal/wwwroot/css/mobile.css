@@ -10,6 +10,13 @@
 #Intro {
     height:100%;
 }
+
+.ExtremeReportText {
+    font-size: 16px;
+    font-family: Arial;
+    margin-left: 2px;
+}
+
 #ExtremeReport2Text
 {
     font-size:10px;
@@ -28,6 +35,12 @@
     border-radius:5px;
     width:80%;
 }
+
+/*#datepickerReport2From, #datepickerReport2To {
+    border-radius: 5px;
+    width: 25px;
+    height: 26px;
+}*/
 
 #CityPicker
 {
@@ -234,3 +247,65 @@ h3 {
     font-family: Arial;
     font-weight: bolder;
 }
+
+.ExtremeReport2Text {
+    font-family: Arial;
+    font-size: 20px;
+    color: black;
+    font-weight: bolder;
+}
+
+#TopnReport2 {
+    background-color: white;
+    color: silver;
+    width: 125px;
+    font-size: 20px;
+    border-radius:5px;
+}
+
+.change::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: silver;
+    font-size: 12px;
+}
+
+#xtremeWx2 {
+    color: silver;
+    background-color: white;
+    margin-left:5px;
+}
+
+/**/
+.bootstrap-select .btn {
+    color: black;
+    height:30px;
+    margin-left:2px;
+}
+
+/* for title at top of topx report*/
+
+
+.ReportTitle
+{
+    text-shadow: 2px 2px;
+    color:black;
+    font-family:Arial;
+    font-size:28px;
+    font-weight:bolder;
+
+}
+
+#datepickerReport2From, #datepickerReport2To
+{
+    margin-left:2px;
+    width:100px;
+}
+
+#btnSubmit2 {
+    all: initial;
+    color: silver;
+    background-color: white;
+    font-weight:bolder;
+    border-radius:3px;
+}
+
+
