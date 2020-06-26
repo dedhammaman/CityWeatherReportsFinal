@@ -483,6 +483,30 @@ function loadCarouselImages() {
         var cityIdLabel = $("#CityPicker2 option:selected").val();
         var extremeWxType = $("#xtremeWx2 option:selected").val();
         var topn = $("#TopnReport2").val();
+        var from = null;
+        var to = null;
+        
+        var yesornovalue;
+        if (isMobile) {
+            yesornovalue = $('input[name="optyesnoTopXMobile"]:checked').val();
+        }
+        else {
+            yesornovalue = $('input[name="optyesno"]:checked').val();
+        }
+
+
+        if (yesornovalue == 'yes') {
+            
+            if (isMobile) {
+                from = $("#datepickerReport2From").val();
+                to= $("#datepickerReport2To").val();
+            }
+            else {
+                from = $("#datepicker").val();
+                to = $("#datepicker2").val();
+            }
+
+        } 
         
         $.ajax({
             url: "/ExtremeWx/GetExtremeWeather",
@@ -491,7 +515,9 @@ function loadCarouselImages() {
             data: {
                 topn: topn,
                 metric: extremeWxType,
-                cityList: cityIdLabel
+                cityList: cityIdLabel,
+                from: from,
+                to: to
             },
             success: function (response) {
 

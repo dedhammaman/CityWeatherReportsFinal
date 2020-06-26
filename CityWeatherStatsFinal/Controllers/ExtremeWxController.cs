@@ -80,7 +80,7 @@ namespace CityWeatherStatsFinal.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetExtremeWeather(int topn,string metric,string cityList)
+        public JsonResult GetExtremeWeather(int topn,string metric,string cityList,DateTime? from = null, DateTime? to = null)
         {
             DataSet ds = new DataSet("xtremewx");
             DailyWeather rec = null;
@@ -91,6 +91,8 @@ namespace CityWeatherStatsFinal.Controllers
                 sqlComm.Parameters.AddWithValue("@N", topn);
                 sqlComm.Parameters.AddWithValue("@Metric",metric );
                 sqlComm.Parameters.AddWithValue("@CityList",cityList );
+                sqlComm.Parameters.AddWithValue("@From", from);
+                sqlComm.Parameters.AddWithValue("@To", to);
 
                 sqlComm.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter da = new SqlDataAdapter();
