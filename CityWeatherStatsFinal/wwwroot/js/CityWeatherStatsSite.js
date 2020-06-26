@@ -526,7 +526,13 @@ function loadCarouselImages() {
 
                 // Summary Line
                 if (response.length > 0) {
-                    var summaryLine = $("<p></p>").text("The Top " + topn + " " + extremeWxType + " day(s) for " + response[0].shortname + ", " + response[0].state + " are:");
+                    var summaryLine = $("<span></span>").text("The Top " + topn + " " + extremeWxType + " day(s) for " + response[0].shortname + ", " + response[0].state + " are:")
+                        .css({
+                            'background-color': 'peachpuff',
+                            'font-size': '20px',
+                            'font-family': 'Arial',
+                            'font-width' : 'bold'
+                            });
                     $("#Summary").append(summaryLine);
                 }
 
@@ -545,13 +551,37 @@ function loadCarouselImages() {
                 var th6 = $('<th></th>');
                 var th7 = $('<th></th>');
 
+                $(th).attr('scope', 'col').text('Rank');
                 $(th3).attr('scope', 'col').text('Date');
                 $(th4).attr('scope', 'col').text('High');
                 $(th5).attr('scope', 'col').text('Low');
                 $(th6).attr('scope', 'col').text('Precip (inches)');
                 $(th7).attr('scope', 'col').text('Snowfall (inches)');
 
-                trhead.append(th3, th4, th5, th6, th7);
+                // Arrange the order of the columns based on the metric.
+                if (extremeWxType == 'Snowiest') {
+                    trhead.append(th, th3, th7.css('color', 'red').css('font-size', '24px'), th4, th5, th6);
+                }
+                else if (extremeWxType == 'Wettest')
+                {
+                    trhead.append(th, th3, th6.css('color', 'red').css('font-size', '24px'), th7, th4, th5);
+                }
+                else if (extremeWxType == 'Warmest Highs')
+                {
+                    trhead.append(th, th3, th4.css('color', 'red').css('font-size', '24px'), th5, th6, th7);
+                }
+                else if (extremeWxType == 'Warmest Lows')
+                {
+                    trhead.append(th, th3, th5.css('color', 'red').css('font-size', '24px'), th4, th6, th7);
+                }
+                else if (extremeWxType == 'Coldest Highs')
+                {
+                    trhead.append(th, th3, th4.css('color', 'red').css('font-size', '24px'),th5, th6, th7);
+                }
+                else if (extremeWxType == 'Coldest Lows')
+                {
+                    trhead.append(th, th3, th5.css('color', 'red').css('font-size', '24px'),th4, th6, th7);
+                }
                 
                 thead.append(trhead);
                 table.append(thead, tbody);
@@ -564,6 +594,7 @@ function loadCarouselImages() {
                 var Precip = "";
                 var Snow = "";
                 var tablerow = "";
+                var rank = "";
 
                 for (var i = 0; i < response.length; i++) {
                     tablerow = $("<tr></tr>");
@@ -572,12 +603,32 @@ function loadCarouselImages() {
                     var temp = new Date(response[i].date.substr(0, 10));
                     theDate = $("<td></td>").text((temp.getMonth() + 1) + "/" + temp.getDate() + "/" + temp.getFullYear());
 
+                    rank = $("<td></td>").text('#' + (i+1))
                     High = $("<td></td>").text(response[i].tmax + String.fromCharCode(176));
                     Low = $("<td></td>").text(response[i].tmin + String.fromCharCode(176));
                     Precip = $("<td></td>").text(response[i].prcp + '"');
                     Snow = $("<td></td>").text(response[i].snow + '"');
 
-                    tablerow.append(theDate, High, Low, Precip, Snow);
+                    if (extremeWxType == 'Snowiest') {
+                        tablerow.append(rank, theDate, Snow.css('color','red').css('font-size','24px'), High,Low, Precip);
+                    }
+                    else if (extremeWxType == 'Wettest') {
+                        tablerow.append(rank, theDate, Precip.css('color', 'red').css('font-size', '24px'), Snow, High, Low );
+                    }
+                    else if (extremeWxType == 'Warmest Highs') {
+                        tablerow.append(rank, theDate, High.css('color', 'red').css('font-size', '24px'), Low, Precip, Snow);
+                    }
+                    else if (extremeWxType == 'Warmest Lows') {
+                        tablerow.append(rank, theDate, Low.css('color', 'red').css('font-size', '24px'), High,Precip, Snow);
+                    }
+                    else if (extremeWxType == 'Coldest Highs') {
+                        tablerow.append(rank, theDate, High.css('color', 'red').css('font-size', '24px'), Low, Precip, Snow);
+                    }
+                    else if (extremeWxType == 'Coldest Lows') {
+                        tablerow.append(rank, theDate, Low.css('color', 'red').css('font-size', '24px'), High, Precip, Snow);
+                    }
+
+                    
 
                     $(table).append(tablerow);
                 }

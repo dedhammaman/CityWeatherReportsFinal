@@ -308,4 +308,9 @@ h3 {
     border-radius:3px;
 }
 
+#Container >table > tr > *
+{
+    text-align:center;
+}
+
 

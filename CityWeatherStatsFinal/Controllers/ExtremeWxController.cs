@@ -91,8 +91,12 @@ namespace CityWeatherStatsFinal.Controllers
                 sqlComm.Parameters.AddWithValue("@N", topn);
                 sqlComm.Parameters.AddWithValue("@Metric",metric );
                 sqlComm.Parameters.AddWithValue("@CityList",cityList );
-                sqlComm.Parameters.AddWithValue("@From", from);
-                sqlComm.Parameters.AddWithValue("@To", to);
+
+                if(from != null)
+                {
+                    sqlComm.Parameters.AddWithValue("@From", from);
+                    sqlComm.Parameters.AddWithValue("@To", to);
+                }
 
                 sqlComm.CommandType = CommandType.StoredProcedure;
                 SqlDataAdapter da = new SqlDataAdapter();

@@ -173,21 +173,29 @@ table {
     color:black;
 }
 
-#Container{
-    margin-top: 30px;
+#Container {
+    margin: 25px 25px 25px 25px;
     height: 300px !important;
+    
+    
+}
+
+#ExtremeReport2DisplayPanel {
+    margin: 25px 25px 25px 25px;
+    display: none;
+    border-radius: 20px;
+    border: 3px solid deepskyblue;
     
 }
 
 #Summary {
     margin-top: 30px;
-    background-color: peachpuff;
-    border-radius:20px;
+    margin-right:25px;
+    /*background-color: peachpuff;*/
+    border-radius: 20px;
     /*border-color:deepskyblue;*/
-    margin-left:25px;
+    margin-left: 25px;
     /*border-width:3px;*/
-    
-    
 }
 
 #Summary2 {
@@ -653,7 +661,7 @@ hr {
 
 #ExtremeInstructionsPanel {
     background-color: lightblue;
-    margin-left: 25px;
+    margin: 25px 25px 25px 25px;
     border-radius: 20px;
     border:solid lightblue;
 }
@@ -814,3 +822,13 @@ input[type='radio']::after
     font-weight: bold;
 }
 
+#Container > table > tbody > tr > td,
+#Container > table > thead > tr > th {
+    text-align: center;
+}
+
+#Container > table
+{
+    width:75%;
+    margin:auto;
+}
