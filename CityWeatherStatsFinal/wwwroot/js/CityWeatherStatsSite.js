@@ -1,9 +1,12 @@
 ﻿var CityMetaData = new Array();
 var isMobile;
+var isIos;
 
 $(document).ready(function () {
     isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
+    
+    isIos = navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+    
     if (window.location.href == "https://" + window.location.host + "/History") {
         $("#Summary").hide();
         $("#Details").hide();
@@ -134,7 +137,7 @@ function loadCarouselImages() {
         var cityNameHeader2;
         var cityNameHeader3;
         headcol.append(cityNameHeader);
-        
+
         if (isMobile) {
             var table = $('<table>').css('margin', '0 auto');
             var tr = $('<tr>');
@@ -176,7 +179,56 @@ function loadCarouselImages() {
         var colSpring;
         var imgSpring;
 
-        if (isMobile) {
+        if (isIos)
+        {
+            var table = $('<table>').css('margin', '0 auto');
+            var tr = $('<tr>');
+
+            var tr = $('<tr>');
+            var tr2 = $('<tr>');
+            var tr3 = $('<tr>');
+            var tr4 = $('<tr>');
+            var td = $('<td>');
+
+            imgSummer = $('<img>').attr('src', "../images/" + item + " summer.png");
+            imgFall = $('<img>').attr('src', '../images/' + item + ' fall.png');
+            imgWinter = $('<img>').attr('src', '../images/' + item + ' winter.png');
+            imgSpring = $('<img>').attr('src', '../images/' + item + ' spring.png');
+
+            var summerContainer = $('<div>').addClass('container').css('position', 'relative').css('text-align', 'center').css('color', 'white');
+            season = $('<div>').addClass('centered centered-summer').text('Summer');
+            summerContainer.append(imgSummer, season);
+            td.append(summerContainer);
+            tr.append(td);
+
+            var fallContainer = $('<div>').addClass('container').css('position', 'relative').css('text-align', 'center').css('color', 'white');
+            season = $('<div>').addClass('centered centered-fall').text('Fall');
+            fallContainer.append(imgFall, season);
+            td = $('<td>');
+            td.append(fallContainer);
+            tr2.append(td);
+
+            var winterContainer = $('<div>').addClass('container').css('position', 'relative').css('text-align', 'center').css('color', 'white');
+            season = $('<div>').addClass('centered centered-winter').text('Winter');
+            winterContainer.append(imgWinter, season);
+            td = $('<td>');
+            td.append(winterContainer);
+            tr3.append(td);
+
+            var springContainer = $('<div>').addClass('container').css('position', 'relative').css('text-align', 'center').css('color', 'white');
+            season = $('<div>').addClass('centered centered-spring').text('Spring');
+            springContainer.append(imgSpring, season);
+            td = $('<td>');
+            td.append(springContainer);
+            tr4.append(td);
+
+            table.append(tr,tr2,tr3,tr4);
+            row2.append(table);
+            ia.append(row2);
+            parent.append(ia);
+        }
+        
+        else if (isMobile) {
             var table = $('<table>').css('margin', '0 auto');
             var tr = $('<tr>');
             var td = $('<td>');
@@ -526,8 +578,17 @@ function loadCarouselImages() {
 
                 // Summary Line
                 if (response.length > 0) {
-                    var summaryLine = $("<span></span>").text("The Top " + topn + " " + extremeWxType + " day(s) for " + response[0].shortname + ", " + response[0].state + " are:")
-                        .css({
+
+                    // Add dates to summary line if time period was used.
+                    var summaryLine;
+                    if (yesornovalue == 'yes') {
+                        summaryLine = $("<span></span>").text("The Top " + topn + " " + extremeWxType + " day(s) for " + response[0].shortname + ", " + response[0].state +
+                            " from " + from + " to " + to + " are:");
+                    }
+                    else {
+                        summaryLine = $("<span></span>").text("The Top " + topn + " " + extremeWxType + " day(s) for " + response[0].shortname + ", " + response[0].state + " are:");
+                    }
+                    summaryLine.css({
                             'background-color': 'peachpuff',
                             'font-size': '20px',
                             'font-family': 'Arial',
