@@ -7,9 +7,13 @@ $(document).ready(function () {
     
     isIos = navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
     
-    if (window.location.href == "https://" + window.location.host + "/History") {
+    
+    if (window.location.href == "https://" + window.location.host + "/History"
+        || (window.location.href == "https://" + window.location.host + "/History#")
+    ) {
         $("#Summary").hide();
         $("#Details").hide();
+
         $.ajax({
             type: 'GET',
             url: '/History/getCityMetaData',
@@ -31,6 +35,8 @@ $(document).ready(function () {
     }
     else if ((window.location.href == "https://" + window.location.host + "/ExtremeWx/TopXReport")
         || (window.location.href == "https://" + window.location.host + "/ExtremeWx/MonthlyAveragesReport")) {
+
+        $("#ExtremeReport1DisplayPanel").hide();
 
         //$('.bootstrap-select.btn-group .dropdown-toggle .filter-option ').css('color', '#db5079').css('background-color', 'lightblue').css('height', '40px').css('width', '400px').css('font-size', '24px');
         $("#datepicker2").css('background-color', 'white').css('color', 'silver').css('height', '40px').css('font-size', '24px').css('font-weight', 'bolder');
@@ -299,10 +305,28 @@ function loadCarouselImages() {
 }
 
         $("#btnSubmit").click(function () {
-            
+            //isIos = true;
+
+            // Clear any results from previos run
+            $("#Summary").empty();
+            $("#Details").empty();
+
+            $("#Summary").hide();
+            $("#Details").hide();
+
             var cityid = $("#CityPicker").val();
-            var FromDate = $("#datepicker").val();
-            var ToDate = $("#datepicker2").val();
+
+            if (isIos) {
+                var FromDate = $("#datepickerReport2From").val();
+                var ToDate = $("#datepickerReport2To").val();
+            }
+            else {
+                var FromDate = $("#datepicker").val();
+                var ToDate = $("#datepicker2").val();
+            }
+
+            // Clear any results that are hanging around.
+            
 
             //var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
@@ -320,7 +344,6 @@ function loadCarouselImages() {
 
             var filters = new Array();
             
-
             $("#filterTable tr").each(function () {
 
                 if (isMobile) {
@@ -448,17 +471,11 @@ function loadCarouselImages() {
                     $(th6).attr('scope', 'col').text('Precip (inches)');
                     $(th7).attr('scope', 'col').text('Snowfall (inches)');
                     
-                    //trhead.append("<th id='header1'>text1</th><th>text2</th>");
                     trhead.append(th3, th4, th5, th6,th7);
-                    //trhead.append(th2);
+                    
 
                     thead.append(trhead);
                     table.append(thead, tbody);
-
-                    //table.append("<tr><td>a</td><td>b</td></tr>");
-                    //table.append("<tr><td>c</td><td>d</td></tr>");
-                    //table.append("<tr><td>c</td><td>d</td></tr>");
-                    //table.append("<tr><td>c</td><td>d</td></tr>");
 
                     var cityName = "";
                     var State = "";
@@ -473,18 +490,16 @@ function loadCarouselImages() {
                     for (var i = 0; i < response.entries.length; i++)
                     {
                         tablerow = $("<tr></tr>");
-                        //cityName = $("<td></td>").text(response[i].name);
-                        //State = $("<td></td>").text(response[i].state);
-                        //var temp = new Date(response[i].date.substr(0, 9));
-                        //alert('the string is ' + response[i].date);
-                        //alert('The substring is ' + response[i].date.substr(0, 10));
-                        var temp = new Date(response.entries[i].date.substr(0, 10) + 'PST');
-                        theDate = $("<td></td>").text((temp.getMonth() + 1) + "/" + (temp.getDate()) + "/" + temp.getFullYear());
+                        
+                        var temp = response.entries[i].date.substr(0, 10);
+                        var dateArray = temp.split('-');
 
-                        High = $("<td></td>").text(response.entries[i].tmax + String.fromCharCode(176));
-                        Low = $("<td></td>").text(response.entries[i].tmin + String.fromCharCode(176));
-                        Precip = $("<td></td>").text(response.entries[i].prcp + '"');
-                        Snow = $("<td></td>").text(response.entries[i].snow + '"');
+                        //theDate = $("<td></td>").text((temp.getMonth() + 1) + "/" + (temp.getDate()) + "/" + temp.getFullYear());
+                        theDate = $("<td></td>").text(dateArray[1] + '/' + dateArray[2] + '/' + dateArray[0]);
+                        High = $("<td></td>").text((response.entries[i].tmax || 0)+ String.fromCharCode(176));
+                        Low = $("<td></td>").text((response.entries[i].tmin || 0) + String.fromCharCode(176));
+                        Precip = $("<td></td>").text((response.entries[i].prcp || 0) + '"');
+                        Snow = $("<td></td>").text((response.entries[i].snow || 0) + '"') || 0;
 
                         tablerow.append(theDate, High, Low, Precip, Snow);
 
@@ -496,8 +511,8 @@ function loadCarouselImages() {
                         $('#Container').append(p);
                     }
                     else {
-                        $('#Container').append(detailsText,table);
-                        $('#Container').css('overflow', 'scroll');
+                        $('#Details').append(detailsText,table);
+                        $('#Details').css('overflow', 'scroll');
                     }
                     $(".progress-bar").css('width', '100%').text('100% - Done ');
                     $("#ProgressBar").css('display', 'none');
@@ -522,6 +537,9 @@ function loadCarouselImages() {
         clearErrors();
         if (validate('Extreme') != true)
             return;
+
+        // Clear any results from previos run
+        $("#ExtremeReport2DisplayPanel").hide();
 
         // Remove any existing table
         $('#Container').empty();
@@ -720,6 +738,7 @@ function loadCarouselImages() {
 $("#btnYearToYearAvgSubmit").click(function () {
 
     clearErrors();
+    $("#ExtremeReport1DisplayPanel").hide();
     if (validate('MonthlyAverages') != true)
         return;
 
@@ -911,8 +930,8 @@ function countdown(type) {
         var rc = true;
         var fromDateExists = false;
         var toDateExists = false;
-  
 
+        
         if (type == 'Historical') {
             if ($("#CityPicker").val() == '') {
                 $("#HisErr1").text('please select a city');
@@ -943,17 +962,31 @@ function countdown(type) {
                 rc = false;
             }
 
-            if (fromDateExists  && (isValidDate($("#datepicker").val()) == false)) {
-                $("#HisErr2").text("Please select or enter a date that is in the format mm/dd/yyyy");
-                rc = false;
+            if (!isIos && fromDateExists) {
+                if (isValidDate($("#datepicker").val()) == false) {
+                    $("#HisErr2").text("Please select or enter a date that is in the format mm/dd/yyyy");
+                    rc = false;
+                }
             }
 
-            if (toDateExists && (isValidDate($("#datepicker2").val()) == false)) {
-                $("#HisErr3").text("Please select or enter a date that is in the format mm/dd/yyyy");
-                rc = false;
+            // Date format already taken care of in Apple
+            if (!isIos && toDateExists) {
+                if (isIos && isValidDate($("#datepicker2").val()) == false) {
+                    $("#HisErr2").text("Please select or enter a date that is in the format mm/dd/yyyy");
+                    rc = false;
+                }
+                else if (isValidDate($("#datepicker2").val()) == false) {
+                    $("#HisErr2").text("Please select or enter a date that is in the format mm/dd/yyyy");
+                    rc = false;
+                }
             }
 
-            if ((rc == true) && Date.parse($("#datepicker2").val()) < Date.parse($("#datepicker").val())) {
+
+            if (isIos && (rc == true) && Date.parse($("#datepickerReport2To").val()) < Date.parse($("#datepickerReport2From").val())) {
+                $("#HisErr3").text("please select a to date greater than or equal to the from date");
+                rc = false;
+            }
+            else if ((rc == true) && Date.parse($("#datepicker2").val()) < Date.parse($("#datepicker").val())) {
                 $("#HisErr3").text("please select a to date greater than or equal to the from date");
                 rc = false;
             }
@@ -1149,6 +1182,7 @@ $(document).on('change', 'input:radio[id^="radoptex"]', function (event) {
 
 
 function isValidDate(dateString) {
+
     var regEx = /^\d{2}\/\d{2}\/\d{4}$/;
     return dateString.match(regEx) != null;
 }
@@ -1258,8 +1292,7 @@ function getCityDataRec(cityid) {
 function displayDataAvailability(cityMDRec) {
 
     if (isMobile) {
-        $("#CityMetaDataAlert").text('Data available from ' + cityMDRec.mindateShort);
-        $("#CityMetaDataAlert2").text(' to ' + cityMDRec.maxdateShort);
+        $("#CityMetaDataAlert").text('Data available from ' + cityMDRec.mindateShort + ' to ' + cityMDRec.maxdateShort);
     }
     else {
 

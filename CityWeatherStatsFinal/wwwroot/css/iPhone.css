@@ -1,17 +1,19 @@
-﻿#ExtremeInstructionsPanel > .row > .col-xs-2 {
-    padding: 0px 2px 0px 2px;
+﻿/*#ExtremeInstructionsPanel > .row > .col-xs-2 {
+    paint-order: 0px 2px 0px 2px;
     
-}
-
+}*/
+/* Space between Font-Awesome icons and instruction text*/
 #ExtremeInstructionsPanel > .row > .col-xs-10 {
     padding-left:20px;
 }
 
+/* Entire paramenters panel for TopX report*/
 #ExtremeInstructionsPanel {
-    background-color: deeppink;
+    background-color: lightblue;
     
 }
 
+/* TopX report title*/
 .ReportTitle {
     
     color: black;
@@ -30,21 +32,25 @@
 }
 
 /* To target the font-awesome icons */
-.col-xs-2 > span
+/*.col-xs-2 > span
 {
    margin-left: 5px; 
-}
-
-/*.ExtremeReportText
-{
-    margin-left:5px;
 }*/
 
+.ExtremeReportText
+{
+    font-family: Arial;
+    font-weight: bold;
+    font-size:18px;
+}
+
+/* Placeholder text for text box in TopX report*/
 .change::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-    color: silver;
+    color: black;
     font-size: 12px;
 }
 
+/* Submit button for TopX report*/
 #btnSubmit2 {
     
     margin-top: 20px;
@@ -52,3 +58,94 @@
     background-color: white;
     margin-left: 1px;
 }
+
+/* Dropdown showing list of options (extreme weather parameters) to select from */
+.dropdown-menu {
+    right:initial;
+}
+
+#HistorySearchPanel {
+    border-radius: 20px;
+    /*margin-top:25px;*/
+    margin-left: 25px;
+    background-color: lightblue;
+    width: 95%;
+}
+
+/*#HistorySearchPanel > .row > .col-xs-2 {
+      margin: 0px 5px 0px 5px;
+}*/
+
+/*#HistorySearchPanel > .row > .col-xs-9 {
+     margin-left: 5px;
+}*/
+
+
+.ExtremeReport2Text {
+    font-family: Arial;
+    font-size: 14px;
+    color: black;
+    font-weight: bold;
+    
+}
+
+
+#EntireDatepicker, #EntireDatepicker2 {
+    /*float: left;*/
+    border-radius: 5px;
+    width: 90%;
+
+}
+
+#EntireDatepicker input[type='text'], #EntireDatepicker2 input[type='text'] {
+   /*float: left;*/
+   border-radius: 5px;
+   width: 100%;
+}
+
+/*.dropdown-menu .open {
+    margin-left: -100px;
+}
+
+.dropdown-menu {
+    margin-left: -100px;
+}*/
+
+/* This slides the menu with the options to the left, along with each item*/
+.bootstrap-select .dropdown-menu {
+    margin-left: -100px !important;
+}
+
+.bootstrap-select .dropdown-menu li a{
+    margin-left: 100px !important;
+}
+
+.datepicker .datepicker-dropdown
+{margin-left:100px !important}
+
+.datepicker .datepicker-dropdown .dropdown-menu .datepicker-orient-right .datepicker-orient-bottom {
+        position: absolute;
+        top: 100px !important;
+        left: 100px !important;
+}
+
+/*#Operator1, #Operator2, #Operator3, #Metric1, #Metric2, #Metric3, #ClearBtn1,
+#ClearBtn2, #ClearBtn3, #MetricValue1, #MetricValue2, #MetricValue3 {
+    max-width: 100%;
+}*/
+
+#MetricValue1, #MetricValue2, #MetricValue3 {
+    color: silver;
+    display: inline;
+    width: 50px;
+}
+#btnYearToYearAvgSubmit {
+    margin: 0;
+}
+
+#fromYearReport1,#toYearReport1
+{
+    width:100%;
+
+}
+

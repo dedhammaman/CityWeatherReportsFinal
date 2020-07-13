@@ -28,6 +28,12 @@ namespace CityWeatherStatsFinal.Controllers
             return false;
         }
 
+        public static bool IsIOSDevice(this HttpRequest request)
+        {
+            string userAgent = request.UserAgent();
+            return (userAgent.Contains("iPhone") || userAgent.Contains("iPod"));
+        }
+
         public static string UserAgent(this HttpRequest request)
         {
             return request.Headers["User-Agent"];
@@ -78,11 +84,24 @@ namespace CityWeatherStatsFinal.Controllers
 
         public IActionResult Index()
         {
-            if (RequestExtensions.IsMobileBrowser(Request))
+            if (RequestExtensions.IsIOSDevice(Request))
+                return View("~/Views/History/Index.Apple.cshtml");
+            else if (RequestExtensions.IsMobileBrowser(Request))
                return View("~/Views/History/Index.Mobile.cshtml");
             else
             return View();
             
+        }
+
+        public IActionResult History ()
+        {
+            if (RequestExtensions.IsIOSDevice(Request))
+                return View("~/Views/History/Index.Apple.cshtml");
+            else if (RequestExtensions.IsMobileBrowser(Request))
+                return View("~/Views/History/Index.Mobile.cshtml");
+            else
+                return View();
+
         }
 
         public IActionResult About()

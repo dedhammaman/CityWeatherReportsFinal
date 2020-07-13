@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CityWeatherStatsFinal.Controllers
 {
-    struct yearlyAvgRec
+    struct YearlyAvgRec
     {
         // Monthly data for each year
         public int startyear;
@@ -152,7 +152,11 @@ namespace CityWeatherStatsFinal.Controllers
 
         public IActionResult MonthlyAveragesReport()
         {
-            return View();
+            if (RequestExtensions.IsMobileBrowser(Request))
+                return View("~/Views/ExtremeWx/MonthlyAveragesReport.Mobile.cshtml");
+            else
+                return View();
+            
         }
 
         [HttpPost]
@@ -165,7 +169,7 @@ namespace CityWeatherStatsFinal.Controllers
             DataSet resultsDS = new DataSet();
 
             // Stores end results
-            yearlyAvgRec rec = new yearlyAvgRec();
+            YearlyAvgRec rec = new YearlyAvgRec();
 
             // sql command for data adapter to adapt data to dataset from SP results.
             using (SqlConnection con = new SqlConnection("Server=tcp:s18.winhost.com;Initial Catalog=DB_134877_citystats;User ID=DB_134877_citystats_user;Password=NYCity1975!;Integrated Security=False"))

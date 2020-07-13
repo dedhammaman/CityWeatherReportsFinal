@@ -1,4 +1,8 @@
-﻿<div class=".container">
+﻿@section css {
+    <link href="@Url.Content("~/css/iPhone.css")" rel="stylesheet" />
+}
+
+<div class=".container">
 
     <div class="row">
         <div class="col-xs-1">
@@ -19,7 +23,7 @@
         </div>
     </div>
 </div>
-<hr style="width:100%;"/>
+<hr style="width:100%;" />
 <br />
 <br />
 <div class=".container">
@@ -41,8 +45,8 @@
                 <i class="fas fa-list-ol fa-stack-1x"></i>
             </span>
         </div>
-        <div class="col-xs-10">
-            <span class="ExtremeReportText">Find the top</span>
+        <div class="col-xs-9 col-xs-offset-1">
+        <span class="ExtremeReportText">Find the top</span>
             <input id="TopnReport2" type="text" class="change" placeholder="Enter a number">
             <span class="ExtremeReportText">days</span>
         </div>
@@ -57,9 +61,10 @@
                 <i class="fas fa-cloud-sun-rain fa-stack-1x"></i>
             </span>
         </div>
-        <div class="col-xs-10">
+        <div class="col-xs-9 col-xs-offset-1">
             <span class="ExtremeReportText">with the</span>
-            <select id="xtremeWx2" class="selectpicker" data-live-search="true" data-width="fit" title="Select weather parameter">
+            <select id="xtremeWx2" class="selectpicker" data-live-search="true" data-width="fit" title="Weather parameter">
+                <option value="None"></option>
                 <option class="cityList" value="Snowiest">Snowiest days</option>
                 <option class="cityList" value="Wettest">Wettest days</option>
                 <option class="cityList" value="Warmest Highs">Days with warmest highs</option>
@@ -78,7 +83,7 @@
                 <i class="fas fa-city fa-stack-1x"></i>
             </span>
         </div>
-        <div class="col-xs-10">
+        <div class="col-xs-9 col-xs-offset-1">
             <span class="ExtremeReportText">in the city of </span>
             <select style="display:inline" id="CityPicker2" class="selectpicker text-nowrap" data-live-search="true" data-width="fit" name="CityId" title="Select a City..." required></select>
         </div>
@@ -92,36 +97,44 @@
                 <i class="fas fa-clock fa-stack-1x"></i>
             </span>
         </div>
-        <div class="col-xs-10">
+        <div class="col-xs-9 col-xs-offset-1">
             <span class="ExtremeReportText">Generate report for specific time frame?</span>
-            <label class="ExtremeReportText"><input type="radio" name="optyesnoTopXMobile" value="yes" />Yes</label>
-            <label class="ExtremeReportText"><input type="radio" name="optyesnoTopXMobile" value="no" checked />No</label>
+            
         </div>
     </div>
-    <br />
-    <div class="row" id="TopXReportMobileTimeInputs" style="display:none;">
-        <div class="col-xs-2">
-            <span class="fa-stack fa-2x">
-                <i class="fas fa-square fa-stack-2x fa-inverse"></i>
-                <i class="fas fa-business-time fa-stack-1x"></i>
-            </span>
+    <div class="row">
+        <div class="col-xs-2"></div>
+            <div class="col-xs-9 col-xs-offset-1">
+                <label class="ExtremeReportText"><input type="radio" name="optyesnoTopXMobile" value="yes" />Yes</label>
+                <label class="ExtremeReportText"><input type="radio" name="optyesnoTopXMobile" value="no" checked />No</label>
+            </div>
+
         </div>
-        <div class="col-xs-10">
-            <span class="ExtremeReportText">during the time period of</span>
-            <br />
-            <input type="date" class="change2" id="datepickerReport2From" name="datepickerReport2From" placeholder="mm/dd/yyyy" required>
-            <span class="ExtremeReportText">To</span>
-            <input type="date" class="change2" id="datepickerReport2To" name="datepickerReport2To" placeholder="mm/dd/yyyy" required>
+        <br />
+        <div class="row" id="TopXReportMobileTimeInputs" style="display:none;">
+            <div class="col-xs-2">
+                <span class="fa-stack fa-2x">
+                    <i class="fas fa-square fa-stack-2x fa-inverse"></i>
+                    <i class="fas fa-business-time fa-stack-1x"></i>
+                </span>
+            </div>
+            <div class="col-xs-9 col-xs-offset-1">
+                <span class="ExtremeReportText">during the time period of</span>
+                <br />
+                <input type="date" class="change2" id="datepickerReport2From" name="datepickerReport2From" placeholder="mm/dd/yyyy" required>
+                <span class="ExtremeReportText">To</span>
+                <input type="date" class="change2" id="datepickerReport2To" name="datepickerReport2To" placeholder="mm/dd/yyyy" required>
+            </div>
         </div>
-    </div>
-    
-    <div class="row" id="SubmitDiv">
-        <div class="col-xs-2"><span></span></div>
-        <div class="col-xs-8">
-            <button type="button" id="btnSubmit2">Generate Report >><i class="fas fa-arrow-circle-down"></i>
-            </button>
+
+        <div class="row" id="SubmitDiv">
+            <div class="col-xs-2"><span></span></div>
+            <div class="col-xs-8">
+                <button type="button" id="btnSubmit2">
+                    Generate Report >><i class="fas fa-arrow-circle-down"></i>
+                </button>
+            </div>
         </div>
-    </div>
 
 
         <span class="Error" id="ExtremeError1"></span>

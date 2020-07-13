@@ -188,14 +188,11 @@ table {
     
 }
 
-#Summary {
-    margin-top: 30px;
-    margin-right:25px;
-    /*background-color: peachpuff;*/
+#Summary,#Details {
     border-radius: 20px;
-    /*border-color:deepskyblue;*/
     margin-left: 25px;
-    /*border-width:3px;*/
+    background-color: peachpuff;
+    width: 95%;
 }
 
 #Summary2 {
@@ -205,19 +202,20 @@ table {
     text-align:center;
 }
 
-#Summary p{
-    font-family:Arial;
-    font-weight:bold;
-    font-size:16px;
-    color:black;
-}
-
-#Container p {
+#Summary p {
     font-family: Arial;
     font-weight: bold;
     font-size: 16px;
     color: black;
-    margin-left:10px;
+    margin: 5px 0px 0px 15px;
+}
+
+#Details p {
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+    margin:0px 0px 0px 15px;
 }
 
 .col-md-3
@@ -265,7 +263,7 @@ table {
     color: black;
 }
 
-/*Cities in city list*/
+/* Each and every item in a bootstrap select picker*/
 .cityList {
     background: lightblue;
     color: black !important;
@@ -567,6 +565,7 @@ hr {
 
 }
 
+/* Entire Datepicker component for history report */
 #Report2FromDate,#Report2ToDate
 {
     width:200px;
@@ -651,6 +650,7 @@ hr {
     background-color: white;
 }
 
+/* input text box for topx number*/
 #TopnReport2 {
     background-color: white;
     color:silver;
@@ -659,6 +659,7 @@ hr {
     font-size: 24px;
 }
 
+/* Entire paramenters panel for TopX report*/
 #ExtremeInstructionsPanel {
     background-color: lightblue;
     margin: 25px 25px 25px 25px;
@@ -666,6 +667,7 @@ hr {
     border:solid lightblue;
 }
 
+/* Text for History report instructions*/
 .ExtremeReport2Text{
    font-family: Arial;
    font-size:24px;
@@ -761,11 +763,12 @@ input[type='radio']::after
     margin-left:2px;
 }*/
 
-#ExtremeReport1DisplayPanel 
-{
-    background-color:lavender;
-    margin-left:25px;
-    display:none;
+#ExtremeReport1DisplayPanel {
+    
+    background-color: lavender;
+    margin: 25px 25px 25px 25px;
+    border-radius: 20px;
+    border: solid lightblue;
 }
 
 #Summary2-Line2{
@@ -832,3 +835,9 @@ input[type='radio']::after
     width:75%;
     margin:auto;
 }
+
+.table > tbody > tr > td,
+.table > thead > tr > th {
+    text-align: center
+}
+

@@ -1,4 +1,8 @@
-﻿<h3>Historical Weather Search</h3>
+﻿@section css {
+    <link href="@Url.Content("~/css/mobile.css")" rel="stylesheet" />
+}
+
+<h3>Historical Weather Search</h3>
 <table class="mobile-table">
     <tr>
         <td>
@@ -85,11 +89,11 @@
         <tr>
             <td class="firstFilterColumn"></td>
             @*<td>
-                <span class="fa-stack" style="display:none;">
-                    <i class="fas fa-circle fa-stack-2x fa-inverse"></i>
-                    <i class="fas fa-info fa-stack-1x"></i>
-                </span>
-            </td>*@
+                    <span class="fa-stack" style="display:none;">
+                        <i class="fas fa-circle fa-stack-2x fa-inverse"></i>
+                        <i class="fas fa-info fa-stack-1x"></i>
+                    </span>
+                </td>*@
             <td>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="CityMetaDataAlert2" style="font-weight:bolder;margin-left:12px" class="text-info"></span>
             </td>
@@ -204,105 +208,103 @@
             </td>
         </tr>
     </table>
-            
-   
-            <table id="filterTable" style="display:none;margin-right:5px">
-            <tr>
-                <td class="firstFilterColumn">
-                    
-                </td>
-                            <td>
-                                <button type="button" class="ClearButton" id="ClearBtn1">Clear</button>
-                            </td>
-                            <td>
-                                <select style="display:inline" id="Metric1" class="selectpicker"
-                                        data-width="80px" name="Metric1" title="Metric" required>
-                                    <option value="Snowfall">Snowfall</option>
-                                    <option value="Precipitation">Precipitation</option>
-                                    <option value="HighTemp">High Temp</option>
-                                    <option value="LowTemp">Low Temp</option>
-                                    <option value="None"></option>
-                                </select>
-                            </td>
-                            <td>
-                                <select style="display:inline" id="Operator1" class="selectpicker"
-                                        data-width="95px" name="Operator1" title="Operator" required>
 
-                                    <option value="GreaterThan">GreaterThan( > )</option>
-                                    <option value="LessThan">LessThan( < )</option>
-                                    <option value="LessThanOrEqualTo">Less Than or equal to ( <= )</option>
-                                    <option value="GreaterThanOrEqualTo">Greater than or equal to ( >= )</option>
-                                    <option value="Equals">Equals ( = )</option>
-                                    <option value="None"></option>
-                                </select>
-                            </td>
-                            <td>
-                                <input id="MetricValue1" type="text" class="form-control" placeholder="Enter #" data-width="75px">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="firstFilterColumn"></td>
-                            <td>
-                                <button type="button" class="ClearButton" id="ClearBtn2">Clear</button>
-                            </td>
-                            <td>
-                                <select style="display:inline" id="Metric2" class="selectpicker"
-                                        data-width="80px" name="Metric2" title="Metric" required>
-                                    <option value="None"></option>
-                                    <option value="Snowfall">Snowfall</option>
-                                    <option value="Precipitation">Precipitation</option>
-                                    <option value="HighTemp">High Temp</option>
-                                    <option value="LowTemp">Low Temp</option>
-                                    <option value="None"></option>
-                                </select>
-                            </td>
-                            <td>
-                                <select style="display:inline" id="Operator2" class="selectpicker"
-                                        data-width="95px" name="Operator2" title="Operator" required>
 
-                                    <option value="GreaterThan">GreaterThan( > )</option>
-                                    <option value="LessThan">LessThan( < )</option>
-                                    <option value="LessThanOrEqualTo">Less Than or equal to ( <= )</option>
-                                    <option value="GreaterThanOrEqualTo">Greater than or equal to ( >= )</option>
-                                    <option value="Equals">Equals ( = )</option>
-                                    <option value="None"></option>
-                                </select>
-                            </td>
-                            <td>
-                                <input id="MetricValue2" type="text" class="form-control" placeholder="Enter #" data-width="75px">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="firstFilterColumn"></td>
-                            <td>
-                                <button class="ClearButton" type="button" id="ClearBtn3">Clear</button>
-                            </td>
-                            <td>
-                                <select style="display:inline" id="Metric3" class="selectpicker"
-                                        data-width="80px" name="Metric3" title="Metric" required>
-                                    <option value="Snowfall">Snowfall</option>
-                                    <option value="Precipitation">Precipitation</option>
-                                    <option value="HighTemp">High Temp</option>
-                                    <option value="LowTemp">Low Temp</option>
-                                    <option value="None"></option>
-                                </select>
-                            </td>
-                            <td>
-                                <select style="display:inline" id="Operator3" class="selectpicker"
-                                        data-width="95px" name="Operator3" title="Operator" required>
+    <table id="filterTable" style="display:none;margin-right:5px">
+        <tr>
+            <td class="firstFilterColumn"></td>
+            <td>
+                <button type="button" class="ClearButton" id="ClearBtn1">Clear</button>
+            </td>
+            <td>
+                <select style="display:inline" id="Metric1" class="selectpicker"
+                        data-width="80px" name="Metric1" title="Metric" required>
+                    <option value="Snowfall">Snowfall</option>
+                    <option value="Precipitation">Precipitation</option>
+                    <option value="HighTemp">High Temp</option>
+                    <option value="LowTemp">Low Temp</option>
+                    <option value="None"></option>
+                </select>
+            </td>
+            <td>
+                <select style="display:inline" id="Operator1" class="selectpicker"
+                        data-width="95px" name="Operator1" title="Operator" required>
 
-                                    <option value="GreaterThan">GreaterThan( > )</option>
-                                    <option value="LessThan">LessThan( < )</option>
-                                    <option value="LessThanOrEqualTo">Less Than or equal to ( <= )</option>
-                                    <option value="GreaterThanOrEqualTo">Greater than or equal to ( >= )</option>
-                                    <option value="Equals">Equals ( = )</option>
-                                    <option value="None"></option>
-                                </select>
-                            </td>
-                            <td>
-                                <input id="MetricValue3" type="text" class="form-control" placeholder="Enter #" data-width="75px">
-                            </td>
-                        </tr>
+                    <option value="GreaterThan">GreaterThan( > )</option>
+                    <option value="LessThan">LessThan( < )</option>
+                    <option value="LessThanOrEqualTo">Less Than or equal to ( <= )</option>
+                    <option value="GreaterThanOrEqualTo">Greater than or equal to ( >= )</option>
+                    <option value="Equals">Equals ( = )</option>
+                    <option value="None"></option>
+                </select>
+            </td>
+            <td>
+                <input id="MetricValue1" type="text" class="form-control" placeholder="Enter #" data-width="75px">
+            </td>
+        </tr>
+        <tr>
+            <td class="firstFilterColumn"></td>
+            <td>
+                <button type="button" class="ClearButton" id="ClearBtn2">Clear</button>
+            </td>
+            <td>
+                <select style="display:inline" id="Metric2" class="selectpicker"
+                        data-width="80px" name="Metric2" title="Metric" required>
+                    <option value="None"></option>
+                    <option value="Snowfall">Snowfall</option>
+                    <option value="Precipitation">Precipitation</option>
+                    <option value="HighTemp">High Temp</option>
+                    <option value="LowTemp">Low Temp</option>
+                    <option value="None"></option>
+                </select>
+            </td>
+            <td>
+                <select style="display:inline" id="Operator2" class="selectpicker"
+                        data-width="95px" name="Operator2" title="Operator" required>
+
+                    <option value="GreaterThan">GreaterThan( > )</option>
+                    <option value="LessThan">LessThan( < )</option>
+                    <option value="LessThanOrEqualTo">Less Than or equal to ( <= )</option>
+                    <option value="GreaterThanOrEqualTo">Greater than or equal to ( >= )</option>
+                    <option value="Equals">Equals ( = )</option>
+                    <option value="None"></option>
+                </select>
+            </td>
+            <td>
+                <input id="MetricValue2" type="text" class="form-control" placeholder="Enter #" data-width="75px">
+            </td>
+        </tr>
+        <tr>
+            <td class="firstFilterColumn"></td>
+            <td>
+                <button class="ClearButton" type="button" id="ClearBtn3">Clear</button>
+            </td>
+            <td>
+                <select style="display:inline" id="Metric3" class="selectpicker"
+                        data-width="80px" name="Metric3" title="Metric" required>
+                    <option value="Snowfall">Snowfall</option>
+                    <option value="Precipitation">Precipitation</option>
+                    <option value="HighTemp">High Temp</option>
+                    <option value="LowTemp">Low Temp</option>
+                    <option value="None"></option>
+                </select>
+            </td>
+            <td>
+                <select style="display:inline" id="Operator3" class="selectpicker"
+                        data-width="95px" name="Operator3" title="Operator" required>
+
+                    <option value="GreaterThan">GreaterThan( > )</option>
+                    <option value="LessThan">LessThan( < )</option>
+                    <option value="LessThanOrEqualTo">Less Than or equal to ( <= )</option>
+                    <option value="GreaterThanOrEqualTo">Greater than or equal to ( >= )</option>
+                    <option value="Equals">Equals ( = )</option>
+                    <option value="None"></option>
+                </select>
+            </td>
+            <td>
+                <input id="MetricValue3" type="text" class="form-control" placeholder="Enter #" data-width="75px">
+            </td>
+        </tr>
     </table>
 
     <button type="button" id="btnSubmit">
@@ -333,11 +335,9 @@
 </div>
 
 <div id="Details" class="col-sm-12 panel panel-default" style="border-radius:20px;margin-left:25px;">
-    <div class="row">
-        <div id="Container"></div>
-    </div>
+
 </div>
 
 <script>
-                        src = "~/lib/bootstrap / dist / js / bootstrap.js"
+    src = "~/lib/bootstrap / dist / js / bootstrap.js"
 </script>

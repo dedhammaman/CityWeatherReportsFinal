@@ -22,9 +22,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.17/css/bootstrap-select.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset-context/cssreset-context-min.css">
-        <link rel="stylesheet" media="only screen and (max-device-width: 375px)" href="~/css/iphone.css" type="text/css" />
-        <link rel="stylesheet" media="screen and (max-width: 700px" href="~/css/mobile.css" />
-
+        @*<link rel="stylesheet" media="screen and (min-width: 320px) and (max-width: 375px)" href="~/css/iPhone.css" />
+        <link rel="stylesheet" media="screen and (min-width: 376px)" href="~/css/mobile.css" type="text/css" />*@
+        @RenderSection("css", false)
     </environment>
 </head>
 <body>

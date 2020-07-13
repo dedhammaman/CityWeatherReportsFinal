@@ -47,6 +47,7 @@
     font-size:10px;
 }
 
+/* Each and every item in a bootstrap select picker*/
 .cityList {
     background: lightblue;
     color: black !important;
@@ -55,11 +56,14 @@
 }
 
 ExtremeReport1DisplayPanel {
-    background-color: lavender;
-    display:none;
-    border-radius:20px;
-    border-color:deepskyblue;
-    margin-left:25px;
+    /*background-color: lightblue;
+    margin-left: 25px;
+    border-radius: 20px;
+    border: solid lightblue;*/
+    background-color: lightblue;
+    margin: 25px 25px 25px 25px;
+    border-radius: 20px;
+    border: solid lightblue;
 }
 
 #WelcomeTo {
@@ -233,9 +237,10 @@ h3 {
     background-color:white;
 }
 
-
+/* Dropdown showing list of options (extreme weather parameters) to select from */
 .bootstrap-select .dropdown-menu {
     margin-left: 10px;
+    
 }
 
 .bootstrap-select .btn {
@@ -249,6 +254,7 @@ h3 {
     font-weight: bolder;
 }
 
+/* Text for History report instructions*/
 .ExtremeReport2Text {
     font-family: Arial;
     font-size: 20px;
@@ -264,10 +270,12 @@ h3 {
     border-radius:5px;
 }
 
+/* Placeholder text for text box in TopX report*/
 .change::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: silver;
     font-size: 12px;
 }
+
 
 #xtremeWx2 {
     color: silver;
@@ -284,7 +292,7 @@ h3 {
 
 /* for title at top of topx report*/
 
-
+/* TopX report title*/
 .ReportTitle
 {
     text-shadow: 2px 2px;
@@ -295,11 +303,12 @@ h3 {
 
 }
 
-#datepickerReport2From, #datepickerReport2To
+/* datepickers in TopX report*/
+/*#datepickerReport2From, #datepickerReport2To
 {
     margin-left:2px;
-    width:110px;
-}
+    width:100%;
+}*/
 
 #btnSubmit2 {
     all: initial;
@@ -309,11 +318,13 @@ h3 {
     border-radius:3px;
 }
 
+/* Center all results in History report results */
 #Container >table > tr > *
 {
     text-align:center;
 }
 
+/* Entire paramenters panel for TopX report*/
 #ExtremeInstructionsPanel {
     background-color: lightblue;
     margin-left: 25px;
@@ -336,4 +347,12 @@ h3 {
     color: silver;
     background-color: white;
     margin-left: 1px;
+}
+
+#HistorySearchPanel {
+    border-radius: 20px;
+    /*margin-top:25px;*/
+    margin-left: 25px;
+    background-color: lightblue;
+    width: 95%;
 }
