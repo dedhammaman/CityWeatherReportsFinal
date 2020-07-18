@@ -1,37 +1,29 @@
-﻿var CityMetaData = new Array();
-var isMobile;
+﻿var isMobile;
 var isIos;
+var CityMetaData;
 
 $(document).ready(function () {
+
+    if (sessionStorage.getItem('CityDataCachedLoaded') != 'cached')
+       fillCityMetaDataCache();
+
+    // Either way, load the global array with what's in the cache now. 
+    CityMetaData = JSON.parse(sessionStorage.getItem('CityMetaData'));
+
+
     isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     
     isIos = navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
-    
-    
+       
     if (window.location.href == "https://" + window.location.host + "/History"
         || (window.location.href == "https://" + window.location.host + "/History#")
     ) {
         $("#Summary").hide();
         $("#Details").hide();
 
-        $.ajax({
-            type: 'GET',
-            url: '/History/getCityMetaData',
-            dataType: 'json',
-            data: {
-                citysize: 2
-            },
-            success: function (data) {
-                loadCityMDCache(data);
-                for (var i = 0; i < data.length; i++) {
-                    $('#CityPicker').append('<option value="' + data[i].cityid + '" class="cityList">' + data[i].shortName.toUpperCase() + ", " + data[i].state.toUpperCase() + " (" + data[i].name + ")" + '</option>');
-
-                }
-                var counter = 0;
-                $('#CityPicker').selectpicker('refresh');
-
-            }
-        });
+        // Initialize the city list for the history report.
+        InitializeCityList('CityPicker');
+        
     }
     else if ((window.location.href == "https://" + window.location.host + "/ExtremeWx/TopXReport")
         || (window.location.href == "https://" + window.location.host + "/ExtremeWx/MonthlyAveragesReport")) {
@@ -42,23 +34,9 @@ $(document).ready(function () {
         $("#datepicker2").css('background-color', 'white').css('color', 'silver').css('height', '40px').css('font-size', '24px').css('font-weight', 'bolder');
         $("#datepicker").css('background-color', 'white').css('color', 'silver').css('height', '40px').css('font-size', '24px').css('font-weight', 'bolder');
 
-
-
-        $.ajax({
-            type: 'GET',
-            url: '/ExtremeWx/getCityMetaData',
-            dataType: 'json',
-            data: {},
-            success: function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    $('#CityPicker2').append('<option value="' + data[i].cityid + '" class="cityList">' + data[i].shortName + ", " + data[i].state + '</option>');
-
-                }
-                var counter = 0;
-                $('#CityPicker2').selectpicker('refresh');
-
-            }
-        });
+        // Initialize the city list for the history report.
+        InitializeCityList('CityPicker2');
+        
     }
     else if (window.location.href == "https://" + window.location.host + "/ExtremeWx/") {
 
@@ -66,33 +44,13 @@ $(document).ready(function () {
         $("#datepicker2").css('background-color', 'white').css('color', 'silver').css('height', '40px').css('font-size', '24px').css('font-weight', 'bolder');
         $("#datepicker").css('background-color', 'white').css('color', 'silver').css('height', '40px').css('font-size', '24px').css('font-weight', 'bolder');
 
-
-
-        $.ajax({
-            type: 'GET',
-            url: '/ExtremeWx/getCityMetaData',
-            dataType: 'json',
-            data: {},
-            success: function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    $('#CityPicker2').append('<option value="' + data[i].cityid + '" class="cityList">' + data[i].shortName + ", " + data[i].state + '</option>');
-
-                }
-                var counter = 0;
-                $('#CityPicker2').selectpicker('refresh');
-
-            }
-        });
+        // Initialize the city list for the history report.
+        InitializeCityList('CityPicker2');
     }
     else if (window.location.href == "https://" + window.location.host + "/")
     {
         isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        //if (!isMobile) {
-            loadCarouselImages();
-        //}
-        //else {
-        //    $("#CarouselHeader1").remove();
-        //}
+        loadCarouselImages();
     }
     else if (window.location.href == "https://" + window.location.host + "/Home/UnderConstruction")
         countdown('Climatology');
@@ -185,7 +143,7 @@ function loadCarouselImages() {
         var colSpring;
         var imgSpring;
 
-        if (isIos)
+        if (isIos || isMobile)
         {
             var table = $('<table>').css('margin', '0 auto');
             var tr = $('<tr>');
@@ -234,44 +192,44 @@ function loadCarouselImages() {
             parent.append(ia);
         }
         
-        else if (isMobile) {
-            var table = $('<table>').css('margin', '0 auto');
-            var tr = $('<tr>');
-            var td = $('<td>');
-            var td2 = $('<td>');
-            var td3 = $('<td>');
-            var td4 = $('<td>');
-            imgSummer = $('<img>').attr('src', "../images/" + item + " summer.png");
-            imgFall = $('<img>').attr('src', '../images/' + item + ' fall.png');
-            imgWinter = $('<img>').attr('src', '../images/' + item + ' winter.png');
-            imgSpring = $('<img>').attr('src', '../images/' + item + ' spring.png');
+        //else if (isMobile) {
+        //    var table = $('<table>').css('margin', '0 auto');
+        //    var tr = $('<tr>');
+        //    var td = $('<td>');
+        //    var td2 = $('<td>');
+        //    var td3 = $('<td>');
+        //    var td4 = $('<td>');
+        //    imgSummer = $('<img>').attr('src', "../images/" + item + " summer.png");
+        //    imgFall = $('<img>').attr('src', '../images/' + item + ' fall.png');
+        //    imgWinter = $('<img>').attr('src', '../images/' + item + ' winter.png');
+        //    imgSpring = $('<img>').attr('src', '../images/' + item + ' spring.png');
 
-            var summerContainer = $('<div>').addClass('container').css('position', 'relative').css('text-align', 'center').css('color', 'white');
-            season = $('<div>').addClass('centered centered-summer').text('Summer');
-            summerContainer.append(imgSummer, season);
-            td.append(summerContainer);
+        //    var summerContainer = $('<div>').addClass('container').css({ 'position': 'relative', 'text-align': 'center', 'color': 'white'});
+        //    season = $('<div>').addClass('centered centered-summer').text('Summer');
+        //    summerContainer.append(imgSummer, season);
+        //    td.append(summerContainer);
 
-            var fallContainer = $('<div>').addClass('container').css('position', 'relative').css('text-align', 'center').css('color', 'white');
-            season = $('<div>').addClass('centered centered-fall').text('Fall');
-            fallContainer.append(imgFall, season);
-            td2.append(fallContainer);
+        //    var fallContainer = $('<div>').addClass('container').css({ 'position': 'relative', 'text-align': 'center', 'color': 'white', 'width': '60px', 'height': '60px' });
+        //    season = $('<div>').addClass('centered centered-fall').text('Fall');
+        //    fallContainer.append(imgFall, season);
+        //    td2.append(fallContainer);
 
-            var winterContainer = $('<div>').addClass('container').css('position', 'relative').css('text-align', 'center').css('color', 'white');
-            season = $('<div>').addClass('centered centered-winter').text('Winter');
-            winterContainer.append(imgWinter, season);
-            td3.append(winterContainer);
+        //    var winterContainer = $('<div>').addClass('container').css('position', 'relative').css({ 'position': 'relative', 'text-align': 'center', 'color': 'white', 'width': '60px', 'height': '60px' });
+        //    season = $('<div>').addClass('centered centered-winter').text('Winter');
+        //    winterContainer.append(imgWinter, season);
+        //    td3.append(winterContainer);
 
-            var springContainer = $('<div>').addClass('container').css('position', 'relative').css('text-align', 'center').css('color', 'white');
-            season = $('<div>').addClass('centered centered-spring').text('Spring');
-            springContainer.append(imgSpring, season);
-            td4.append(springContainer);
+        //    var springContainer = $('<div>').addClass('container').css({ 'position': 'relative', 'text-align': 'center', 'color': 'white', 'width': '60px', 'height': '60px' });
+        //    season = $('<div>').addClass('centered centered-spring').text('Spring');
+        //    springContainer.append(imgSpring, season);
+        //    td4.append(springContainer);
 
-            tr.append(td, td2,td3,td4);
-            table.append(tr);
-            row2.append(table);
-            ia.append(row2);
-            parent.append(ia);
-        }
+        //    tr.append(td, td2,td3,td4);
+        //    table.append(tr);
+        //    row2.append(table);
+        //    ia.append(row2);
+        //    parent.append(ia);
+        //}
         else {
 
             colSummer = $('<div>').addClass('col-sm-3');
@@ -1098,85 +1056,32 @@ function clearErrors() {
 
 //$(document).on('change', 'input:radio[id^="opt"]', function (event) {
 $('#CityScope').on('change', function (e) {
-    
+
     var cityScope = $(this).find("option:selected").val();
+    var citysize = 0;
 
     // Clear current list
     $('#CityPicker').empty();
 
-    if (cityScope == 'Major') {
-
-        $.ajax({
-            type: 'GET',
-            url: '/History/getCityMetaData',
-            dataType: 'json',
-            data: {
-                citysize: 1
-            },
-            success: function (data) {
-                
-                for (var i = 0; i < data.length; i++) {
-                    $('#CityPicker').append('<option value="' + data[i].cityid + '" class="cityList">' + data[i].shortName.toUpperCase() + ", " + data[i].state.toUpperCase() + " (" + data[i].name + ")" + '</option>');                  
-                }
-                var counter = 0;
-                $('#CityPicker').selectpicker('refresh');
-
-            }
-        });
+    switch (cityScope) {
+        case 'Major': citysize = 1; break;
+        case 'MidSize': citysize = 2; break;
+        case 'SmallSized': citysize = 3; break;
     }
-    else if (cityScope == 'MidSize') {
 
-        $.ajax({
-            type: 'GET',
-            url: '/History/getCityMetaData',
-            dataType: 'json',
-            data: {
-                citysize: 2
-            },
-            success: function (data) {
-                loadCityMDCache(data);
-                for (var i = 0; i < data.length; i++) {
-                    $('#CityPicker').append('<option value="' + data[i].cityid + '" class="cityList">' + data[i].shortName.toUpperCase() + ", " + data[i].state.toUpperCase() + " (" + data[i].name + ")" + '</option>');
-                }
-                var counter = 0;
-                $('#CityPicker').selectpicker('refresh');
-
-            }
-        });
+    for (var i = 0; i < CityMetaData.length - 1; i++) {
+        if (CityMetaData[i].citysize <= citysize) {
+            $('#CityPicker').append('<option value="' + CityMetaData[i].cityid + '" class="cityList">' + CityMetaData[i].shortName + ", " + CityMetaData[i].state + '</option>');
+        }
     }
-    else if (cityScope == 'SmallSized') {
+    $('#CityPicker').selectpicker('refresh');
 
-        $.ajax({
-            type: 'GET',
-            url: '/History/getCityMetaData',
-            dataType: 'json',
-            data: {
-                citysize: 3
-            },
-            success: function (data) {
-                
-                for (var i = 0; i < data.length; i++) {
-                    //if ((data[i].citysize == 1) || (data[i].citysize == 2))
-                    $('#CityPicker').append('<option value="' + data[i].cityid + '" class="cityList">' + data[i].shortName.toUpperCase() + ", " + data[i].state.toUpperCase() + " (" + data[i].name + ")" + '</option>');
-                    //else
-                    //    $('#CityPicker').append('<option value="' + data[i].cityid + '" class="cityList">' + data[i].name + ", " + data[i].state + '</option>');
-                }
-                var counter = 0;
-                $('#CityPicker').selectpicker('refresh');
-
-            }
-        });
-    }
 });
 
 $(document).on('change', 'input:radio[id^="radoptex"]', function (event) {
 
     // Unhide the checked option.
-    if (event.target.id == 'radoptex2') { alert('made it');}
-
-
-    
-    
+    if (event.target.id == 'radoptex2') { alert('made it');} 
 });
 
 
@@ -1304,15 +1209,45 @@ function displayDataAvailability(cityMDRec) {
 
 function loadCityMDCache(data) {
 
+    var CityMetaData = new Array;
     for (var i = 0; i < data.length - 1; i++) {
         // Rec for one city.
         var cityRec = data[i];
         CityMetaData.push(cityRec);
     }
+
+    sessionStorage.setItem('CityMetaData', JSON.stringify(CityMetaData));
 }
     
-      
-        
+function fillCityMetaDataCache() {
+
+    $.ajax({
+        type: 'GET',
+        url: '/History/getCityMetaData',
+        dataType: 'json',
+        async: false,
+        data: {
+            citysize: 3
+        },
+        success: function (data) {
+            loadCityMDCache(data);
+
+        }
+    });
+    sessionStorage.setItem('CityDataCachedLoaded', 'cached');
+    
+}
+
+function InitializeCityList(cityListId)
+{
+    for (var i = 0; i < CityMetaData.length - 1; i++) {
+
+        if ((CityMetaData[i].citysize == 1) || CityMetaData[i].citysize == 2) {
+            $('#' + cityListId).append('<option value="' + CityMetaData[i].cityid + '" class="cityList">' + CityMetaData[i].shortName.toUpperCase() + ", " + CityMetaData[i].state.toUpperCase() + " (" + CityMetaData[i].name + ")" + '</option>');
+        }
+    }
+    $('#' + cityListId).selectpicker('refresh');
+}
 
    
 
