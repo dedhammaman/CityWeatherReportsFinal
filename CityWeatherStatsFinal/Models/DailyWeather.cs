@@ -11,9 +11,6 @@ namespace CityWeatherStatsFinal.Models
         public string DailyWeatherId { get; set; }
 
         public string cityid { get; set; }
-        public string state { get; set; }
-        public string name { get; set; }
-        public string shortname { get; set; }
         public DateTime date { get; set; }
         public string datatype { get; set; }
 
@@ -36,9 +33,12 @@ namespace CityWeatherStatsFinal.Models
     {
         public DbSet<DailyWeather> CityDailyWeather { get; set; }
 
+        public DailyWeatherContext(DbContextOptions<DailyWeatherContext> options) : base(options) { }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=s08.everleap.com;Database=DB_4325_citystats;Trusted_Connection=False;User Id=DB_4325_citystats_user;Password=Elise2014");
+            //optionsBuilder.UseSqlServer(@"Server=s08.everleap.com;Database=DB_4325_citystats;Trusted_Connection=False;User Id=DB_4325_citystats_user;Password=Elise2014");
+            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

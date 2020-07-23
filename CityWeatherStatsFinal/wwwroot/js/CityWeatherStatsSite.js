@@ -10,7 +10,6 @@ $(document).ready(function () {
     // Either way, load the global array with what's in the cache now. 
     CityMetaData = JSON.parse(sessionStorage.getItem('CityMetaData'));
 
-
     isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     
     isIos = navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
@@ -262,316 +261,141 @@ function loadCarouselImages() {
 
 }
 
-        $("#btnSubmit").click(function () {
-            //isIos = true;
+$("#btnSubmit").click(function () {
+    //isIos = true;
 
-            // Clear any results from previos run
-            $("#Summary").empty();
-            $("#Details").empty();
+    // Clear any results from previos run
+    $("#Summary").empty();
+    $("#Details").empty();
 
-            $("#Summary").hide();
-            $("#Details").hide();
+    $("#Summary").hide();
+    $("#Details").hide();
 
-            var cityid = $("#CityPicker").val();
+    var cityid = $("#CityPicker").val();
 
-            if (isIos) {
-                var FromDate = $("#datepickerReport2From").val();
-                var ToDate = $("#datepickerReport2To").val();
-            }
-            else {
-                var FromDate = $("#datepicker").val();
-                var ToDate = $("#datepicker2").val();
-            }
+    if (isMobile) {
+        var FromDate = $("#datepickerReport2From").val();
+        var ToDate = $("#datepickerReport2To").val();
+    }
+    else {
+        var FromDate = $("#datepicker").val();
+        var ToDate = $("#datepicker2").val();
+    }
 
-            // Clear any results that are hanging around.
-            
-
-            //var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-            clearErrors();
-            if (validate('Historical') != true)
-                return;
-
-            // Remove any existing table
-            $('#Container').empty();
-            $('#Summary').empty();
-
-            // Turn on progress bar
-            $("#ProgressBar").css('display', 'block');
-            $(".progress-bar").css('width', '50%').text('Pulling Data From NOAA');
-
-            var filters = new Array();
-            
-            $("#filterTable tr").each(function () {
-
-                if (isMobile) {
-                    var row = $(this);
-                    var filter = {};
-                    filter.Metric = row.find("td").eq(2).find('select option:selected').val();
-                    filter.Operator = row.find("td").eq(3).find('select option:selected').val();
-                    filter.MetricValue = row.find("td").eq(4).find('input').val();
-                    filters.push(filter);
-                }
-                else {
-                    var row = $(this);
-                    var filter = {};
-                    filter.Metric = row.find("td").eq(1).find('select option:selected').val();
-                    filter.Operator = row.find("td").eq(2).find('select option:selected').val();
-                    filter.MetricValue = row.find("td").eq(3).find('input').val();
-                    filters.push(filter);
-                }
-            });
-
-            var cityIdLabel = $("#CityPicker option:selected").text();
-            var data = {
-                cityId: cityid,
-                fromDate: FromDate,
-                toDate: ToDate,
-                filters: filters
-            };
-
-            $.ajax({
-                url: "/History/GetDailyWeather",
-                type: "POST",
-                dataType: 'json',
-                data: data
-                ,
-                 success: function (response) {
-
-                    // Update progress
-                    $(".progress-bar").css('width', '50%').text('50% -  Received Data');
-                    
-                     // Summary Line
-                     if (response.entries.length > 0) {
-                         //$("#summarybanner").html('  ' + response.entries[0].name + " from " + FromDate + " To " + ToDate);
-                         var avgHigh = parseFloat(response.averageHigh).toFixed(0);
-                         var avgLow = parseFloat(response.averageLow).toFixed(0);
-                         var totalSnow = parseFloat(response.totalSnow).toFixed(2);
-                         var totalPrecip = parseFloat(response.totalPrecip).toFixed(2);
-                         
-                         var avgHighLine = $("<p style='text-align:center'></p>").text('Average High: ' + avgHigh.toString() + String.fromCharCode(176));
-                         var avgLowLine = $("<p style='text-align:center'></p>").text('Average Low: ' + avgLow.toString() + String.fromCharCode(176));
-                         var totalPrecipLine = $("<p style='text-align:center'></p>").text('Total Precip: ' + totalPrecip.toString() + '"');
-                         var totalSnow = $("<p style='text-align:center'></p>").text('Total Snow: ' + totalSnow.toString() + '"');
-
-                         var maxHighLine = $("<p style='text-align:center'></p>").text('Maximum High: ' + response.maxHigh + String.fromCharCode(176));
-                         var maxLowLine = $("<p style='text-align:center'></p>").text('Maximum Low: ' + response.maxLow + String.fromCharCode(176));
-                         var minHighLine = $("<p style='text-align:center'></p>").text('Minimum High: ' + response.minHigh + String.fromCharCode(176));
-                         var minLowLine = $("<p style='text-align:center'></p>").text('Minimum Low: ' + response.minLow + String.fromCharCode(176));
-
-                         var summaryText = $("<p></p>").text("SUMMARY for " + response.entries[0].name + " from " + FromDate + " To " + ToDate);
-                         var detailsText = $("<p></p>").text("DETAILS for " + response.entries[0].name + " from " + FromDate + " To " + ToDate);
-
-                         var innerdiv = $("<div></div >").addClass('row');
-                         var firstquart = $("<div></div>").addClass('col-sm-3');
-                         firstquart.append(avgHighLine);
-                         innerdiv.append(firstquart);
-
-                         var secondquart = $("<div></div>").addClass('col-sm-3');
-                         secondquart.append(avgLowLine);
-                         innerdiv.append(secondquart);
-
-                         var thirdquart = $("<div></div>").addClass('col-sm-3');
-                         thirdquart.append(totalPrecipLine);
-                         innerdiv.append(thirdquart);
-
-                         var fourthquart = $("<div></div>").addClass('col-sm-3');
-                         fourthquart.append(totalSnow);
-                         innerdiv.append(fourthquart);
-
-                         var innerdiv2 = $("<div></div >").addClass('row');
-                         var firstquart2 = $("<div></div>").addClass('col-sm-3');
-                         firstquart2.append(maxHighLine);
-                         innerdiv2.append(firstquart2);
-
-                         var secondquart2 = $("<div></div>").addClass('col-sm-3');
-                         secondquart2.append(maxLowLine);
-                         innerdiv2.append(secondquart2);
-
-                         var thirdquart2 = $("<div></div>").addClass('col-sm-3');
-                         thirdquart2.append(minHighLine);
-                         innerdiv2.append(thirdquart2);
-
-                         var fourthquart2 = $("<div></div>").addClass('col-sm-3');
-                         fourthquart2.append(minLowLine);
-                         innerdiv2.append(fourthquart2);
-
-                         $("#Summary").append(summaryText, innerdiv, innerdiv2);
-
-                         //$("#AvgHigh").text('hello there');//append(avgHighLine);
-                         //$("#AvgLow").append(avgLowLine);
-                         //$("#TotalPrecip").append(totalPrecipLine);
-                         //$("#TotalSnow").append(totalSnow);
-                    }
-
-
-
-                    //Details
-                    var table = $("<table></table>").addClass('table table-striped').addClass('table-bordered');
-                    table.addClass('table');
-                    var thead = $("<thead></thead>").addClass('thead-dark');
-                    var tbody = $("<tbody></tbody>")
-                    var trhead = $('<tr></tr>');
-
-                    var th = $('<th></th>');
-                    var th2 = $('<th></th>');
-                    var th3 = $('<th></th>');
-                    var th4 = $('<th></th>');
-                    var th5 = $('<th></th>');
-                    var th6 = $('<th></th>');
-                    var th7 = $('<th></th>');
-
-                    //$(th).attr('scope', 'col').text('City');
-                    //$(th2).attr('scope', 'col').text('State');
-                    $(th3).attr('scope', 'col').text('Date');
-                    $(th4).attr('scope', 'col').text('High');
-                    $(th5).attr('scope', 'col').text('Low');
-                    $(th6).attr('scope', 'col').text('Precip (inches)');
-                    $(th7).attr('scope', 'col').text('Snowfall (inches)');
-                    
-                    trhead.append(th3, th4, th5, th6,th7);
-                    
-
-                    thead.append(trhead);
-                    table.append(thead, tbody);
-
-                    var cityName = "";
-                    var State = "";
-                    var theDate = "";
-                    var High = "";
-                    var Low = "";
-                    var Precip = "";
-                    var Snow = "";
-                    var tablerow = "";
-
-
-                    for (var i = 0; i < response.entries.length; i++)
-                    {
-                        tablerow = $("<tr></tr>");
-                        
-                        var temp = response.entries[i].date.substr(0, 10);
-                        var dateArray = temp.split('-');
-
-                        //theDate = $("<td></td>").text((temp.getMonth() + 1) + "/" + (temp.getDate()) + "/" + temp.getFullYear());
-                        theDate = $("<td></td>").text(dateArray[1] + '/' + dateArray[2] + '/' + dateArray[0]);
-                        High = $("<td></td>").text((response.entries[i].tmax || 0)+ String.fromCharCode(176));
-                        Low = $("<td></td>").text((response.entries[i].tmin || 0) + String.fromCharCode(176));
-                        Precip = $("<td></td>").text((response.entries[i].prcp || 0) + '"');
-                        Snow = $("<td></td>").text((response.entries[i].snow || 0) + '"') || 0;
-
-                        tablerow.append(theDate, High, Low, Precip, Snow);
-
-                        $(table).append(tablerow);
-                    }
-                    if (response.length == 0) {
-                        var p = $('<p></p>')
-                        p.text('No Data To Show').css('color', 'red').css('font-size', '20px');
-                        $('#Container').append(p);
-                    }
-                    else {
-                        $('#Details').append(detailsText,table);
-                        $('#Details').css('overflow', 'scroll');
-                    }
-                    $(".progress-bar").css('width', '100%').text('100% - Done ');
-                    $("#ProgressBar").css('display', 'none');
-                    $("#Summary").show();
-                    $("#Details").show();
-                    
-                },
-                error: function (xhr, status, error) {
-                    alert("The NOAA site down. Please try this again later.")
-                    //alert(xhr.responseText);
-                    //alert(error.responseText);
-                    //alert(status.responseText);
-                    $("#ProgressBar").css('display', 'none');
-                }
-            });
-        })
+    // Clear any results that are hanging around.
     
+    //var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
+    clearErrors();
+    if (validate('Historical') != true)
+        return;
 
-    $("#btnSubmit2").click(function () {
+    // Remove any existing table
+    $('#Container').empty();
+    $('#Summary').empty();
 
-        clearErrors();
-        if (validate('Extreme') != true)
-            return;
+    // Turn on progress bar
+    $("#ProgressBar").css('display', 'block');
+    $(".progress-bar").css('width', '50%').text('Pulling Data From NOAA');
 
-        // Clear any results from previos run
-        $("#ExtremeReport2DisplayPanel").hide();
+    var filters = new Array();
 
-        // Remove any existing table
-        $('#Container').empty();
-        $('#Summary').empty();
+    $("#filterTable tr").each(function () {
 
-        // Turn on progress bar
-        $("#ProgressBar").css('display', 'block');
-        $(".progress-bar").css('width', '30%').text('30% - Pulling Data');
-        //$("#THELOADER").css('display', 'block');
-
-        var cityIdLabel = $("#CityPicker2 option:selected").val();
-        var extremeWxType = $("#xtremeWx2 option:selected").val();
-        var topn = $("#TopnReport2").val();
-        var from = null;
-        var to = null;
-        
-        var yesornovalue;
         if (isMobile) {
-            yesornovalue = $('input[name="optyesnoTopXMobile"]:checked').val();
+            var row = $(this);
+            var filter = {};
+            filter.Metric = row.find("td").eq(2).find('select option:selected').val();
+            filter.Operator = row.find("td").eq(3).find('select option:selected').val();
+            filter.MetricValue = row.find("td").eq(4).find('input').val();
+            filters.push(filter);
         }
         else {
-            yesornovalue = $('input[name="optyesno"]:checked').val();
+            var row = $(this);
+            var filter = {};
+            filter.Metric = row.find("td").eq(1).find('select option:selected').val();
+            filter.Operator = row.find("td").eq(2).find('select option:selected').val();
+            filter.MetricValue = row.find("td").eq(3).find('input').val();
+            filters.push(filter);
         }
+    });
+
+    var cityIdLabel = $("#CityPicker option:selected").text();
+    var data = {
+        cityId: cityid,
+        fromDate: FromDate,
+        toDate: ToDate,
+        filters: filters
+    };
+
+    $.ajax({
+        url: "/History/GetDailyWeather",
+        type: "POST",
+        dataType: 'json',
+        data: data
+        ,success: function (response) {
+
+            // Update progress
+            $(".progress-bar").css('width', '50%').text('50% -  Received Data');
+
+            // Summary Line
+            if (response.entries.length > 0) {
+                //$("#summarybanner").html('  ' + response.entries[0].name + " from " + FromDate + " To " + ToDate);
+                var avgHigh = parseFloat(response.averageHigh).toFixed(0);
+                var avgLow = parseFloat(response.averageLow).toFixed(0);
+                var totalSnow = parseFloat(response.totalSnow).toFixed(2);
+                var totalPrecip = parseFloat(response.totalPrecip).toFixed(2);
+
+                var avgHighLine = $("<p style='text-align:center'></p>").text('Average High: ' + avgHigh.toString() + String.fromCharCode(176));
+                var avgLowLine = $("<p style='text-align:center'></p>").text('Average Low: ' + avgLow.toString() + String.fromCharCode(176));
+                var totalPrecipLine = $("<p style='text-align:center'></p>").text('Total Precip: ' + totalPrecip.toString() + '"');
+                var totalSnow = $("<p style='text-align:center'></p>").text('Total Snow: ' + totalSnow.toString() + '"');
+
+                var maxHighLine = $("<p style='text-align:center'></p>").text('Maximum High: ' + response.maxHigh + String.fromCharCode(176));
+                var maxLowLine = $("<p style='text-align:center'></p>").text('Maximum Low: ' + response.maxLow + String.fromCharCode(176));
+                var minHighLine = $("<p style='text-align:center'></p>").text('Minimum High: ' + response.minHigh + String.fromCharCode(176));
+                var minLowLine = $("<p style='text-align:center'></p>").text('Minimum Low: ' + response.minLow + String.fromCharCode(176));
+
+                var summaryText = $("<p></p>").text("SUMMARY for " + response.name + " from " + FromDate + " To " + ToDate);
+                var detailsText = $("<p></p>").text("DETAILS for " + response.name + " from " + FromDate + " To " + ToDate);
+
+                var innerdiv = $("<div></div >").addClass('row');
+                var firstquart = $("<div></div>").addClass('col-sm-3');
+                firstquart.append(avgHighLine);
+                innerdiv.append(firstquart);
+
+                var secondquart = $("<div></div>").addClass('col-sm-3');
+                secondquart.append(avgLowLine);
+                innerdiv.append(secondquart);
+
+                var thirdquart = $("<div></div>").addClass('col-sm-3');
+                thirdquart.append(totalPrecipLine);
+                innerdiv.append(thirdquart);
+
+                var fourthquart = $("<div></div>").addClass('col-sm-3');
+                fourthquart.append(totalSnow);
+                innerdiv.append(fourthquart);
+
+                var innerdiv2 = $("<div></div >").addClass('row');
+                var firstquart2 = $("<div></div>").addClass('col-sm-3');
+                firstquart2.append(maxHighLine);
+                innerdiv2.append(firstquart2);
+
+                var secondquart2 = $("<div></div>").addClass('col-sm-3');
+                secondquart2.append(maxLowLine);
+                innerdiv2.append(secondquart2);
+
+                var thirdquart2 = $("<div></div>").addClass('col-sm-3');
+                thirdquart2.append(minHighLine);
+                innerdiv2.append(thirdquart2);
+
+                var fourthquart2 = $("<div></div>").addClass('col-sm-3');
+                fourthquart2.append(minLowLine);
+                innerdiv2.append(fourthquart2);
+
+                $("#Summary").append(summaryText, innerdiv, innerdiv2);
 
 
-        if (yesornovalue == 'yes') {
-            
-            if (isMobile) {
-                from = $("#datepickerReport2From").val();
-                to= $("#datepickerReport2To").val();
-            }
-            else {
-                from = $("#datepicker").val();
-                to = $("#datepicker2").val();
-            }
-
-        } 
-        
-        $.ajax({
-            url: "/ExtremeWx/GetExtremeWeather",
-            type: "POST",
-            dataType: 'json',
-            data: {
-                topn: topn,
-                metric: extremeWxType,
-                cityList: cityIdLabel,
-                from: from,
-                to: to
-            },
-            success: function (response) {
-
-                // Update progress
-                $(".progress-bar").css('width', '50%').text('50% -  Received Data');
-
-                // Summary Line
-                if (response.length > 0) {
-
-                    // Add dates to summary line if time period was used.
-                    var summaryLine;
-                    if (yesornovalue == 'yes') {
-                        summaryLine = $("<span></span>").text("The Top " + topn + " " + extremeWxType + " day(s) for " + response[0].shortname + ", " + response[0].state +
-                            " from " + from + " to " + to + " are:");
-                    }
-                    else {
-                        summaryLine = $("<span></span>").text("The Top " + topn + " " + extremeWxType + " day(s) for " + response[0].shortname + ", " + response[0].state + " are:");
-                    }
-                    summaryLine.css({
-                            'background-color': 'peachpuff',
-                            'font-size': '20px',
-                            'font-family': 'Arial',
-                            'font-width' : 'bold'
-                            });
-                    $("#Summary").append(summaryLine);
-                }
 
                 //Details
                 var table = $("<table></table>").addClass('table table-striped').addClass('table-bordered');
@@ -588,110 +412,274 @@ function loadCarouselImages() {
                 var th6 = $('<th></th>');
                 var th7 = $('<th></th>');
 
-                $(th).attr('scope', 'col').text('Rank');
+                //$(th).attr('scope', 'col').text('City');
+                //$(th2).attr('scope', 'col').text('State');
                 $(th3).attr('scope', 'col').text('Date');
                 $(th4).attr('scope', 'col').text('High');
                 $(th5).attr('scope', 'col').text('Low');
                 $(th6).attr('scope', 'col').text('Precip (inches)');
                 $(th7).attr('scope', 'col').text('Snowfall (inches)');
 
-                // Arrange the order of the columns based on the metric.
-                if (extremeWxType == 'Snowiest') {
-                    trhead.append(th, th3, th7.css('color', 'red').css('font-size', '24px'), th4, th5, th6);
-                }
-                else if (extremeWxType == 'Wettest')
-                {
-                    trhead.append(th, th3, th6.css('color', 'red').css('font-size', '24px'), th7, th4, th5);
-                }
-                else if (extremeWxType == 'Warmest Highs')
-                {
-                    trhead.append(th, th3, th4.css('color', 'red').css('font-size', '24px'), th5, th6, th7);
-                }
-                else if (extremeWxType == 'Warmest Lows')
-                {
-                    trhead.append(th, th3, th5.css('color', 'red').css('font-size', '24px'), th4, th6, th7);
-                }
-                else if (extremeWxType == 'Coldest Highs')
-                {
-                    trhead.append(th, th3, th4.css('color', 'red').css('font-size', '24px'),th5, th6, th7);
-                }
-                else if (extremeWxType == 'Coldest Lows')
-                {
-                    trhead.append(th, th3, th5.css('color', 'red').css('font-size', '24px'),th4, th6, th7);
-                }
-                
+                trhead.append(th3, th4, th5, th6, th7);
+
+
                 thead.append(trhead);
                 table.append(thead, tbody);
 
-                //var cityName = "";
-                //var State = "";
+                var cityName = "";
+                var State = "";
                 var theDate = "";
                 var High = "";
                 var Low = "";
                 var Precip = "";
                 var Snow = "";
                 var tablerow = "";
-                var rank = "";
 
-                for (var i = 0; i < response.length; i++) {
+
+                for (var i = 0; i < response.entries.length; i++) {
                     tablerow = $("<tr></tr>");
-                    //cityName = $("<td></td>").text(response.entries[i].name);
-                    //State = $("<td></td>").text(response.entries[i].state);
-                    var temp = new Date(response[i].date.substr(0, 10));
-                    theDate = $("<td></td>").text((temp.getMonth() + 1) + "/" + temp.getDate() + "/" + temp.getFullYear());
 
-                    rank = $("<td></td>").text('#' + (i+1))
-                    High = $("<td></td>").text(response[i].tmax + String.fromCharCode(176));
-                    Low = $("<td></td>").text(response[i].tmin + String.fromCharCode(176));
-                    Precip = $("<td></td>").text(response[i].prcp + '"');
-                    Snow = $("<td></td>").text(response[i].snow + '"');
+                    var temp = response.entries[i].date.substr(0, 10);
+                    var dateArray = temp.split('-');
 
-                    if (extremeWxType == 'Snowiest') {
-                        tablerow.append(rank, theDate, Snow.css('color','red').css('font-size','24px'), High,Low, Precip);
-                    }
-                    else if (extremeWxType == 'Wettest') {
-                        tablerow.append(rank, theDate, Precip.css('color', 'red').css('font-size', '24px'), Snow, High, Low );
-                    }
-                    else if (extremeWxType == 'Warmest Highs') {
-                        tablerow.append(rank, theDate, High.css('color', 'red').css('font-size', '24px'), Low, Precip, Snow);
-                    }
-                    else if (extremeWxType == 'Warmest Lows') {
-                        tablerow.append(rank, theDate, Low.css('color', 'red').css('font-size', '24px'), High,Precip, Snow);
-                    }
-                    else if (extremeWxType == 'Coldest Highs') {
-                        tablerow.append(rank, theDate, High.css('color', 'red').css('font-size', '24px'), Low, Precip, Snow);
-                    }
-                    else if (extremeWxType == 'Coldest Lows') {
-                        tablerow.append(rank, theDate, Low.css('color', 'red').css('font-size', '24px'), High, Precip, Snow);
-                    }
+                    //theDate = $("<td></td>").text((temp.getMonth() + 1) + "/" + (temp.getDate()) + "/" + temp.getFullYear());
+                    theDate = $("<td></td>").text(dateArray[1] + '/' + dateArray[2] + '/' + dateArray[0]);
+                    High = $("<td></td>").text((response.entries[i].tmax || 0) + String.fromCharCode(176));
+                    Low = $("<td></td>").text((response.entries[i].tmin || 0) + String.fromCharCode(176));
+                    Precip = $("<td></td>").text((response.entries[i].prcp || 0) + '"');
+                    Snow = $("<td></td>").text((response.entries[i].snow || 0) + '"') || 0;
 
-                    
+                    tablerow.append(theDate, High, Low, Precip, Snow);
 
                     $(table).append(tablerow);
                 }
-                if (response.length == 0) {
-                    var p = $('<p></p>')
-                    p.text('No Data To Show').css('color', 'red').css('font-size', '20px');
-                    $('#Container').append(p);
+            }
+            if (response.length == 0) {
+                var p = $('<p></p>')
+                p.text('No Data To Show').css('color', 'red').css('font-size', '20px');
+                $('#Container').append(p);
+            }
+            else {
+                $('#Details').append(detailsText, table);
+                $('#Details').css('overflow', 'scroll');
+            }
+            $(".progress-bar").css('width', '100%').text('100% - Done ');
+            $("#ProgressBar").css('display', 'none');
+            $("#Summary").show();
+            $("#Details").show();
+
+        },
+        error: function (xhr, status, error) {
+            alert("The NOAA site down. Please try this again later.");
+            //alert(xhr.responseText);
+            //alert(error.responseText);
+            //alert(status.responseText);
+            $("#ProgressBar").css('display', 'none');
+
+        }
+    });
+                
+});
+    
+
+
+$("#btnSubmit2").click(function () {
+
+    clearErrors();
+    if (validate('Extreme') != true)
+        return;
+
+    // Clear any results from previos run
+    $("#ExtremeReport2DisplayPanel").hide();
+
+    // Remove any existing table
+    $('#Container').empty();
+    $('#Summary').empty();
+
+    // Turn on progress bar
+    $("#ProgressBar").css('display', 'block');
+    $(".progress-bar").css('width', '30%').text('30% - Pulling Data');
+    //$("#THELOADER").css('display', 'block');
+
+    var cityIdLabel = $("#CityPicker2 option:selected").val();
+    var extremeWxType = $("#xtremeWx2 option:selected").val();
+    var topn = $("#TopnReport2").val();
+    var from = null;
+    var to = null;
+
+    var yesornovalue;
+    if (isMobile) {
+        yesornovalue = $('input[name="optyesnoTopXMobile"]:checked').val();
+    }
+    else {
+        yesornovalue = $('input[name="optyesno"]:checked').val();
+    }
+
+
+    if (yesornovalue == 'yes') {
+
+        if (isMobile) {
+            from = $("#datepickerReport2From").val();
+            to = $("#datepickerReport2To").val();
+        }
+        else {
+            from = $("#datepicker").val();
+            to = $("#datepicker2").val();
+        }
+
+    }
+
+    $.ajax({
+        url: "/ExtremeWx/GetExtremeWeather",
+        type: "POST",
+        dataType: 'json',
+        data: {
+            topn: topn,
+            metric: extremeWxType,
+            cityList: cityIdLabel,
+            from: from,
+            to: to
+        },
+        success: function (response) {
+
+            // Update progress
+            $(".progress-bar").css('width', '50%').text('50% -  Received Data');
+
+            // Summary Line
+            if (response.length > 0) {
+
+                // Add dates to summary line if time period was used.
+                var summaryLine;
+                if (yesornovalue == 'yes') {
+                    summaryLine = $("<span></span>").text("The Top " + topn + " " + extremeWxType + " day(s) for " + response[0].shortname + ", " + response[0].state +
+                        " from " + from + " to " + to + " are:");
                 }
                 else {
-                    $('#Container').append(table);
-                    $('#Container').css('overflow', 'scroll');
+                    summaryLine = $("<span></span>").text("The Top " + topn + " " + extremeWxType + " day(s) for " + response[0].shortname + ", " + response[0].state + " are:");
                 }
-                $(".progress-bar").css('width', '100%').text('100% - Done ');
-                $("#ProgressBar").css('display', 'none');
-
-                // Unhide the panel
-                $("#ExtremeReport2DisplayPanel").show();
-
-            },
-            error: function (xhr, status, error) {
-                alert(xhr.responseText);
-                alert(error.responseText);
-                alert(status.responseText);
+                summaryLine.css({
+                    'background-color': 'peachpuff',
+                    'font-size': '20px',
+                    'font-family': 'Arial',
+                    'font-width': 'bold'
+                });
+                $("#Summary").append(summaryLine);
             }
-        });
-    })
+
+            //Details
+            var table = $("<table></table>").addClass('table table-striped').addClass('table-bordered');
+            table.addClass('table');
+            var thead = $("<thead></thead>").addClass('thead-dark');
+            var tbody = $("<tbody></tbody>")
+            var trhead = $('<tr></tr>');
+
+            var th = $('<th></th>');
+            var th2 = $('<th></th>');
+            var th3 = $('<th></th>');
+            var th4 = $('<th></th>');
+            var th5 = $('<th></th>');
+            var th6 = $('<th></th>');
+            var th7 = $('<th></th>');
+
+            $(th).attr('scope', 'col').text('Rank');
+            $(th3).attr('scope', 'col').text('Date');
+            $(th4).attr('scope', 'col').text('High');
+            $(th5).attr('scope', 'col').text('Low');
+            $(th6).attr('scope', 'col').text('Precip (inches)');
+            $(th7).attr('scope', 'col').text('Snowfall (inches)');
+
+            // Arrange the order of the columns based on the metric.
+            if (extremeWxType == 'Snowiest') {
+                trhead.append(th, th3, th7.css('color', 'red').css('font-size', '24px'), th4, th5, th6);
+            }
+            else if (extremeWxType == 'Wettest') {
+                trhead.append(th, th3, th6.css('color', 'red').css('font-size', '24px'), th7, th4, th5);
+            }
+            else if (extremeWxType == 'Warmest Highs') {
+                trhead.append(th, th3, th4.css('color', 'red').css('font-size', '24px'), th5, th6, th7);
+            }
+            else if (extremeWxType == 'Warmest Lows') {
+                trhead.append(th, th3, th5.css('color', 'red').css('font-size', '24px'), th4, th6, th7);
+            }
+            else if (extremeWxType == 'Coldest Highs') {
+                trhead.append(th, th3, th4.css('color', 'red').css('font-size', '24px'), th5, th6, th7);
+            }
+            else if (extremeWxType == 'Coldest Lows') {
+                trhead.append(th, th3, th5.css('color', 'red').css('font-size', '24px'), th4, th6, th7);
+            }
+
+            thead.append(trhead);
+            table.append(thead, tbody);
+
+            //var cityName = "";
+            //var State = "";
+            var theDate = "";
+            var High = "";
+            var Low = "";
+            var Precip = "";
+            var Snow = "";
+            var tablerow = "";
+            var rank = "";
+
+            for (var i = 0; i < response.length; i++) {
+                tablerow = $("<tr></tr>");
+                //cityName = $("<td></td>").text(response.entries[i].name);
+                //State = $("<td></td>").text(response.entries[i].state);
+                var temp = new Date(response[i].date.substr(0, 10));
+                theDate = $("<td></td>").text((temp.getMonth() + 1) + "/" + temp.getDate() + "/" + temp.getFullYear());
+
+                rank = $("<td></td>").text('#' + (i + 1))
+                High = $("<td></td>").text(response[i].tmax + String.fromCharCode(176));
+                Low = $("<td></td>").text(response[i].tmin + String.fromCharCode(176));
+                Precip = $("<td></td>").text(response[i].prcp + '"');
+                Snow = $("<td></td>").text(response[i].snow + '"');
+
+                if (extremeWxType == 'Snowiest') {
+                    tablerow.append(rank, theDate, Snow.css('color', 'red').css('font-size', '24px'), High, Low, Precip);
+                }
+                else if (extremeWxType == 'Wettest') {
+                    tablerow.append(rank, theDate, Precip.css('color', 'red').css('font-size', '24px'), Snow, High, Low);
+                }
+                else if (extremeWxType == 'Warmest Highs') {
+                    tablerow.append(rank, theDate, High.css('color', 'red').css('font-size', '24px'), Low, Precip, Snow);
+                }
+                else if (extremeWxType == 'Warmest Lows') {
+                    tablerow.append(rank, theDate, Low.css('color', 'red').css('font-size', '24px'), High, Precip, Snow);
+                }
+                else if (extremeWxType == 'Coldest Highs') {
+                    tablerow.append(rank, theDate, High.css('color', 'red').css('font-size', '24px'), Low, Precip, Snow);
+                }
+                else if (extremeWxType == 'Coldest Lows') {
+                    tablerow.append(rank, theDate, Low.css('color', 'red').css('font-size', '24px'), High, Precip, Snow);
+                }
+
+
+
+                $(table).append(tablerow);
+            }
+            if (response.length == 0) {
+                var p = $('<p></p>')
+                p.text('No Data To Show').css('color', 'red').css('font-size', '20px');
+                $('#Container').append(p);
+            }
+            else {
+                $('#Container').append(table);
+                $('#Container').css('overflow', 'scroll');
+            }
+            $(".progress-bar").css('width', '100%').text('100% - Done ');
+            $("#ProgressBar").css('display', 'none');
+
+            // Unhide the panel
+            $("#ExtremeReport2DisplayPanel").show();
+
+        },
+        error: function (xhr, status, error) {
+            alert(xhr.responseText);
+            alert(error.responseText);
+            alert(status.responseText);
+        }
+    });
+});
 
 $("#btnYearToYearAvgSubmit").click(function () {
 
@@ -902,6 +890,7 @@ function countdown(type) {
             else {
                 fromDateExists = true;
             }
+
             if (Date.parse($("#datepicker").val()) > new Date()) {
                 $("#HisErr2").text("please select a from date that has occurred");
                 rc = false;
@@ -914,33 +903,29 @@ function countdown(type) {
             else {
                 toDateExists = true;
             }
-
+            
             if (Date.parse($("#datepicker2").val()) > new Date()) {
                 $("#HisErr3").text("please select a to date that has occurred");
                 rc = false;
             }
 
-            if (!isIos && fromDateExists) {
+            if (!isMobile && fromDateExists) {
                 if (isValidDate($("#datepicker").val()) == false) {
                     $("#HisErr2").text("Please select or enter a date that is in the format mm/dd/yyyy");
                     rc = false;
                 }
             }
-
-            // Date format already taken care of in Apple
-            if (!isIos && toDateExists) {
-                if (isIos && isValidDate($("#datepicker2").val()) == false) {
-                    $("#HisErr2").text("Please select or enter a date that is in the format mm/dd/yyyy");
-                    rc = false;
-                }
-                else if (isValidDate($("#datepicker2").val()) == false) {
+            
+            // Date format already taken care of in mobile.
+            if (!isMobile && toDateExists) {
+                if (isValidDate($("#datepicker2").val()) == false) {
                     $("#HisErr2").text("Please select or enter a date that is in the format mm/dd/yyyy");
                     rc = false;
                 }
             }
 
 
-            if (isIos && (rc == true) && Date.parse($("#datepickerReport2To").val()) < Date.parse($("#datepickerReport2From").val())) {
+            if (isMobile && (rc == true) && Date.parse($("#datepickerReport2To").val()) < Date.parse($("#datepickerReport2From").val())) {
                 $("#HisErr3").text("please select a to date greater than or equal to the from date");
                 rc = false;
             }

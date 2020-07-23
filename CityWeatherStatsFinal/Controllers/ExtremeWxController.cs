@@ -109,15 +109,12 @@ namespace CityWeatherStatsFinal.Controllers
                 {
                     rec = new DailyWeather();
                     rec.cityid = dr["CityId"].ToString();
-                    rec.name = dr["City"].ToString();
-                    rec.shortname = dr["ShortName"].ToString();
                     rec.date = Convert.ToDateTime(dr["Date"]);
                     rec.tmax = float.Parse(dr["tmax"].ToString());
                     rec.tmin = float.Parse(dr["tmin"].ToString());
                     rec.snow = float.Parse(dr["snow"].ToString());
                     rec.prcp = float.Parse(dr["prcp"].ToString());
-                    rec.state = dr["state"].ToString();
-
+                    
                     Entries.Add(rec);
                 }
 

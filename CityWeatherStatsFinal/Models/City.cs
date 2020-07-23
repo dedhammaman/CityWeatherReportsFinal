@@ -9,10 +9,7 @@ namespace CityWeatherStatsFinal.Models
 {
     public class City
     {
-        private DateTime minDateLocal;
-        private string maxDateLocal;
-
-
+        
         public Nullable<double> elevation { get; set; }
         public DateTime mindate { get; set; }
          
