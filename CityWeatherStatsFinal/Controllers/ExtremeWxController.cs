@@ -138,9 +138,18 @@ namespace CityWeatherStatsFinal.Controllers
             string viewname = null;
             switch(WhichReport)
             {
-
-                case "TopXReport" : viewname = "TopXReport";break;
-                case "MonthlyAveragesReport": viewname = "MonthlyAveragesReport";break;
+                case "TopXReport" :
+                    if (RequestExtensions.IsMobileBrowser(Request))
+                        viewname = "~/Views/ExtremeWx/TopXReport.Mobile.cshtml";
+                    else
+                        viewname = "TopXReport";
+                    break;
+                case "MonthlyAveragesReport":
+                    if (RequestExtensions.IsMobileBrowser(Request))
+                        viewname = "~/Views/ExtremeWx/MonthlyAveragesReport.Mobile.cshtml";
+                    else
+                        viewname = "MonthlyAveragesReport";
+                    break;
                 case "NumExtremeEvents": viewname = "UnderConstruction";break;
             }
 

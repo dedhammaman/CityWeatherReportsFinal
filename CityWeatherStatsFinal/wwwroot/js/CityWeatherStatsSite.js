@@ -22,7 +22,7 @@ $(document).ready(function () {
 
         // Initialize the city list for the history report.
         InitializeCityList('CityPicker');
-        
+
     }
     else if ((window.location.href == "https://" + window.location.host + "/ExtremeWx/TopXReport")
         || (window.location.href == "https://" + window.location.host + "/ExtremeWx/MonthlyAveragesReport")) {
@@ -35,8 +35,14 @@ $(document).ready(function () {
 
         // Initialize the city list for the history report.
         InitializeCityList('CityPicker2');
-        
+
     }
+    else if ((window.location.href == "https://" + window.location.host + "/ExtremeWx/Report"))
+    {
+        $("#ExtremeReport1DisplayPanel").hide();
+        InitializeCityList('CityPicker2');
+    }
+    
     else if (window.location.href == "https://" + window.location.host + "/ExtremeWx/") {
 
         //$('.bootstrap-select.btn-group .dropdown-toggle .filter-option ').css('color', '#db5079').css('background-color', 'lightblue').css('height', '40px').css('width', '400px').css('font-size', '24px');
