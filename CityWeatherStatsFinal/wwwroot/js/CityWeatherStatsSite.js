@@ -882,8 +882,9 @@ function countdown(type) {
         var rc = true;
         var fromDateExists = false;
         var toDateExists = false;
-
-        
+        var dateFromValidSoFar = true;
+        var dateToValidSoFar = true;
+               
         if (type == 'Historical') {
             if ($("#CityPicker").val() == '') {
                 $("#HisErr1").text('please select a city');
@@ -964,9 +965,9 @@ function countdown(type) {
 
             var yesornovalue = $('input[name="optyesno"]:checked').val();
 
+            // Generate report for specific time frame in TOPX report.
             if ($('input[name="optyesno"]:checked').val() == 'yes') {
-                var dateFromValidSoFar = true;
-                var dateToValidSoFar = true;
+                
                 if ($("#datepicker").val() == '') {
                     $("#ExtremeError4").text('please select a from date');
                     $("#ExtremeError4").before('<i id="icon4" class="fas fa-exclamation-circle fa-2x">')
@@ -1015,10 +1016,55 @@ function countdown(type) {
                     $("#ExtremeError5").after('<br>')
                 }
             }
-            
-            
-            
-                
+        }
+        else if (type == 'MonthlyAverages') {
+                if ($("#CityPicker2 option:selected").val() == '') {
+                    $("#ExtremeError1").text('Please select a city');
+                    $("#ExtremeError1").before('<i id="icon3" class="fas fa-exclamation-circle fa-2x">')
+                    $("#ExtremeError1").after('<br>')
+                    rc = false;
+                }
+
+                if ($("#fromYearReport1").val() == '') {
+                    $("#ExtremeError2").text('Please enter a FROM year');
+                    $("#ExtremeError2").before('<i id="icon1" class="fas fa-exclamation-circle fa-2x">');
+                    $("#ExtremeError2").after('<br>');
+                    rc = false;
+                    dateFromValidSoFar = false;
+                }
+
+                if ($("#toYearReport1").val() == '') {
+                    $("#ExtremeError3").text('Please enter a TO year');
+                    $("#ExtremeError3").before('<i id="icon1" class="fas fa-exclamation-circle fa-2x">')
+                    $("#ExtremeError3").after('<br>');
+                    rc = false;
+                    dateToValidSoFar = false;
+                }
+
+                if (dateFromValidSoFar && isValidYear($("#fromYearReport1").val()) == false)
+                {
+                    $("#ExtremeError4").text("Enter a FROM year that is in the format yyyy");
+                    $("#ExtremeError4").before('<i id="icon10" class="fas fa-exclamation-circle fa-2x">')
+                    $("#ExtremeError4").after('<br>');
+                    rc = false;
+                    dateFromValidSoFar = false;
+                }
+                if (dateToValidSoFar && isValidYear($("#toYearReport1").val()) == false)
+                {
+                   $("#ExtremeError5").text("Enter a TO year that is in the format yyyy");
+                   $("#ExtremeError5").before('<i id="icon10" class="fas fa-exclamation-circle fa-2x">')
+                   $("#ExtremeError5").after('<br>');
+                    rc = false;
+                    dateToValidSoFar = false;
+                }
+            if (dateFromValidSoFar && dateToValidSoFar && $("#fromYearReport1").val() > $("#toYearReport1").val())
+                {
+                    $("#ExtremeError5").text("FROM year must be less than TO yeaer");
+                    $("#ExtremeError5").before('<i id="icon10" class="fas fa-exclamation-circle fa-2x">')
+                    $("#ExtremeError5").after('<br>');
+                    rc = false;
+                    dateToValidSoFar = false;
+                }
 
 
         }
@@ -1075,13 +1121,22 @@ $(document).on('change', 'input:radio[id^="radoptex"]', function (event) {
     if (event.target.id == 'radoptex2') { alert('made it');} 
 });
 
-
-
-function isValidDate(dateString) {
+function isValidDate(dateString)
+{
 
     var regEx = /^\d{2}\/\d{2}\/\d{4}$/;
     return dateString.match(regEx) != null;
 }
+
+function isValidYear(yearString) {
+
+    var regEx = /^\d{4}$/;
+    return yearString.match(regEx) != null;
+}
+
+
+
+
 
 function FilterOnOff() {
     var filterbutton = $("#FilterButton");
