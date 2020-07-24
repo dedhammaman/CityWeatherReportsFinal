@@ -84,6 +84,7 @@ namespace CityWeatherStatsFinal.Controllers
         {
             DataSet ds = new DataSet("xtremewx");
             DailyWeather rec = null;
+            SearchResults results = new SearchResults();
             List<Models.DailyWeather> Entries = new List<Models.DailyWeather>();
             using (SqlConnection con = new SqlConnection("Server=tcp:s18.winhost.com;Initial Catalog=DB_134877_citystats;User ID=DB_134877_citystats_user;Password=NYCity1975!;Integrated Security=False"))
             {
@@ -118,7 +119,14 @@ namespace CityWeatherStatsFinal.Controllers
                     Entries.Add(rec);
                 }
 
-                return Json(Entries);
+                results.entries = Entries;
+
+                // Store city name and state
+                results.name = cityContext.CityMetaData.Where(x => x.cityid == Entries[0].cityid).Select(x => x.name).First();
+                results.state = cityContext.CityMetaData.Where(x => x.cityid == Entries[0].cityid).Select(x => x.state).First();
+                results.shortname = cityContext.CityMetaData.Where(x => x.cityid == Entries[0].cityid).Select(x => x.ShortName).First();
+
+                return Json(results);
 
                 }
 

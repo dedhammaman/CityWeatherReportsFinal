@@ -552,16 +552,16 @@ $("#btnSubmit2").click(function () {
             $(".progress-bar").css('width', '50%').text('50% -  Received Data');
 
             // Summary Line
-            if (response.length > 0) {
+            if (response.entries.length > 0) {
 
                 // Add dates to summary line if time period was used.
                 var summaryLine;
                 if (yesornovalue == 'yes') {
-                    summaryLine = $("<span></span>").text("The Top " + topn + " " + extremeWxType + " day(s) for " + response[0].shortname + ", " + response[0].state +
+                    summaryLine = $("<span></span>").text("The Top " + topn + " " + extremeWxType + " day(s) for " + response.shortname + ", " + response.state +
                         " from " + from + " to " + to + " are:");
                 }
                 else {
-                    summaryLine = $("<span></span>").text("The Top " + topn + " " + extremeWxType + " day(s) for " + response[0].shortname + ", " + response[0].state + " are:");
+                    summaryLine = $("<span></span>").text("The Top " + topn + " " + extremeWxType + " day(s) for " + response.shortname + ", " + response.state + " are:");
                 }
                 summaryLine.css({
                     'background-color': 'peachpuff',
@@ -627,18 +627,18 @@ $("#btnSubmit2").click(function () {
             var tablerow = "";
             var rank = "";
 
-            for (var i = 0; i < response.length; i++) {
+            for (var i = 0; i < response.entries.length; i++) {
                 tablerow = $("<tr></tr>");
                 //cityName = $("<td></td>").text(response.entries[i].name);
                 //State = $("<td></td>").text(response.entries[i].state);
-                var temp = new Date(response[i].date.substr(0, 10));
+                var temp = new Date(response.entries[i].date.substr(0, 10));
                 theDate = $("<td></td>").text((temp.getMonth() + 1) + "/" + temp.getDate() + "/" + temp.getFullYear());
 
                 rank = $("<td></td>").text('#' + (i + 1))
-                High = $("<td></td>").text(response[i].tmax + String.fromCharCode(176));
-                Low = $("<td></td>").text(response[i].tmin + String.fromCharCode(176));
-                Precip = $("<td></td>").text(response[i].prcp + '"');
-                Snow = $("<td></td>").text(response[i].snow + '"');
+                High = $("<td></td>").text(response.entries[i].tmax + String.fromCharCode(176));
+                Low = $("<td></td>").text(response.entries[i].tmin + String.fromCharCode(176));
+                Precip = $("<td></td>").text(response.entries[i].prcp + '"');
+                Snow = $("<td></td>").text(response.entries[i].snow + '"');
 
                 if (extremeWxType == 'Snowiest') {
                     tablerow.append(rank, theDate, Snow.css('color', 'red').css('font-size', '24px'), High, Low, Precip);
@@ -1062,7 +1062,7 @@ $('#CityScope').on('change', function (e) {
 
     for (var i = 0; i < CityMetaData.length - 1; i++) {
         if (CityMetaData[i].citysize <= citysize) {
-            $('#CityPicker').append('<option value="' + CityMetaData[i].cityid + '" class="cityList">' + CityMetaData[i].shortName + ", " + CityMetaData[i].state + '</option>');
+            $('#CityPicker').append('<option value="' + CityMetaData[i].cityid + '" class="cityList">' + CityMetaData[i].shortName.toUpperCase() + ", " + CityMetaData[i].state.toUpperCase() + " (" + CityMetaData[i].name + ")" + '</option>');
         }
     }
     $('#CityPicker').selectpicker('refresh');
