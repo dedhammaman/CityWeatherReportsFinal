@@ -11,7 +11,7 @@ $(document).ready(function () {
     CityMetaData = JSON.parse(sessionStorage.getItem('CityMetaData'));
 
     isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    
+        
     isIos = navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
        
     if (window.location.href == "https://" + window.location.host + "/History"
@@ -37,12 +37,11 @@ $(document).ready(function () {
         InitializeCityList('CityPicker2');
 
     }
-    else if ((window.location.href == "https://" + window.location.host + "/ExtremeWx/Report"))
-    {
+    else if ((window.location.href == "https://" + window.location.host + "/ExtremeWx/Report")) {
         $("#ExtremeReport1DisplayPanel").hide();
         InitializeCityList('CityPicker2');
     }
-    
+
     else if (window.location.href == "https://" + window.location.host + "/ExtremeWx/") {
 
         //$('.bootstrap-select.btn-group .dropdown-toggle .filter-option ').css('color', '#db5079').css('background-color', 'lightblue').css('height', '40px').css('width', '400px').css('font-size', '24px');
@@ -52,8 +51,7 @@ $(document).ready(function () {
         // Initialize the city list for the history report.
         InitializeCityList('CityPicker2');
     }
-    else if (window.location.href == "https://" + window.location.host + "/")
-    {
+    else if (window.location.href == "https://" + window.location.host + "/") {
         isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         loadCarouselImages();
     }
@@ -61,6 +59,45 @@ $(document).ready(function () {
         countdown('Climatology');
     else if (window.location.href == "https://" + window.location.host + "/Home/UnderConstruction2")
         countdown('Dashboard');
+    else if ((window.location.href == "https://" + window.location.host + "/History/About") && isMobile) {
+
+
+        // History example 1 images for mobile.
+        
+        $('#Example1-1').attr('src', '../../images/Historical Mobile 1-1.png');
+        $('#Example1-2').attr('src', '../../images/Historical Mobile 1-2.png');
+        $('#Example1-3').css({ 'width': '90%', 'height': '300px' }).show();
+
+        // History example 2 images for mobile.
+        $('#Example2-1').attr('src', '../../images/Historical Mobile 2-1.png');
+        $('#Example2-2').attr('src', '../../images/Historical Mobile 2-2.png');
+        $('#Example2-3').show();
+
+
+        
+    }
+    else if ((window.location.href == "https://" + window.location.host + "/ExtremeWx/About") && isMobile) {
+
+
+        // History example 1 images for mobile.
+
+        $('#Example1-1').attr('src', '../../images/TopX Mobile 1-1.png');
+        $('#Example1-2').attr('src', '../../images/TopX Mobile 1-2.PNG');
+        $('#Example1-3').attr('src', '../../images/TopX Mobile 1-3.PNG');
+
+        // History example 2 images for mobile.
+        $('#Example2-1').attr('src', '../../images/TopX Mobile 2-1.PNG');
+        $('#Example2-2').attr('src', '../../images/TopX Mobile 2-2.PNG');
+        $('#Example2-3').attr('src', '../../images/TopX Mobile 2-3.PNG');
+
+        // History example 3 images for mobile.
+        $('#Example3-1').attr('src', '../../images/TopX Mobile 3-1.PNG');
+        $('#Example3-2').attr('src', '../../images/TopX Mobile 3-2.PNG');
+        $('#Example3-3').attr('src', '../../images/TopX Mobile 3-3.PNG');
+
+
+
+    }
 
     $('li.active').removeClass('active');
     $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
@@ -361,6 +398,12 @@ $("#btnSubmit").click(function () {
                 var maxLowLine = $("<p style='text-align:center'></p>").text('Maximum Low: ' + response.maxLow + String.fromCharCode(176));
                 var minHighLine = $("<p style='text-align:center'></p>").text('Minimum High: ' + response.minHigh + String.fromCharCode(176));
                 var minLowLine = $("<p style='text-align:center'></p>").text('Minimum Low: ' + response.minLow + String.fromCharCode(176));
+                
+                // Bug: Fix date for mobile devices. 
+                if ( isMobile ) {
+                    FromDate = formatDate(FromDate);
+                    ToDate = formatDate(ToDate);
+                }
 
                 var summaryText = $("<p></p>").text("SUMMARY for " + response.name + " from " + FromDate + " To " + ToDate);
                 var detailsText = $("<p></p>").text("DETAILS for " + response.name + " from " + FromDate + " To " + ToDate);
@@ -557,23 +600,32 @@ $("#btnSubmit2").click(function () {
                 // Add dates to summary line if time period was used.
                 var summaryLine;
                 if (yesornovalue == 'yes') {
+
+                    // Bug: Fix date format for mobile devices.
+                    if (isMobile) {
+                        from = formatDate(from);
+                        to = formatDate(to);
+                    }
+
                     summaryLine = $("<span></span>").text("The Top " + topn + " " + extremeWxType + " day(s) for " + response.shortname + ", " + response.state +
                         " from " + from + " to " + to + " are:");
                 }
                 else {
-                    summaryLine = $("<span></span>").text("The Top " + topn + " " + extremeWxType + " day(s) for " + response.shortname + ", " + response.state + " are:");
+                    summaryLine = $("<span></span>").text("Top " + topn + " " + extremeWxType + " day(s) for " + response.shortname + ", " + response.state).css('text-align', 'center');
                 }
                 summaryLine.css({
-                    'background-color': 'peachpuff',
-                    'font-size': '20px',
+                    'font-size': '24px',
                     'font-family': 'Arial',
-                    'font-width': 'bold'
+                    'font-weight': 'bolder',
+                    'color': 'deepskyblue'
+                    
                 });
-                $("#Summary").append(summaryLine);
+                
+                $("#Summary").css('background-color','white').append(summaryLine);
             }
 
             //Details
-            var table = $("<table></table>").addClass('table table-striped').addClass('table-bordered');
+            var table = $("<table></table>").addClass('table table-striped').addClass('table-bordered').css('overflow', 'scroll');
             table.addClass('table');
             var thead = $("<thead></thead>").addClass('thead-dark');
             var tbody = $("<tbody></tbody>")
@@ -676,7 +728,7 @@ $("#btnSubmit2").click(function () {
             $("#ProgressBar").css('display', 'none');
 
             // Unhide the panel
-            $("#ExtremeReport2DisplayPanel").show();
+            $("#ExtremeReport2DisplayPanel").css('overflow','scroll').show();
 
         },
         error: function (xhr, status, error) {
@@ -1293,6 +1345,14 @@ function InitializeCityList(cityListId)
         }
     }
     $('#' + cityListId).selectpicker('refresh');
+}
+
+// Formats from yyyy-mm-dd to mm/dd/yyyy
+function formatDate(date) {
+    var _date = date.split('-');
+    var dateObj = { month: _date[1], day: _date[2], year: _date[0] };
+
+    return dateObj.month + '/' + dateObj.day + '/' + dateObj.year;
 }
 
    

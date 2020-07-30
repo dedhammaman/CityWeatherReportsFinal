@@ -101,11 +101,11 @@ header {
 }
 
 .navbar {
-    min-height: 80px;
+    min-height: 140px;
 }
 
 .navbar-brand {
-    padding: 0 15px;
+    padding: 0px 15px;
     height: 90px;
     line-height: 80px;
 }
@@ -193,6 +193,11 @@ table {
     margin-left: 25px;
     background-color: peachpuff;
     width: 95%;
+}
+
+#Summary
+{
+    text-align:center;
 }
 
 #Summary2 {

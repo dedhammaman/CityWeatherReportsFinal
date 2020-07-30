@@ -10,19 +10,60 @@
         <div class="panel-body">
 
             <p>
-                The historical data that is pulled is a reflection of the data
-                found in National Weather Service's (NOAA)'s database. There may be cities that are listed in this website that have no data (I'm not sure why).
-                Generally, the historical data goes back as far as the 1880 in some cases.
-                This data is always being updated as each day goes by. Many large cities use data recorded
-                at airports to measure their daily weather stats.
+                The historical weather data report answers the following question: <b>
+                    What was the weather in (a selected city) from
+                    (start date) to (end date)?
+                </b>
             </p>
-            An example of how to use the tool follows.
+            <p>
 
-            Example: Generate a report showing weather stats for Baltimore from 02/01/1975 to 02/10/1975.
+                The resulting report shows a summary of the data
+                at the top, along with a table of weather data for each day below.
+                The summary data is an aggregate of the data in the details section below.
+                The details section shows the:
+                <ul>
+                    <li>High Temperature</li>
+                    <li>Low Temperature</li>
+                    <li>Precipitation (inches)</li>
+                    <li>Snowfall (inches)</li>
+                </ul>
+                for each day within the selected time frame.
+            </p>
+            <p>
+                In addtion, this report can contain filters that filter the resulting data
+                based on snowfall, precipitation, high temperature, or low temperature. See the example
+                below that illustrates this.
+            </p>
+
+            <p>The examples below illustrate the types of reports the historical data search can produce.</p>
+
+            <h3>Example 1: Generate a report showing weather data for Baltimore, MD from Feburary 1, 1975 to February 10, 1975</h3>
+            <p>
+                After completing the parameters for this report, the parameters appear as follows:
+            </p>
+            <img src="~/images/Historical Weather Search Example 1-1.png" id="Example1-1" style="width:90%;height:300px" alt="PARAMETERS for Historical Weather Search for Baltimore, MD from February 1, 1975 to February 10, 1975" />
             <br />
-            Output:
+            <p>
+                Upon generation, the report appears as follows:
+            </p>
+            <img src="~/Images/Historical Weather Search Example 1-2.png" id="Example1-2" style="width:90%;height:300px" alt="DETAILS for Historical Weather Search for Baltimore, MD from February 1, 1975 to February 10, 1975" />
+
+            <img src="~/Images/Historical Mobile 1-3.png" id="Example1-3" style="display:none" />
+
+            <h3>Example 2: Generate a report showing weather data for Raleigh, NC from January 1, 1951 to January 10, 1951 with high temps ranging from 40-50 degrees.</h3>
+
+            <p>
+                After completing the parameters for this report, the parameters appear as follows:
+            </p>
+            <img src="~/Images/Historical Weather Search Example 2-1.png" id="Example2-1" style="width:90%;height:300px" alt="PARAMETERS for Historical Weather Search for Raleigh, NC from January 1, 1951 to January 10, 1951 with high temps between 40 and 50 degrees." />
             <br />
-            <img src="~/Images/Example 1 search.png" style="width:800px;height:800px" width="300" height="300" alt="Baltimore Weather Stats" />
+            <p>
+                Upon generation, the report appears as follows:
+            </p>
+            <img src="~/Images/Historical Weather Search Example 2-2.png" id="Example2-2" style="width:90%;height:300px" alt="DETAILS for Historical Weather Search for Raleigh, NC from January 1, 1951 to January 10, 1951 with high temps between 40 and 50 degrees." />
+            <img src="~/Images/Historical Mobile 2-3.png" id="Example2-3" style="display:none" />
+            <br />
+
         </div>
     </div>
     </div>
