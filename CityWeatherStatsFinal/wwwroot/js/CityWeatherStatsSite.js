@@ -79,22 +79,32 @@ $(document).ready(function () {
     else if ((window.location.href == "https://" + window.location.host + "/ExtremeWx/About") && isMobile) {
 
 
-        // History example 1 images for mobile.
+        // Topx Report example 1 images for mobile.
 
         $('#Example1-1').attr('src', '../../images/TopX Mobile 1-1.png');
         $('#Example1-2').attr('src', '../../images/TopX Mobile 1-2.PNG');
         $('#Example1-3').attr('src', '../../images/TopX Mobile 1-3.PNG');
 
-        // History example 2 images for mobile.
+        // Topx Report example 2 images for mobile.
         $('#Example2-1').attr('src', '../../images/TopX Mobile 2-1.PNG');
         $('#Example2-2').attr('src', '../../images/TopX Mobile 2-2.PNG');
         $('#Example2-3').attr('src', '../../images/TopX Mobile 2-3.PNG');
 
-        // History example 3 images for mobile.
+        // Topx Report example 3 images for mobile.
         $('#Example3-1').attr('src', '../../images/TopX Mobile 3-1.PNG');
         $('#Example3-2').attr('src', '../../images/TopX Mobile 3-2.PNG');
         $('#Example3-3').attr('src', '../../images/TopX Mobile 3-3.PNG');
 
+        // Monthly Average example 1 for mobile.
+        $('#MonthlyAvgExample1-1').attr('src', '../../images/MonthlyAve Mobile 1-1.png');
+        $('#MonthlyAvgExample1-2').attr('src', '../../images/MonthlyAve Mobile 1-2.PNG');
+        $('#MonthlyAvgExample1-3').attr('src', '../../images/MonthlyAve Mobile 1-3.PNG');
+
+
+        // Monthly Average example 1 for mobile.
+        $('#MonthlyAvgExample2-1').attr('src', '../../images/MonthlyAve Mobile 2-1.PNG');
+        $('#MonthlyAvgExample2-2').attr('src', '../../images/MonthlyAve Mobile 2-2.PNG');
+        $('#MonthlyAvgExample2-3').attr('src', '../../images/MonthlyAve Mobile 2-3.PNG');
 
 
     }
