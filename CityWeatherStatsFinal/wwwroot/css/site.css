@@ -846,3 +846,7 @@ input[type='radio']::after
     text-align: center
 }
 
+#cityDataAvailableInfoIcon
+{
+    margin-left:62px;
+}

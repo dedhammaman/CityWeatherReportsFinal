@@ -174,7 +174,10 @@ namespace CityWeatherStatsFinal.Controllers
             // internal database. Otherwise, pull from NOAA API. 
             double totalDaysApart = (md.maxdate - md.mindate).TotalDays;
             if (totalDaysApart <= 90)
-                pullHistoricalWeatherFromNOAA(md);
+            {
+                if (pullHistoricalWeatherFromNOAA(md) == -1)
+                    pullHistoricalDataFromBackend(md);
+            }
             else
                 pullHistoricalDataFromBackend(md);
 

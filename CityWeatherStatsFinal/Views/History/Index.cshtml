@@ -28,17 +28,13 @@
     </tr>
 </table>
 
-@*<div style="margin-left:25px;">
-<i style="margin-left:25px" class="fas fa-directions fa-2x"></i>
-<span class="ExtremeInstructions">Instructions: Enter search parameters below then click 'Submit'. After clicking 'Submit', a summary along with the data will appear below. The additional filters are optional and can help to narrow the search results.</span>
-</div>*@
 <div id="HistorySearchPanel">
     <div>
         <ul style="list-style:none;padding-left:0">
             <li>
                 <br />
             </li>
-            <li>
+            @*<li>
                 <span class="fa-stack fa-2x">
                     <i class="fas fa-square fa-stack-2x fa-inverse"></i>
                     <i class="fas fa-ruler fa-stack-1x"></i>
@@ -49,7 +45,7 @@
                     <option value="Major">List major U.S. cities only</option>
                     <option value="SmallSized">List all U.S. cities (data may be limited)</option>
                 </select>
-            </li>
+            </li>*@
             <li>
                 @*<span class="fa-stack fa-2x">
             <i class="fas fa-square fa-stack-2x fa-inverse"></i>
@@ -63,7 +59,8 @@
                 </span>
                 <select style="display:inline" id="CityPicker" class="selectpicker" data-live-search="true"
                         data-width="fit" name="CityId" data- title="Select a City..." required></select>
-
+            </li>
+            <li>
                 <span id="cityDataAvailableInfoIcon" class="fa-stack" style="display:none;">
                     <i class="fas fa-circle fa-stack-2x fa-inverse"></i>
                     <i class="fas fa-info fa-stack-1x"></i>

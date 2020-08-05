@@ -1350,7 +1350,7 @@ function InitializeCityList(cityListId)
 {
     for (var i = 0; i < CityMetaData.length - 1; i++) {
 
-        if ((CityMetaData[i].citysize == 1) || CityMetaData[i].citysize == 2) {
+        if (CityMetaData[i].citysize >= 1 && CityMetaData[i].citysize <= 3 ) {
             $('#' + cityListId).append('<option value="' + CityMetaData[i].cityid + '" class="cityList">' + CityMetaData[i].shortName.toUpperCase() + ", " + CityMetaData[i].state.toUpperCase() + " (" + CityMetaData[i].name + ")" + '</option>');
         }
     }
