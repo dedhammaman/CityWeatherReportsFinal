@@ -243,9 +243,10 @@ table {
 #btnSubmit, #btnSubmit2 {
     margin-top: 20px;
     margin-bottom: 20px;
-    color: silver;
-    background-color:white;
-    margin-left:30px;
+    color: #ff6961;
+    background-color: white;
+    margin-left: 30px;
+    font-weight: bolder;
 }
 
 /*Results of picked city, dates*/
@@ -782,9 +783,9 @@ input[type='radio']::after
     text-align:center;
 }
 
-#btnYearToYearAvgSubmit
-{
-   margin-left:25px; 
+#btnYearToYearAvgSubmit {
+    margin-left: 25px;
+    color: #ff6961;
 }
 
 /*#CityPicker2.selectpicker .dropdown-menu .open {

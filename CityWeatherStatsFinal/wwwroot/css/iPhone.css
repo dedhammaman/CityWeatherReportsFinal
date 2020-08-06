@@ -53,9 +53,8 @@
 
 /* Submit button for TopX report*/
 #btnSubmit2 {
-    
     margin-top: 20px;
-    color: silver;
+    color: #ff6961;
     background-color: white;
     margin-left: 1px;
 }
@@ -120,6 +119,7 @@
 }
 #btnYearToYearAvgSubmit {
     margin: 0;
+    color: #ff6961;
 }
 
 #fromYearReport1,#toYearReport1
