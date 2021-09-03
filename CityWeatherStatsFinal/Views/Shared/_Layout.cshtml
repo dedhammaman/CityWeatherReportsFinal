@@ -14,7 +14,7 @@
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset-context/cssreset-context-min.css">
         <link rel="stylesheet" media="only screen and (max-device-width: 375px)" href="~/css/iphone.css" type="text/css" />
         <link rel="stylesheet" media="screen and (max-width: 700px" href="~/css/mobile.css" />
-        
+
 
     </environment>
     <environment exclude="Development">
@@ -29,6 +29,7 @@
         <link rel="stylesheet" media="screen and (max-width: 700px" href="~/css/mobile.css" />
 
     </environment>
+    <script data-ad-client="ca-pub-6053792738510605" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 <body>
     <div class="container">
@@ -66,60 +67,70 @@
             </div>*@
         @*</nav>**@
          
-    <nav class="navbar navbar-expand-lg navbar-inverse">
-        <a class="navbar-brand" href="#">
-            <img style="max-width:100px;max-height:100px;margin-bottom:10px;" src="~/images/cityweatherreports.jpg">
-        </a>
-        <p id="WelcomeTo" class="navbar-text">Welcome To <br /> City Weather Reports</p>
-        @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg navbar-inverse">
+            <a class="navbar-brand" href="#">
+                <img style="max-width:100px;max-height:100px;" src="~/images/cityweatherreports.jpg">
+            </a>
+            <p id="WelcomeTo" class="navbar-text">Welcome To <br /> City Weather Reports</p>
+            @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>*@
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a asp-controller="History" asp-action="Index">Historical Weather Data Report</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Extreme Weather Reports
-                    </a>
-                    <div id="ExtremeNavDropdown" class="dropdown-menu text-nowrap"  aria-labelledby="navbarDropdown" style="border:2px solid white">
-                        <a title="Show top number of coldest/snowiest/warmest/etc. days for city" class="dropdown-item" href=@Url.Action("TopXReport", "ExtremeWx")>
-                            <span class="fa-stack fa-1x">
-                                <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
-                                <i class="fas fa-list-ol fa-stack-1x"></i>
-                            </span>
-                            @*<i style="padding:10px" class="fas fa-list-ol"></i>*@
-                            Top X Days Extreme Weather Report
-                        </a><br />
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="History" asp-action="Index">Historical Weather Data Report</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Extreme Weather Reports
+                        </a>
+                        <div id="ExtremeNavDropdown" class="dropdown-menu text-nowrap" aria-labelledby="navbarDropdown" style="border:2px solid white">
+                            <a title="Show top number of coldest/snowiest/warmest/etc. days for city" class="dropdown-item" href=@Url.Action("TopXReport", "ExtremeWx")>
+                                <span class="fa-stack fa-1x">
+                                    <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                                    <i class="fas fa-list-ol fa-stack-1x"></i>
+                                </span>
+                                @*<i style="padding:10px" class="fas fa-list-ol"></i>*@
+                                Top X Days Extreme Weather Report
+                            </a><br />
                             <a title="Show average monthly high temperatures for a city throughout a certain time period" class="dropdown-item" href="@Url.Action("MonthlyAveragesReport", "ExtremeWx")">
                                 <span class="fa-stack fa-1x">
                                     <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
                                     <i class="fa fa-divide fa-stack-1x"></i>
                                 </span>
                                 Average Monthly High Temperature Report
+                            </a><br />
+                            <a title="Show cities where weather events occurred during particular time period" class="dropdown-item" href="@Url.Action("Cities4WeatherEvents", "ExtremeWx")">
+                                <span class="fa-stack fa-1x">
+                                    <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                                    <i class="fa fa-city fa-stack-1x"></i>
+                                </span>
+                                Cities Where Weather Events Occurred Report
                             </a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a asp-controller="Home" asp-action="About">About</a>
-                </li>
-                <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Home" asp-action="About">About</a>
+                    </li>
+                    <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
 
-                @*<li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>*@
-            </ul>
-            @*<form class="form-inline my-2 my-lg-0">
+                    @*<li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>*@
+                </ul>
+                @*<form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>*@
-        </div>
-    </nav>
+                
+            </div>
+            <br />
+            <hr class="solid" />
+        </nav>
 
 
         @*<partial name="_CookieConsentPartial" />*@

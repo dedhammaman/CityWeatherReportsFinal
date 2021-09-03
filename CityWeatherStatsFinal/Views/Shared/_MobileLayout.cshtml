@@ -12,21 +12,22 @@
         <link rel="stylesheet" hhref="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.standalone.min.css">
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset-context/cssreset-context-min.css">
         <link rel="stylesheet" media="screen and (max-width: 800px" href="~/css/mobile.css" />
-
+        <link rel="stylesheet" href="~/css/iPhone.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/iPhone.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.17/css/bootstrap-select.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
         <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset-context/cssreset-context-min.css">
         @*<link rel="stylesheet" media="screen and (min-width: 320px) and (max-width: 375px)" href="~/css/iPhone.css" />
-            <link rel="stylesheet" media="screen and (min-width: 376px)" href="~/css/mobile.css" type="text/css" />*@
+        <link rel="stylesheet" media="screen and (min-width: 376px)" href="~/css/mobile.css" type="text/css" />*@
         @RenderSection("css", false)
     </environment>
-    
+    <script data-ad-client="ca-pub-6053792738510605" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 <body>
 
@@ -62,6 +63,13 @@
                             <i class="fa fa-divide fa-stack-1x"></i>
                         </span>
                         Average Monthly High Temperature Report
+                    </a><br />
+                    <a title="Show cities where weather events occurred during particular time period" class="dropdown-item" href="@Url.Action("Cities4WeatherEvents", "ExtremeWx")">
+                        <span class="fa-stack fa-1x">
+                            <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+                            <i class="fa fa-city fa-stack-1x"></i>
+                        </span>
+                        Cities Where Weather Events Occurred Report
                     </a>
                 </div>
             </li>

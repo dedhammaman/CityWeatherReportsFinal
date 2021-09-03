@@ -127,3 +127,49 @@
     width:100%;
 }
 
+#cityDataAvailableInfoIcon {
+    margin-left: 0;
+}
+
+.CityMetaDataAlert {
+    font-size: 14px;
+    font-family: Arial;
+    font-weight: bold;
+}
+
+#CityMetaDataAlert2.CityMetaDataAlert {
+    margin-left: 100px;
+}
+
+#Report2ToDate {
+    width:90%;
+    display: inline;
+    border-radius: 3px;
+}
+
+    /*#Report2FromDate input[type='text'] {
+        width: 80%;
+        border-radius: 5px;
+        margin-left:5px;
+    }*/
+/*#Report2ToDate input[type='text'] {
+    width: 80%;
+    border-radius: 5px;
+}*/
+
+#Report2FromDate {
+    width: 90%;
+    display: inline;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+
+#From, #Find, #FilterParamInstruction, #ClickToAdd {
+margin-left: 5px;
+}
+
+#valueType2
+{
+
+}
+

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CityWeatherStatsFinal.Models;
 using Microsoft.AspNetCore.Mvc;
+using static System.Console;
 
 namespace CityWeatherStatsFinal.Controllers
 {
@@ -19,14 +20,17 @@ namespace CityWeatherStatsFinal.Controllers
         public Dictionary<int, decimal?[]> MonthlyData;
     }
 
+    
+
     public class ExtremeWxController : Controller
     {
-        private CityWeatherStatsFinal.Models.CityMetaDataContext cityContext;
-        
+        //private CityWeatherStatsFinal.Models.CityMetaDataContext cityContext;
+        private DailyWeatherContext dailyWeatherContext;        
 
-        public ExtremeWxController(CityWeatherStatsFinal.Models.CityMetaDataContext cc)
+        public ExtremeWxController(//CityWeatherStatsFinal.Models.CityMetaDataContext cc,
+            DailyWeatherContext dwc)
         {
-            cityContext = cc;
+            dailyWeatherContext = dwc;
         }
 
         public IActionResult Index()
@@ -41,7 +45,7 @@ namespace CityWeatherStatsFinal.Controllers
 
         public JsonResult getCityMetaData()
         {
-           var aList = cityContext.CityMetaData.Select(x => new
+           var aList = dailyWeatherContext.CityMetaData.Select(x => new
             {
                 x.name,
                 x.cityid,
@@ -61,7 +65,7 @@ namespace CityWeatherStatsFinal.Controllers
 
 
             return Json(
-                cityContext.CityMetaData.Select(x => new
+                dailyWeatherContext.CityMetaData.Select(x => new
                 {
                     x.name,
                     x.cityid,
@@ -88,7 +92,7 @@ namespace CityWeatherStatsFinal.Controllers
             List<Models.DailyWeather> Entries = new List<Models.DailyWeather>();
             using (SqlConnection con = new SqlConnection("Server=tcp:s18.winhost.com;Initial Catalog=DB_134877_citystats;User ID=DB_134877_citystats_user;Password=NYCity1975!;Integrated Security=False"))
             {
-                SqlCommand sqlComm = new SqlCommand("GetTopNDays", con);
+                SqlCommand sqlComm = new SqlCommand("GetTopNDays2", con);
                 sqlComm.Parameters.AddWithValue("@N", topn);
                 sqlComm.Parameters.AddWithValue("@Metric",metric );
                 sqlComm.Parameters.AddWithValue("@CityList",cityList );
@@ -122,9 +126,12 @@ namespace CityWeatherStatsFinal.Controllers
                 results.entries = Entries;
 
                 // Store city name and state
-                results.name = cityContext.CityMetaData.Where(x => x.cityid == Entries[0].cityid).Select(x => x.name).First();
-                results.state = cityContext.CityMetaData.Where(x => x.cityid == Entries[0].cityid).Select(x => x.state).First();
-                results.shortname = cityContext.CityMetaData.Where(x => x.cityid == Entries[0].cityid).Select(x => x.ShortName).First();
+                if (Entries.Count > 0)
+                {
+                    results.name = dailyWeatherContext.CityMetaData.Where(x => x.cityid == Entries[0].cityid).Select(x => x.name).First();
+                    results.state = dailyWeatherContext.CityMetaData.Where(x => x.cityid == Entries[0].cityid).Select(x => x.state).First();
+                    results.shortname = dailyWeatherContext.CityMetaData.Where(x => x.cityid == Entries[0].cityid).Select(x => x.ShortName).First();
+                }
 
                 return Json(results);
 
@@ -139,6 +146,11 @@ namespace CityWeatherStatsFinal.Controllers
                 return View("~/Views/ExtremeWx/TopXReport.Mobile.cshtml");
             else
                 return View();
+        }
+
+        public IActionResult Cities4WeatherEvents()
+        {
+            return View();
         }
 
         public IActionResult Report(string WhichReport)
@@ -198,6 +210,9 @@ namespace CityWeatherStatsFinal.Controllers
                 da.Fill(resultsDS);
 
                 DataTable dataTable = resultsDS.Tables[0];
+
+                if (dataTable.Rows.Count == 0)
+                    return new JsonResult(new object());
                 foreach (DataRow dr in dataTable.Rows)
                 {
                     int theYear = Convert.ToInt16(dr["theYear"]);
@@ -227,11 +242,62 @@ namespace CityWeatherStatsFinal.Controllers
                 rec.startyear = fromYear;
                 rec.endyear = toYear;
 
-
             }
             return Json(rec);
         }
+        public IActionResult GetFilterParamView()
+        {
+            if (!CityWeatherStatsFinal.Controllers.RequestExtensions.IsMobileBrowser(Request))
+                return PartialView("~/Views/Shared/FilterParamPartialView.cshtml");
+            else
+                return PartialView("~/Views/Shared/FilterParamPartialViewMobile.cshtml");
+        }
 
+        public IActionResult GetInitialFilterParamView()
+        {
+            if (!CityWeatherStatsFinal.Controllers.RequestExtensions.IsMobileBrowser(Request))
+                return PartialView("~/Views/Shared/InitialFilterParamPartialView.cshtml");
+            else
+                return PartialView("~/Views/Shared/InitialFilterParamPartialViewMobile.cshtml");
+        }
+
+        [HttpPost]
+        public JsonResult GetCitiesForWx(int[] CitySize,DateTime Start, DateTime End,Filter[] filters)
+        {
+            List<DailyWeather> results = new List<DailyWeather>();
+
+            try
+            {
+                for (int i = 0; i < CitySize.Length; i++)
+                {
+                    List<DailyWeather> TempResults = (from c in dailyWeatherContext.CityDailyWeather
+                                                      join md in dailyWeatherContext.CityMetaData on c.cityid equals md.cityid
+                                                      where (md.citysize == Convert.ToInt16(CitySize[i]))
+                                                         && c.date >= Start && c.date <= End
+                                                         && md.Active
+                                                         && !(c.tmax == 0 && c.tmin==0)
+                                                      select c).ToList();
+                    results.AddRange(TempResults);
+
+
+                }
+            }catch(Exception e)
+            {
+                WriteLine(e.Message);
+                WriteLine(e.StackTrace);
+            }
+            
+            dailyWeatherContext.applyFilterOperator(filters, ref results);
+
+            // Need to join back the meta data and create a new data structure to return
+            // with meta data things in it.
+            var finalResults = (from r in results
+                                from md in dailyWeatherContext.CityMetaData.Where(x=> x.cityid == r.cityid)
+                                orderby md.ShortName,r.date
+                                select new { r, md }).ToList();
+
+            return Json(finalResults);
+        }
 
 
     }

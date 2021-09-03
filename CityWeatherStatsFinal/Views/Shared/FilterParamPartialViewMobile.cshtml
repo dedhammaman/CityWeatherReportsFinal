@@ -1,0 +1,72 @@
+﻿<div class="row AndTheRow">
+    <div class="col-xs-6 col-xs-offset-1">
+        <span class="ExtremeReportText">And The</span>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-xs-3">
+        <span class="fa-stack fa-2x">
+            <i class="fas fa-square fa-stack-2x fa-inverse"></i>
+            <i class="fas fa-filter fa-stack-1x"></i>
+        </span>
+    </div>
+    <div class="col-xs-9">
+        <span class="ExtremeReportText" id="#FilterParamInstruction">Complete the filter parameters</span>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-xs-9 col-xs-offset-3">
+        <span class="ExtremeReportText">Select Weather Type: </span>
+        <select style="display:inline" class="selectpicker Metric"
+                data-width="60%" title="Click" onchange="UpdateValueMetricText(this);">
+            <option value="Snowfall">Snowfall</option>
+            <option value="Precipitation">Rainfall</option>
+            <option value="HighTemp">High Temp</option>
+            <option value="LowTemp">Low Temp</option>
+        </select>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-xs-9 col-xs-offset-3">
+        <span class="ExtremeReportText">Was</span>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-xs-8 col-xs-offset-3 ">
+        <span class="ExtremeReportText Operator">Select Operator: </span>
+        <select style="display:inline" id="Operator1" class="selectpicker Operator"
+                data-width="80%" name="Operator1" title="Click">
+            <option value="GreaterThan">GreaterThan( > )</option>
+            <option value="LessThan">LessThan( < )</option>
+            <option value="LessThanOrEqualTo">Less Than or equal to ( <= )</option>
+            <option value="GreaterThanOrEqualTo">Greater than or equal to ( >= )</option>
+            <option value="Equals">Equals ( = )</option>
+        </select>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-8 col-xs-offset-3 ">
+        <div>
+            <span class="ExtremeReportText" id="valueType2">Enter value:</span>
+            <span class="ExtremeReportText valueType"></span>
+            <input id="MetricValue1" type="text" class="form-control Value" onchange="AddSymbolToNum(this);" placeholder="#" style="width:80%">
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-xs-10 col-xs-offset-2">
+        <button class="RemoveFilterBtn" onclick="RemoveFilter(this);">Remove Filter</button>
+    </div>
+</div>
+    <br />
+
+    @*<div class="row" style="height:2px;background-color:black;"></div>*@
+
+
+    <div class="row SeperatorRow" style="height:2px;background-color:black;"></div>
+

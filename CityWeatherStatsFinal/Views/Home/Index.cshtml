@@ -4,7 +4,7 @@
 
 
 <header id="CarouselHeader1">
-    <div id="CityCarousel" class="carousel slide" data-ride="carousel" data-wrap="true" data-interval="3000">
+    <div id="CityCarousel" class="carousel slide" data-ride="carousel" data-wrap="true" data-interval="5000">
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner" id="carouselTagStart">
@@ -18,27 +18,27 @@
     <div class="panel-body">
 
         <div class="row">
-            <div class="col-md-4 col-sm-4 ">
+            <div class="col-md-6">
                 <span class="HistoricalSearch">Historical Weather Searches</span>
                 <ul>
                     <li><a class="btn btn-default" asp-controller="History" asp-action="About">Learn More >></a></li>
                     <li><a class="btn btn-default" asp-controller="History" asp-action="Index">Search Now>></a></li>
                 </ul>
             </div>
-            <div class="col-md-4 col-sm-4 ">
+            <div class="col-md-5">
                 <span class="ExtremeSearch">Extreme Weather Searches</span>
                 <ul>
                     <li><a class="btn btn-info" asp-controller="ExtremeWx" asp-action="About">Learn More >></a></li>
                     <li><a class="btn btn-default" asp-controller="ExtremeWx" asp-action="Index">Search Now >></a></li>
                 </ul>
             </div>
-            <div class="col-md-4 col-sm-4 ">
+            @*<div class="col-md-4 col-sm-4 ">
                 <span class="Climatologysearch">Climatology Data Searches</span>
                 <ul>
                     <li><a class="btn btn-default" asp-controller="Home" asp-action="UnderConstruction">Learn More >></a></li>
                     <li><a class="btn btn-default" asp-controller="Home" asp-action="UnderConstruction">Search Now >></a></li>
                 </ul>
-            </div>
+            </div>*@
             @*<div class="col-md-2 col-sm-2">
                     <h2>Weather Dashboard For Selected City</h2>
                     <ul>

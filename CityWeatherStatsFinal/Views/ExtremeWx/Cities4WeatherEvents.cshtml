@@ -1,0 +1,125 @@
+﻿@{
+    ViewData["Title"] = "Cities Where Extreme Weather Occurred Report";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<i style="margin-left:10px" class="fas fa-city fa-2x"></i>
+<i class="fas fa-snowflake fa-2x"></i>
+<i class="fas fa-cloud-rain fa-2x"></i>
+
+<h2>Cities Where Extreme Weather Occurred Report</h2>
+
+<i style="margin-left:10px" class="fas fa-temperature-high fa-2x"></i>
+<i class="fas fa-temperature-low fa-2x"></i>
+
+<h5 style="margin-left:25px">Show cities and dates where extreme weather occurred</h5>
+
+<br />
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-xs-1 col-lg-1"><i class="fas fa-directions fa-2x"></i></div>
+        <div class="col-xs-9 col-lg-9">
+            <span class="ExtremeInstructions">Complete parameters below then click 'Generate Report'</span>
+        </div>
+    </div>
+</div>
+@*<div id="ExtremeInstructionsPanel">*@
+<div class="container-fluid" style="border-radius:20px;background-color:lightblue">
+    <br />
+    <div class="row">
+        <div class="col-xs-2 col-md-1">
+            <span class="fa-stack fa-2x">
+                <i class="fas fa-square fa-stack-2x fa-inverse"></i>
+                <i class="fas fa-city fa-stack-1x"></i>
+            </span>
+        </div>
+        <div class="col-xs-9 col-md-5">
+            <span class="ExtremeReportText" id="Find">Find</span>
+            <select style="display:inline" id="CitySize" class="selectpicker"
+                    name="Metric1" title="Click" data-width="40%" multiple>
+                <option value="1" selected>Major</option>
+                <option value="2">Midsized</option>
+                <option value="3">Smaller sized</option>
+            </select>
+            <span class="ExtremeReportText">cities</span>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-xs-2 col-md-1">
+            <span class="fa-stack fa-2x">
+                <i class="fas fa-square fa-stack-2x fa-inverse"></i>
+                <i class="fas fa-calendar-times fa-stack-1x"></i>
+            </span>
+        </div>
+
+        <div class="col-xs-5 col-md-5">
+            <span ID="From" class="ExtremeReportText">From:</span>
+            <input type="date" class="change2" id="Report2FromDate" name="datepickerReport2From" placeholder="mm/dd/yyyy" value="2020-01-01" required>
+        </div>
+        <div class="col-xs-5 col-md-5">
+            <span class="ExtremeReportText">To:</span>
+            <input type="date" class="change2" id="Report2ToDate" name="datepickerReport2To" placeholder="mm/dd/yyyy" value="2020-03-31" required>
+        </div>
+    </div>
+    <br />
+      
+
+    <div id="DummyPlaceholder" class="row" style="height:10px;">
+        <div class="col-xs-1 col-md-1"></div>
+        <div class="col-xs-10 col-md-10"></div>
+
+    </div>
+    
+    <button type="button" id="btnSubmit4WeatherEvents">
+        Click Here To Generate Report >>
+        <i class="fas fa-arrow-circle-down"></i>
+    </button>
+    <br />
+    <br />
+    @*<a href="@Url.Action("CheckoutDetails","Home")" class="btn btn-success">Checkout >></a>*@
+    <span class="Error" id="ExtremeError1"></span>
+    @*<i class="fas fa-exclamation-circle fa-2x"></i>*@
+    <span class="Error" id="ExtremeError2"></span>
+    <span class="Error" id="ExtremeError3"></span>
+    <span class="Error" id="ExtremeError4"></span>
+    <span class="Error" id="ExtremeError5"></span>
+
+
+</div>
+
+
+<div id="ProgressBar" class="col-sm-10 panel panel-default" style="margin-left:25px;border:none;display:none;">
+    <div class="row">
+        <div class='col-sm-6'>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+        </div>
+        <div class='col-sm-4'>
+            <div id="THELOADER" class="loader"></div>
+        </div>
+
+    </div>
+</div>
+
+<br /><br />
+
+@*<div id="ExtremeReport2DisplayPanel">*@
+<div class="row">
+    <div class="col-md-8 col-md-offset-2 col-xs-8 col-xs-offset-2">
+        <div id="Summary4Events"></div>
+    </div>
+</div>
+
+<div class="row">
+    <div id="Container"></div>
+</div>
+@*</div>*@
+
+
+

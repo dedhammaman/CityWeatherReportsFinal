@@ -1,9 +1,11 @@
 ﻿
 @{
     bool isMobile = CityWeatherStatsFinal.Controllers.RequestExtensions.IsMobileBrowser(Context.Request);
-    
+    //bool isMobile = true;
+
     if (!isMobile) {
         Layout = "~/Views/Shared/_Layout.cshtml";
+
     } else {
         Layout = "~/Views/Shared/_MobileLayout.cshtml";
     }

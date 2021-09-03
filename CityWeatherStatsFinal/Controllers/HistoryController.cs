@@ -46,7 +46,7 @@ namespace CityWeatherStatsFinal.Controllers
     {
         public string Metric { get; set; }
         public string Operator { get; set; }
-        public int MetricValue { get; set; }
+        public string MetricValue { get; set; }
     }
 
     [Serializable]
@@ -77,7 +77,7 @@ namespace CityWeatherStatsFinal.Controllers
 
     public class HistoryController : Controller
     {
-        private CityWeatherStatsFinal.Models.CityMetaDataContext cityContext;
+       // private CityWeatherStatsFinal.Models.CityMetaDataContext cityContext;
         private CityWeatherStatsFinal.Models.DailyWeatherContext dailyWeatherContext;
         private List<CityWeatherStatsFinal.Models.DailyWeather> dailyWeatherData;
 
@@ -85,10 +85,10 @@ namespace CityWeatherStatsFinal.Controllers
         const int limit = 1000;
         public enum NOAADataType { STATION, DAILY }
 
-        public HistoryController(CityWeatherStatsFinal.Models.CityMetaDataContext cc,
+        public HistoryController(//CityWeatherStatsFinal.Models.CityMetaDataContext cc,
             CityWeatherStatsFinal.Models.DailyWeatherContext dc)
         {
-            cityContext = cc;
+            //cityContext = cc;
             dailyWeatherContext = dc;
             dailyWeatherData = new List<Models.DailyWeather>();
         }
@@ -127,7 +127,7 @@ namespace CityWeatherStatsFinal.Controllers
         {
 
             return Json(
-                    cityContext.CityMetaData.Select(x => new
+                    dailyWeatherContext.CityMetaData.Select(x => new
                     {
                         x.name,
                         x.cityid,
@@ -188,9 +188,9 @@ namespace CityWeatherStatsFinal.Controllers
             SearchResults results = getSummary(dailyWeatherData);
 
             // Store city name and state
-            results.name = cityContext.CityMetaData.Where(x => x.cityid == md.cityid).Select(x => x.name).First();
-            results.state = cityContext.CityMetaData.Where(x => x.cityid == md.cityid).Select(x => x.state).First();
-            results.shortname = cityContext.CityMetaData.Where(x => x.cityid == md.cityid).Select(x => x.ShortName).First();
+            results.name = dailyWeatherContext.CityMetaData.Where(x => x.cityid == md.cityid).Select(x => x.name).First();
+            results.state = dailyWeatherContext.CityMetaData.Where(x => x.cityid == md.cityid).Select(x => x.state).First();
+            results.shortname = dailyWeatherContext.CityMetaData.Where(x => x.cityid == md.cityid).Select(x => x.ShortName).First();
 
             return Json(results);
 
@@ -237,36 +237,36 @@ namespace CityWeatherStatsFinal.Controllers
                         dc = dc ?? new CityWeatherStatsFinal.Models.DailyWeather();
                         dc.cityid = jsonObj.results[insideCounter].station;
                         dc.date = jsonObj.results[insideCounter].date;
-                        dc.datatype = jsonObj.results[insideCounter].datatype;
+                        datatype = jsonObj.results[insideCounter].datatype;
 
-                        switch (dc.datatype)
+                        switch (datatype)
                         {
                             case "PRCP":
                                 dc.prcp = jsonObj.results[insideCounter].value;
                                 break;
-                            case "SNWD":
-                                dc.snwd = jsonObj.results[insideCounter].value;
-                                break;
+                            //case "SNWD":
+                            //    dc.snwd = jsonObj.results[insideCounter].value;
+                            //    break;
                             case "SNOW":
                                 dc.snow = jsonObj.results[insideCounter].value;
                                 break;
-                            case "WESD":
-                                dc.wesd = jsonObj.results[insideCounter].value;
-                                break;
-                            case "WESF":
-                                dc.wesf = jsonObj.results[insideCounter].value;
-                                break;
+                            //case "WESD":
+                            //    dc.wesd = jsonObj.results[insideCounter].value;
+                            //    break;
+                            //case "WESF":
+                            //    dc.wesf = jsonObj.results[insideCounter].value;
+                            //    break;
                             case "TMAX":
                                 dc.tmax = jsonObj.results[insideCounter].value;
                                 break;
                             case "TMIN":
                                 dc.tmin = jsonObj.results[insideCounter].value;
                                 break;
-                            case "TAVG":
-                                dc.tavg = jsonObj.results[insideCounter].value;
-                                break;
+                            //case "TAVG":
+                            //    dc.tavg = jsonObj.results[insideCounter].value;
+                            //    break;
                         }
-                        dc.attributes = jsonObj.results[insideCounter].attributes;
+                        //dc.attributes = jsonObj.results[insideCounter].attributes;
                         insideCounter++;
 
                         if (addNew)
@@ -368,64 +368,64 @@ namespace CityWeatherStatsFinal.Controllers
 
         }
 
-        private void applyFilterOperator(Filter[] filters, ref List<CityWeatherStatsFinal.Models.DailyWeather> entries)
+        public void applyFilterOperator(Filter[] filters, ref List<CityWeatherStatsFinal.Models.DailyWeather> entries)
         {
               
            foreach(Filter f in filters)
            {
                switch(f.Operator)
-                {
+               {
                     case "GreaterThan":
-                        entries = entries.Where(x => ((f.Metric == "Snowfall") && (x.snow > f.MetricValue))
+                        entries = entries.Where(x => ((f.Metric == "Snowfall") && (x.snow > float.Parse(f.MetricValue)))
                                       ||
-                                      ((f.Metric == "Precipitation") && (x.prcp > f.MetricValue))
+                                      ((f.Metric == "Precipitation") && (x.prcp > float.Parse(f.MetricValue)))
                                       ||
-                                      ((f.Metric == "HighTemp") && (x.tmax > f.MetricValue))
+                                      ((f.Metric == "HighTemp") && (x.tmax > float.Parse(f.MetricValue)))
                                       ||
-                                      ((f.Metric == "LowTemp") && (x.tmin > f.MetricValue))
+                                      ((f.Metric == "LowTemp") && (x.tmin > float.Parse(f.MetricValue)))
                                       ).ToList();
                                       break;
 
                     case "LessThan":
-                        entries = entries.Where(x => ((f.Metric == "Snowfall") && (x.snow < f.MetricValue))
+                        entries = entries.Where(x => ((f.Metric == "Snowfall") && (x.snow < float.Parse(f.MetricValue)))
                                       ||
-                                      ((f.Metric == "Precipitation") && (x.prcp < f.MetricValue))
+                                      ((f.Metric == "Precipitation") && (x.prcp < float.Parse(f.MetricValue)))
                                       ||
-                                      ((f.Metric == "HighTemp") && (x.tmax < f.MetricValue))
+                                      ((f.Metric == "HighTemp") && (x.tmax < float.Parse(f.MetricValue)))
                                       ||
-                                      ((f.Metric == "LowTemp") && (x.tmin < f.MetricValue))
+                                      ((f.Metric == "LowTemp") && (x.tmin < float.Parse(f.MetricValue)))
                                       ).ToList();
                         break;
 
                     case "GreaterThanOrEqualTo":
-                        entries = entries.Where(x => ((f.Metric == "Snowfall") && (x.snow >= f.MetricValue))
+                        entries = entries.Where(x => ((f.Metric == "Snowfall") && (x.snow >= float.Parse(f.MetricValue)))
                                       ||
-                                      ((f.Metric == "Precipitation") && (x.prcp >= f.MetricValue))
+                                      ((f.Metric == "Precipitation") && (x.prcp >= float.Parse(f.MetricValue)))
                                       ||
-                                      ((f.Metric == "HighTemp") && (x.tmax >= f.MetricValue))
+                                      ((f.Metric == "HighTemp") && (x.tmax >= float.Parse(f.MetricValue)))
                                       ||
-                                      ((f.Metric == "LowTemp") && (x.tmin >= f.MetricValue))
+                                      ((f.Metric == "LowTemp") && (x.tmin >= float.Parse(f.MetricValue)))
                                       ).ToList();
 
                         break;
                     case "LessThanOrEqualTo":
-                        entries = entries.Where(x => ((f.Metric == "Snowfall") && (x.snow <= f.MetricValue))
+                        entries = entries.Where(x => ((f.Metric == "Snowfall") && (x.snow <= float.Parse(f.MetricValue)))
                                       ||
-                                      ((f.Metric == "Precipitation") && (x.prcp <= f.MetricValue))
+                                      ((f.Metric == "Precipitation") && (x.prcp <= float.Parse(f.MetricValue)))
                                       ||
-                                      ((f.Metric == "HighTemp") && (x.tmax <= f.MetricValue))
+                                      ((f.Metric == "HighTemp") && (x.tmax <= float.Parse(f.MetricValue)))
                                       ||
-                                      ((f.Metric == "LowTemp") && (x.tmin <= f.MetricValue))
+                                      ((f.Metric == "LowTemp") && (x.tmin <= float.Parse(f.MetricValue)))
                                       ).ToList();
                         break;
                     case "Equals":
-                        entries = entries.Where(x => ((f.Metric == "Snowfall") && (x.snow == f.MetricValue))
+                        entries = entries.Where(x => ((f.Metric == "Snowfall") && (x.snow == float.Parse(f.MetricValue)))
                                       ||
-                                      ((f.Metric == "Precipitation") && (x.prcp == f.MetricValue))
+                                      ((f.Metric == "Precipitation") && (x.prcp == float.Parse(f.MetricValue)))
                                       ||
-                                      ((f.Metric == "HighTemp") && (x.tmax == f.MetricValue))
+                                      ((f.Metric == "HighTemp") && (x.tmax == float.Parse(f.MetricValue)))
                                       ||
-                                      ((f.Metric == "LowTemp") && (x.tmin == f.MetricValue))
+                                      ((f.Metric == "LowTemp") && (x.tmin == float.Parse(f.MetricValue)))
                                       ).ToList();
 
                         break;

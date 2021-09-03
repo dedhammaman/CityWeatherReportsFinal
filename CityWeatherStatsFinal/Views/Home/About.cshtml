@@ -4,21 +4,22 @@
 <h2 style="color:deepskyblue">@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-<p> Hello, and welcome to cityweatherreports.com! This site was partly developed for fun as I love weather statistics/data, cities, and weather in general. 
-    This site was also developed to practice and learn web development skills in Bootstrap, ASP.NET Core, C#, LINQ, WEB API consumption, Web API development (REST), SQL, ADO.NET, HTML, and CSS.'
+<p> Welcome to City Weather Reports! This is a place to view weather statistics and historical weather data. For example,
+    Find the weather on the day of your wedding, the day you graduated, the day you were born, etc. Or, find the top 10 coldest days in your city or find
+    all the cities where certain weather occurred in a specific time frame.
 </p> 
 
 <p>
-    Currently, there are two reports that can generated on this site:
+    Currently, there are four reports with various weather statistics that can be viewed:
     <ol>
-        <li><i>The historical weather data report</i></li>
-        <li><i>The extreme weather data report.</i></li>
+        <li><i><a asp-controller="History" asp-action="Index">Historical Weather Data Report</a></i></li>
+        <li><i><a href="@Url.Action("TopXReport", "ExtremeWx")">Top X Days Extreme Weather Report</a></i></li>
+        <li><i><a href="@Url.Action("Cities4WeatherEvents", "ExtremeWx")">Average Monthly High Temperature Report</a></i></li>
+        <li><i><a href="@Url.Action("Cities4WeatherEvents", "ExtremeWx")">Cities Where Weather Events Occurred Report</a></i></li>
     </ol>
 
-    The data source of the weather data behind the <i>The historical weather data report</i> is <a href="https://www.ncdc.noaa.gov/cdo-web/webservices/v2"> the National Weather Service's (NOAA) Web Services API </a>. The ASP.NET business logic consumes
-    this service by making REST API calls and eventually displaying the data to the end-user.
+    For an explanation of the Historical Weather Data Report go <a asp-controller="History" asp-action="About">here.</a>
+    For an explanation of the other reports go <a asp-controller="History" asp-action="Index">here.</a>
 
-    The data source of the weather data behind the <i>The extreme weather report</i> is a backend database residing in the cloud that already has preloaded weather data. 
-    This data is regularly updated by a seperate program that pulls data from <a href="https://www.ncdc.noaa.gov/cdo-web/webservices/v2"> the National Weather Service's (NOAA) Web Services API </a>
-    The extreme weather report calculations are made when the user submits the parameters of the report. The results are then returned from the database back to the end-user and displayed in a Bootstrap table.
+    The latest daily weather data from the various cities and towns is usually approximately three days behind the current date as it becomes available.
 </p>    

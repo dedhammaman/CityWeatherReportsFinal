@@ -41,6 +41,8 @@ namespace CityWeatherStatsFinal.Models
             get => maxdate.ToString("MM-dd-yyyy");
         }
 
+        public bool Active { get; set; }
+
 
     }
 
